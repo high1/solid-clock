@@ -1,13 +1,13 @@
 import { createSignal, Index, onCleanup, createEffect } from 'solid-js';
-import type { JSX } from 'solid-js';
+import type { Accessor, JSX } from 'solid-js';
 
-const lines = (numberOfLines: number, lineClass: string, lineLength: number, lineWidth: number) => (
+const Lines = ({ numberOfLines, lineClass, lineLength, lineWidth} : { numberOfLines: number, lineClass: string, lineLength: number, lineWidth: number }) => (
   <Index each={Array.from({ length: numberOfLines }, (_, index) => index)}>
-    {(index) => hand(lineRotate(index(), numberOfLines), lineClass, lineLength, lineWidth, true)} 
+    {(index) => <Hand rotate={() => lineRotate(index(), numberOfLines)} handClass={lineClass} handLength={lineLength} handWidth={lineWidth} fixed />}
   </Index>
 );
 
-const hand = (rotate: string, handClass: string, handLength: number, handWidth: number, fixed?: boolean) =>
+const Hand = ({ rotate, handClass, handLength, handWidth, fixed }: { rotate: Accessor<string>, handClass: string, handLength: number, handWidth: number, fixed?: boolean }) =>
   <line
     class={handClass}
     x1={100}
@@ -17,7 +17,7 @@ const hand = (rotate: string, handClass: string, handLength: number, handWidth: 
     stroke="currentColor"
     stroke-width={handWidth}
     stroke-linecap="round"
-    transform={rotate}
+    transform={rotate()}
   />;
 
 const miliseconds = (date: Date) => ((date.getHours() * 60 + date.getMinutes()) * 60 + date.getSeconds()) * 1000 + date.getMilliseconds();
@@ -32,13 +32,13 @@ const ClockFace = ({ date }): JSX.Element => (
   <svg viewBox="0 0 200 200" width="82">
     {/* static */}
     <circle class="text-neutral-900" cx="100" cy="100" r="98" fill="none" stroke="currentColor" />
-    {lines(60, 'text-cyan-500', 5, 1 )}
-    {lines(12, 'text-emerald-500', 15, 2)}
+    <Lines numberOfLines={60} lineClass="text-cyan-500" lineLength={5} lineWidth={1} />
+    <Lines numberOfLines={12} lineClass="text-emerald-500" lineLength={15} lineWidth={2} />
     {/* dynamic */}
-    {hand(rotate(subsecond(date())), 'text-neutral-300', 90, 8)}
-    {hand(rotate(hour(date())), 'text-neutral-700', 50, 4)}
-    {hand(rotate(minute(date())), 'text-neutral-500', 70, 3)}
-    {hand(rotate(second(date())), 'text-red-500', 90, 2)}
+    <Hand rotate={() => rotate(subsecond(date()))} handClass="text-neutral-300" handLength={90} handWidth={8} />
+    <Hand rotate={() => rotate(hour(date()))} handClass="text-neutral-700" handLength={50} handWidth={4} />
+    <Hand rotate={() => rotate(minute(date()))} handClass="text-neutral-500" handLength={70} handWidth={3} />
+    <Hand rotate={() => rotate(second(date()))} handClass="text-red-500" handLength={90} handWidth={2} />
   </svg>
 );
 
@@ -51,7 +51,7 @@ export const Clock = (): JSX.Element => {
 
   return (
     <div class="flex flex-wrap items-center justify-center h-full">
-      <Index each={Array.from({ length: 276 })}>
+      <Index each={Array.from({ length: 207 })}>
         {() => <ClockFace date={date} />}
       </Index>
     </div>
