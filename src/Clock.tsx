@@ -1,4 +1,4 @@
-import { createSignal, Index, onCleanup, createEffect } from 'solid-js';
+import { createSignal, onCleanup, createEffect } from 'solid-js';
 import { Hand } from 'Hand';
 import { Lines } from 'Lines';
 import type { JSX } from 'solid-js';
@@ -33,9 +33,7 @@ export const Clock = (): JSX.Element => {
 
   return (
     <div class="flex flex-wrap items-center justify-center h-full">
-      <Index each={Array.from({ length: 207 })}>
-        {() => <ClockFace date={date} />}
-      </Index>
+      {Array.from({ length: 276 }).map(() => <ClockFace date={date} />)}
     </div>
   )
 };
