@@ -14,9 +14,9 @@ export const createScheduler = <T, U> ({ loop, callback, cancel, schedule }: {
     schedule: (( callback: FN<[U]>) => T),
 }) : () => void => {
   let tickId: T;
-  const work = ( value: U ): void => {
-    if (unwrap(loop)) tick ();
-    unwrap(callback)(value);
+  const work = (): void => {
+    if (unwrap(loop)) tick();
+    unwrap(callback);
   };
 
   const tick = (): void => {
