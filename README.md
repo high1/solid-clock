@@ -8,3 +8,5 @@ Inspired by [sauron clock](https://ivanceras.github.io/svg-clock/) and [voby](ht
     alt="Open in StackBlitz"
   />
 </a>
+
+View in [Github Pages](https://high1.github.io/solid-clock/) 
