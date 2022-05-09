@@ -21,6 +21,8 @@ export const ClockFace: Component<ClockFaceProps> = ({ hour, minute, second, sub
       <Lines numberOfLines={60} class='text-neutral-400' length={3} width={1} />
       <Lines numberOfLines={12} class='text-neutral-800' length={7} width={2} />
       {/* dynamic */}
+    </g>
+    <g transform="translate(100, 100)">
       <Hand rotate={subsecond} class="text-neutral-200 change-transform" length={83} width={5} />
       <Hand rotate={hour} class="text-neutral-800" length={50} width={4} />
       <Hand rotate={minute} class="text-neutral-800" length={70} width={3} />
