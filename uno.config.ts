@@ -1,7 +1,7 @@
-import { defineConfig, presetUno } from 'unocss';
+import { defineConfig } from 'unocss';
 
 export default defineConfig({
   rules: [
-    [/^will-change-(.+)$/, ([, d]) => ({ 'will-change': d })],
+    [/^change-(.+)$/, ([, d]) => ({ 'will-change': d })],
   ]
 });
