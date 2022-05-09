@@ -35,21 +35,19 @@ export const Clock: Component = () => {
   onCleanup(dispose);
 
   const rotate = (rotate: number, fixed: number = 1) => `rotate(${(rotate * 360).toFixed(fixed)})`;
-  const subsecond = () => rotate(time() % 1);
+  const subsecond = () => rotate(time() % 1, 0);
   const second = () => rotate(time() % 60 / 60);
   const minute = () => rotate(time() / 60 % 60 / 60);
   const hour = () => rotate(time() / 60 / 60 % 12 / 12);
 
   return (
     <div class="flex flex-wrap items-center justify-center h-full">
-      {Array.from({ length: 1 }).map(() => (
-        <ClockFace
-          hour={hour}
-          minute={minute}
-          second={second}
-          subsecond={subsecond}
-        />
-      ))}
+      <ClockFace
+        hour={hour}
+        minute={minute}
+        second={second}
+        subsecond={subsecond}
+      />
     </div>
   )
 };
