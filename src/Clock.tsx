@@ -1,6 +1,5 @@
 import { createSignal, onCleanup } from 'solid-js';
 import { Hand } from 'Hand';
-import { Lines } from 'Lines';
 import { createAnimationLoop } from 'utils/createAnimationLoop';
 import type { Accessor, Component } from 'solid-js';
 
@@ -15,13 +14,20 @@ type ClockFaceProps = {
 
 export const ClockFace: Component<ClockFaceProps> = ({ hour, minute, second, subsecond }) => (
   <svg viewBox="0 0 200 200" class="h-9/10">
+    {/* static */}
     <g transform="translate(100, 100)">
-      {/* static */}
       <circle class="text-neutral-900 stroke-current fill-none" r="99" />
-      <Lines numberOfLines={60} class="text-neutral-400" length={3} width={1} />
-      <Lines numberOfLines={12} class="text-neutral-800" length={7} width={2} />
-      {/* dynamic */}
+      {Array.from({ length: 60 }, (_, index) => [index, index % 5]).map(([index, isDivisibleByFive]) => (
+        <Hand
+          rotate={() => `rotate(${(360 * index) / 60})`}
+          class={isDivisibleByFive ? 'text-neutral-400' : 'text-neutral-800'}
+          length={isDivisibleByFive ? 3 : 7}
+          width={isDivisibleByFive ? 1 : 2}
+          fixed
+        />
+      ))}
     </g>
+    {/* dynamic */}
     <g transform="translate(100, 100)">
       <Hand rotate={subsecond} class="text-neutral-200 change-transform" length={83} width={5} />
       <Hand rotate={hour} class="text-neutral-800" length={50} width={4} />
