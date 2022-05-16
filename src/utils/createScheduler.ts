@@ -2,9 +2,9 @@
 import { Accessor } from 'solid-js';
 
 type FN<Arguments extends unknown[], Return extends unknown = void> = (...args: Arguments) => Return;
-type MaybeAccessor<T = unknown> = Accessor<T> | T;
-const isFunction = (value: unknown): value is (...args: unknown[]) => unknown => typeof value === 'function';
-const unwrap = <T = unknown>(maybeValue: MaybeAccessor<T>): T => (isFunction(maybeValue) ? maybeValue() : maybeValue);
+export type MaybeAccessor<T = unknown> = Accessor<T> | T;
+const isFunction = (value: unknown): value is () => unknown => typeof value === 'function';
+export const unwrap = <T = unknown>(maybeValue: MaybeAccessor<T>): T => (isFunction(maybeValue) ? maybeValue() : maybeValue);
 
 export const createScheduler = <T, U>({
   loop,

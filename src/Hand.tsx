@@ -1,7 +1,9 @@
-import type { Accessor, Component } from 'solid-js';
+import { unwrap } from 'utils/createScheduler';
+import type { Component } from 'solid-js';
+import type { MaybeAccessor } from 'utils/createScheduler';
 
 type HandProps = {
-  rotate: Accessor<string>;
+  rotate: MaybeAccessor<string>;
   class: string;
   length: number;
   width: number;
@@ -16,7 +18,7 @@ export const Hand: Component<HandProps> = ({ rotate, length, width, fixed, limit
     stroke="currentColor"
     stroke-width={width}
     stroke-linecap="round"
-    transform={rotate()}
+    transform={unwrap(rotate)}
     {...rest}
   />
 );

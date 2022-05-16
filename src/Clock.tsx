@@ -19,7 +19,7 @@ export const ClockFace: Component<ClockFaceProps> = ({ hour, minute, second, sub
       <circle class="text-neutral-900 stroke-current fill-none" r="99" />
       {Array.from({ length: 60 }, (_, index) => [index, index % 5]).map(([index, isNotDivisibleByFive]) => (
         <Hand
-          rotate={() => `rotate(${(360 * index) / 60})`}
+          rotate={`rotate(${(360 * index) / 60})`}
           class={isNotDivisibleByFive ? 'text-neutral-400' : 'text-neutral-800'}
           length={isNotDivisibleByFive ? 3 : 7}
           width={isNotDivisibleByFive ? 1 : 2}
