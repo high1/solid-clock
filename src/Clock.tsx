@@ -13,7 +13,7 @@ type ClockFaceProps = {
 };
 
 export const ClockFace: Component<ClockFaceProps> = ({ hour, minute, second, subsecond }) => (
-  <svg viewBox="0 0 200 200" class="h-[95vmin]">
+  <svg viewBox="0 0 200 200" class="h-95vmin">
     {/* static */}
     <g transform="translate(100, 100)">
       <circle class="text-neutral-900 stroke-current fill-none" r="99" />
