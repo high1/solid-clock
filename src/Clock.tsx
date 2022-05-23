@@ -17,12 +17,12 @@ export const ClockFace: Component<ClockFaceProps> = ({ hour, minute, second, sub
     {/* static */}
     <g transform="translate(100, 100)">
       <circle class="text-neutral-900 stroke-current fill-none" r="99" />
-      {Array.from({ length: 60 }, (_, index) => [index, index % 5]).map(([index, isNotHour]) => (
+      {Array.from({ length: 60 }, (_, index) => ({ index, isHour: index % 5 === 0 })).map(({ index, isHour }) => (
         <Hand
           rotate={`rotate(${(360 * index) / 60})`}
-          class={isNotHour ? 'text-neutral-400' : 'text-neutral-800'}
-          length={isNotHour ? 3 : 7}
-          width={isNotHour ? 1 : 2}
+          class={isHour ? 'text-neutral-800' : 'text-neutral-400'}
+          length={isHour ? 7 : 3}
+          width={isHour ? 2 : 1}
           fixed
         />
       ))}
