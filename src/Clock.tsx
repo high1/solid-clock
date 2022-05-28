@@ -1,9 +1,10 @@
 import { createSignal, onCleanup } from 'solid-js';
+import { createAnimationLoop } from 'utils';
 import { Hand } from 'Hand';
-import { createAnimationLoop } from 'utils/createAnimationLoop';
 import type { Accessor, Component } from 'solid-js';
 
-const getSecondsSinceMidnight = (): number => (Date.now() - new Date().setHours(0, 0, 0, 0)) / 1000;
+const getSecondsSinceMidnight = (): number =>
+  (Date.now() - new Date().setHours(0, 0, 0, 0)) / 1000;
 
 type ClockFaceProps = {
   hour: Accessor<string>;
@@ -12,14 +13,21 @@ type ClockFaceProps = {
   subsecond: Accessor<string>;
 };
 
-export const ClockFace: Component<ClockFaceProps> = ({ hour, minute, second, subsecond }) => (
+export const ClockFace: Component<ClockFaceProps> = ({
+  hour,
+  minute,
+  second,
+  subsecond,
+}) => (
   <svg viewBox="0 0 200 200" class="h-95vmin">
-    {/* static */}
     <g transform="translate(100, 100)">
       <circle class="text-neutral-900 stroke-current fill-none" r="99" />
-      {Array.from({ length: 60 }, (_, index) => ({ index, isHour: index % 5 === 0 })).map(({ index, isHour }) => (
+      {Array.from({ length: 60 }, (_, index) => ({
+        index,
+        isHour: index % 5 === 0,
+      })).map(({ index, isHour }) => (
         <Hand
-          rotate={`rotate(${(360 * index) / 60})`}
+          rotate={() => `rotate(${(360 * index) / 60})`}
           class={isHour ? 'text-neutral-800' : 'text-neutral-400'}
           length={isHour ? 7 : 3}
           width={isHour ? 2 : 1}
@@ -27,9 +35,13 @@ export const ClockFace: Component<ClockFaceProps> = ({ hour, minute, second, sub
         />
       ))}
     </g>
-    {/* dynamic */}
     <g transform="translate(100, 100)">
-      <Hand rotate={subsecond} class="text-neutral-200 change-transform" length={83} width={5} />
+      <Hand
+        rotate={subsecond}
+        class="text-neutral-200 change-transform"
+        length={83}
+        width={5}
+      />
       <Hand rotate={hour} class="text-neutral-800" length={50} width={4} />
       <Hand rotate={minute} class="text-neutral-800" length={70} width={3} />
       <Hand rotate={second} class="text-red-500" length={77} width={2} />
@@ -42,7 +54,8 @@ export const Clock: Component = () => {
   const dispose = createAnimationLoop(() => setTime(getSecondsSinceMidnight()));
   onCleanup(dispose);
 
-  const rotate = (rotate: number, fixed: number = 1) => `rotate(${(rotate * 360).toFixed(fixed)})`;
+  const rotate = (rotate: number, fixed: number = 1) =>
+    `rotate(${(rotate * 360).toFixed(fixed)})`;
   const subsecond = () => rotate(time() % 1, 0);
   const second = () => rotate((time() % 60) / 60);
   const minute = () => rotate(((time() / 60) % 60) / 60);
@@ -50,7 +63,12 @@ export const Clock: Component = () => {
 
   return (
     <div class="flex flex-wrap items-center justify-center h-full">
-      <ClockFace hour={hour} minute={minute} second={second} subsecond={subsecond} />
+      <ClockFace
+        hour={hour}
+        minute={minute}
+        second={second}
+        subsecond={subsecond}
+      />
     </div>
   );
 };
