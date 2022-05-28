@@ -20,5 +20,5 @@
   "dependencies": {
     "solid-js": "^1.4.3"
   },
-  "packageManager": "pnpm@7.1.2"
+  "packageManager": "pnpm@7.1.6"
 }
