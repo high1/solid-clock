@@ -1,15 +1,15 @@
 import type { Accessor, Component, JSX } from 'solid-js';
 
 type HandProps = {
-  rotate: Accessor<string>;
+  transform: Accessor<string>;
   length: number;
   width: number;
   fixed?: boolean;
   limit?: number;
-} & JSX.SvgSVGAttributes<SVGLineElement>;
+} & Omit<JSX.SvgSVGAttributes<SVGLineElement>, 'transform'>;
 
 export const Hand: Component<HandProps> = ({
-  rotate,
+  transform,
   length,
   width,
   fixed,
@@ -22,7 +22,7 @@ export const Hand: Component<HandProps> = ({
     stroke="currentColor"
     stroke-width={width}
     stroke-linecap="round"
-    transform={rotate()}
+    transform={transform()}
     {...rest}
   />
 );

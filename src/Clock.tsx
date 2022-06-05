@@ -27,7 +27,7 @@ export const ClockFace: Component<ClockFaceProps> = ({
         isHour: index % 5 === 0,
       })).map(({ index, isHour }) => (
         <Hand
-          rotate={() => `rotate(${(360 * index) / 60})`}
+          transform={() => `rotate(${(360 * index) / 60})`}
           class={isHour ? 'text-neutral-800' : 'text-neutral-400'}
           length={isHour ? 7 : 3}
           width={isHour ? 2 : 1}
@@ -37,14 +37,14 @@ export const ClockFace: Component<ClockFaceProps> = ({
     </g>
     <g transform="translate(100, 100)">
       <Hand
-        rotate={subsecond}
+        transform={subsecond}
         class="text-neutral-200 change-transform"
         length={83}
         width={5}
       />
-      <Hand rotate={hour} class="text-neutral-800" length={50} width={4} />
-      <Hand rotate={minute} class="text-neutral-800" length={70} width={3} />
-      <Hand rotate={second} class="text-red-500" length={77} width={2} />
+      <Hand transform={hour} class="text-neutral-800" length={50} width={4} />
+      <Hand transform={minute} class="text-neutral-800" length={70} width={3} />
+      <Hand transform={second} class="text-red-500" length={77} width={2} />
     </g>
   </svg>
 );

@@ -11,8 +11,8 @@
     "start": "vite"
   },
   "devDependencies": {
-    "typescript": "^4.7.2",
-    "unocss": "^0.34.1",
+    "typescript": "^4.7.3",
+    "unocss": "^0.37.4",
     "vite": "^2.9.9",
     "vite-plugin-solid": "^2.2.6",
     "vite-tsconfig-paths": "^3.5.0"
@@ -20,5 +20,5 @@
   "dependencies": {
     "solid-js": "^1.4.3"
   },
-  "packageManager": "pnpm@7.1.6"
+  "packageManager": "pnpm@7.1.7"
 }
