@@ -12,13 +12,13 @@
   },
   "devDependencies": {
     "typescript": "^4.7.3",
-    "unocss": "^0.37.4",
-    "vite": "^2.9.9",
+    "unocss": "^0.38.2",
+    "vite": "^2.9.12",
     "vite-plugin-solid": "^2.2.6",
     "vite-tsconfig-paths": "^3.5.0"
   },
   "dependencies": {
-    "solid-js": "^1.4.3"
+    "solid-js": "^1.4.4"
   },
-  "packageManager": "pnpm@7.1.7"
+  "packageManager": "pnpm@7.1.9"
 }

@@ -20,7 +20,7 @@ export const ClockFace: Component<ClockFaceProps> = ({
   subsecond,
 }) => (
   <svg viewBox="0 0 200 200" class="h-95vmin">
-    <g transform="translate(100, 100)">
+    <g class="translate-100px">
       <circle class="text-neutral-900 stroke-current fill-none" r="99" />
       {Array.from({ length: 60 }, (_, index) => ({
         index,
@@ -31,11 +31,11 @@ export const ClockFace: Component<ClockFaceProps> = ({
           class={isHour ? 'text-neutral-800' : 'text-neutral-400'}
           length={isHour ? 7 : 3}
           width={isHour ? 2 : 1}
-          fixed
+          stationary
         />
       ))}
     </g>
-    <g transform="translate(100, 100)">
+    <g class="translate-100px">
       <Hand
         transform={subsecond}
         class="text-neutral-200 change-transform"
@@ -62,7 +62,7 @@ export const Clock: Component = () => {
   const hour = () => rotate(((time() / 60 / 60) % 12) / 12);
 
   return (
-    <div class="flex flex-wrap items-center justify-center h-full">
+    <div class="flex items-center justify-center h-full">
       <ClockFace
         hour={hour}
         minute={minute}

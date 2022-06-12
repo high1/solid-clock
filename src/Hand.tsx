@@ -1,24 +1,24 @@
 import type { Accessor, Component, JSX } from 'solid-js';
 
 type HandProps = {
-  transform: Accessor<string>;
   length: number;
-  width: number;
-  fixed?: boolean;
   limit?: number;
-} & Omit<JSX.SvgSVGAttributes<SVGLineElement>, 'transform'>;
+  stationary?: boolean;
+  transform: Accessor<string>;
+  width: number;
+} & Omit<JSX.LineSVGAttributes<SVGLineElement>, 'transform'>;
 
 export const Hand: Component<HandProps> = ({
-  transform,
   length,
-  width,
-  fixed,
   limit = 94,
+  stationary,
+  transform,
+  width,
   ...rest
 }) => (
   <line
-    {...(fixed && { y1: length - limit })}
-    y2={-(fixed ? limit : length)}
+    {...(stationary && { y1: length - limit })}
+    y2={-(stationary ? limit : length)}
     stroke="currentColor"
     stroke-width={width}
     stroke-linecap="round"
