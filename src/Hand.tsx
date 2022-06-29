@@ -19,10 +19,9 @@ export const Hand: Component<HandProps> = ({
   <line
     {...(stationary && { y1: length - limit })}
     y2={-(stationary ? limit : length)}
-    stroke="currentColor"
     stroke-width={width}
-    stroke-linecap="round"
     transform={transform()}
     {...rest}
+    class={`stroke-cap-round ${rest.class}`}
   />
 );
