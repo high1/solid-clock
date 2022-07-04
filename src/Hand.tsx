@@ -5,7 +5,6 @@ type HandProps = {
   limit?: number;
   stationary?: boolean;
   transform: Accessor<string>;
-  width: number;
 } & Omit<JSX.LineSVGAttributes<SVGLineElement>, 'transform'>;
 
 export const Hand: Component<HandProps> = ({
@@ -13,13 +12,11 @@ export const Hand: Component<HandProps> = ({
   limit = 94,
   stationary,
   transform,
-  width,
   ...rest
 }) => (
   <line
     {...(stationary && { y1: length - limit })}
     y2={-(stationary ? limit : length)}
-    stroke-width={width}
     transform={transform()}
     {...rest}
     class={`stroke-cap-round ${rest.class}`}

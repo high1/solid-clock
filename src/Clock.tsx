@@ -19,9 +19,8 @@ export const Clock: Component = () => {
   const hour = () => rotate(((time() / 60 / 60) % 12) / 12);
 
   return (
-    <div class="flex items-center justify-center h-full">
-      <ClockFace {...{hour, minute, second, subsecond}}
-      />
+    <div class="flex items-center justify-center h-full @dark:bg-neutral-700">
+      <ClockFace {...{ hour, minute, second, subsecond }} />
     </div>
   );
 };
