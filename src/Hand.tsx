@@ -13,7 +13,7 @@ export const Hand: Component<HandProps> = ({
   stationary,
   transform,
   ...rest
-}) => (
+}) =>  (
   <line
     {...(stationary && { y1: length - limit })}
     y2={-(stationary ? limit : length)}

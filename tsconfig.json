@@ -10,6 +10,7 @@
     "types": ["vite/client"],
     "noEmit": true,
     "isolatedModules": true,
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "skipLibCheck": true
   }
 }

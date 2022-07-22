@@ -21,11 +21,10 @@ export const ClockFace: Component<ClockFaceProps> = ({
         r="99"
       />
       {Array.from({ length: 60 }, (_, index) => ({
-        index,
         isHour: index % 5 === 0,
-      })).map(({ index, isHour }) => (
+      })).map(({ isHour }, index, { length }) => (
         <Hand
-          transform={() => `rotate(${(360 * index) / 60})`}
+          transform={() => `rotate(${(360 * index) / length})`}
           class={
             isHour
               ? 'stroke-neutral-800 @dark:stroke-neutral-200 stroke-width-2'
