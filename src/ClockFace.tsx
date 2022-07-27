@@ -8,10 +8,19 @@ const getSecondsSinceMidnight = (): number =>
 export const ClockFace: Component = () => {
   const [time, setTime] = createSignal(getSecondsSinceMidnight());
 
-  createEffect(on(time, (frame) => {
-    requestAnimationFrame(() => setTime(getSecondsSinceMidnight()));
-    onCleanup(() => cancelAnimationFrame(frame));
-}));
+  let frame: number;
+
+  createEffect(
+    on(
+      time,
+      () =>
+        (frame = requestAnimationFrame(() =>
+          setTime(getSecondsSinceMidnight())
+        ))
+    )
+  );
+
+  onCleanup(() => cancelAnimationFrame(frame));
 
   const rotate = (rotate: number, fixed: number = 1) =>
     `rotate(${(rotate * 360).toFixed(fixed)})`;
