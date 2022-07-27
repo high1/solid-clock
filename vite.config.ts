@@ -7,9 +7,9 @@ export default defineConfig({
   base: '/solid-clock/',
   plugins: [solid(), uno(), tsconfigPaths()],
   optimizeDeps: {
-    disabled: false
+    disabled: false,
   },
   build: {
-    commonjsOptions: { include: [] }
-  }
+    commonjsOptions: { include: [] },
+  },
 });

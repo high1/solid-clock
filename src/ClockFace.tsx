@@ -1,4 +1,4 @@
-import { createSignal, onCleanup } from 'solid-js';
+import { createEffect, createSignal, on, onCleanup } from 'solid-js';
 import { Hand } from 'Hand';
 import type { Component } from 'solid-js';
 
@@ -8,14 +8,10 @@ const getSecondsSinceMidnight = (): number =>
 export const ClockFace: Component = () => {
   const [time, setTime] = createSignal(getSecondsSinceMidnight());
 
-  const loop = () => {
-    setTime(getSecondsSinceMidnight());
-    frame = requestAnimationFrame(loop);
-  };
-
-  let frame = requestAnimationFrame(loop);
-
-  onCleanup(() => cancelAnimationFrame(frame));
+  createEffect(on(time, (frame) => {
+    requestAnimationFrame(() => setTime(getSecondsSinceMidnight()));
+    onCleanup(() => cancelAnimationFrame(frame));
+}));
 
   const rotate = (rotate: number, fixed: number = 1) =>
     `rotate(${(rotate * 360).toFixed(fixed)})`;
