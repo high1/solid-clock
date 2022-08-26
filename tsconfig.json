@@ -11,6 +11,15 @@
     "noEmit": true,
     "isolatedModules": true,
     "baseUrl": "src",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "importsNotUsedAsValues": "error"
   }
 }

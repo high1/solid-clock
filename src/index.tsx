@@ -2,4 +2,6 @@ import 'uno.css';
 import { render } from 'solid-js/web';
 import { ClockFace } from 'ClockFace';
 
-render(() => <ClockFace />, document.querySelector('#root'));
+const root = document.querySelector('#root');
+if (root) render(() => <ClockFace />, root);
+else throw new Error('#root element not found!');

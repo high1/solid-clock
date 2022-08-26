@@ -1,4 +1,4 @@
-import { createSignal, onCleanup } from 'solid-js';
+import { createSignal, For, onCleanup } from 'solid-js';
 import { Hand } from 'Hand';
 import type { Component } from 'solid-js';
 
@@ -15,8 +15,8 @@ export const ClockFace: Component = () => {
 
   onCleanup(() => cancelAnimationFrame(frame));
 
-  const rotate = (rotate: number, fixed: number = 1) =>
-    `rotate(${(rotate * 360).toFixed(fixed)})`;
+  const rotate = (rotate: number, fractionDigits = 1) =>
+    `rotate(${(rotate * 360).toFixed(fractionDigits)})`;
   const subsecond = () => rotate(time() % 1, 0);
   const second = () => rotate((time() % 60) / 60);
   const minute = () => rotate(((time() / 60) % 60) / 60);
@@ -30,20 +30,24 @@ export const ClockFace: Component = () => {
             class="stroke-neutral-900 @dark:stroke-neutral-100 fill-none"
             r="99"
           />
-          {Array.from({ length: 60 }, (_, index) => ({
-            isHour: index % 5 === 0,
-          })).map(({ isHour }, index, { length }) => (
-            <Hand
-              transform={`rotate(${(360 * index) / length})`}
-              class={
-                isHour
-                  ? 'stroke-neutral-800 @dark:stroke-neutral-200 stroke-width-2'
-                  : 'stroke-neutral-400 @dark:stroke-neutral-600'
-              }
-              length={isHour ? 7 : 3}
-              stationary
-            />
-          ))}
+          <For
+            each={Array.from({ length: 60 }, (_, index) => ({
+              isHour: index % 5 === 0,
+            }))}
+          >
+            {({ isHour }, index) => (
+              <Hand
+                transform={`rotate(${(360 * index()) / 60})`}
+                class={
+                  isHour
+                    ? 'stroke-neutral-800 @dark:stroke-neutral-200 stroke-width-2'
+                    : 'stroke-neutral-400 @dark:stroke-neutral-600'
+                }
+                length={isHour ? 7 : 3}
+                stationary
+              />
+            )}
+          </For>
         </g>
         <g class="translate-100px">
           <Hand
