@@ -52,7 +52,7 @@ export const ClockFace: Component = () => {
         <g class="translate-100px">
           <Hand
             transform={subsecond()}
-            class="stroke-neutral-200 @dark:stroke-neutral-600 stroke-width-5 change-transform"
+            class="stroke-neutral-200 @dark:stroke-neutral-600 stroke-width-5 will-change-transform"
             length={83}
           />
           <Hand

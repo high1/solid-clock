@@ -11,9 +11,9 @@
     "start": "vite"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.35.1",
-    "@typescript-eslint/parser": "^5.35.1",
-    "eslint": "^8.22.0",
+    "@typescript-eslint/eslint-plugin": "^5.36.1",
+    "@typescript-eslint/parser": "^5.36.1",
+    "eslint": "^8.23.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-import-resolver-typescript": "^3.5.0",
     "eslint-plugin-import": "^2.26.0",
@@ -22,13 +22,13 @@
     "eslint-plugin-solid": "^0.7.1",
     "prettier": "^2.7.1",
     "typescript": "^4.8.2",
-    "unocss": "^0.45.13",
-    "vite": "3.0.9",
+    "unocss": "^0.45.15",
+    "vite": "3.1.0",
     "vite-plugin-solid": "^2.3.0",
     "vite-tsconfig-paths": "^3.5.0"
   },
   "dependencies": {
-    "solid-js": "^1.5.1"
+    "solid-js": "^1.5.4"
   },
-  "packageManager": "pnpm@7.9.5"
+  "packageManager": "pnpm@7.11.0"
 }

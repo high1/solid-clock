@@ -8,8 +8,8 @@ type HandProps = {
 } & JSX.LineSVGAttributes<SVGLineElement>;
 
 export const Hand: Component<HandProps> = (props) => {
-  const mergedProps = mergeProps({ length: 0, limit: 94, class: '' }, props);
-  const [local, rest] = splitProps(mergedProps, [
+  const props_ = mergeProps({ length: 0, limit: 94, class: '' }, props);
+  const [local, rest] = splitProps(props_, [
     'class',
     'length',
     'limit',
@@ -18,11 +18,10 @@ export const Hand: Component<HandProps> = (props) => {
 
   return (
     <line
-      // eslint-disable-next-line solid/reactivity
-      {...(local.stationary && { y1: local.length - local.limit })}
+      class={`stroke-cap-round ${local.class}`}
+      y1={local.stationary ? local.length - local.limit : undefined}
       y2={-(local.stationary ? local.limit : local.length)}
       {...rest}
-      class={`stroke-cap-round ${local.class}`}
     />
   );
 };
