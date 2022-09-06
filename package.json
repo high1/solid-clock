@@ -11,24 +11,24 @@
     "start": "vite"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.36.1",
-    "@typescript-eslint/parser": "^5.36.1",
-    "eslint": "^8.23.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-import-resolver-typescript": "^3.5.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jsx-a11y": "^6.6.1",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-solid": "^0.7.1",
-    "prettier": "^2.7.1",
-    "typescript": "^4.8.2",
-    "unocss": "^0.45.15",
+    "@typescript-eslint/eslint-plugin": "5.36.2",
+    "@typescript-eslint/parser": "5.36.2",
+    "eslint": "8.23.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-import-resolver-typescript": "3.5.0",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-jsx-a11y": "6.6.1",
+    "eslint-plugin-prettier": "4.2.1",
+    "eslint-plugin-solid": "0.7.1",
+    "prettier": "2.7.1",
+    "typescript": "4.8.2",
+    "unocss": "0.45.18",
     "vite": "3.1.0",
-    "vite-plugin-solid": "^2.3.0",
-    "vite-tsconfig-paths": "^3.5.0"
+    "vite-plugin-solid": "2.3.0",
+    "vite-tsconfig-paths": "3.5.0"
   },
   "dependencies": {
-    "solid-js": "^1.5.4"
+    "solid-js": "1.5.4"
   },
   "packageManager": "pnpm@7.11.0"
 }
