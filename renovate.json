@@ -1,7 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "timezone": "Europe/Belgrade",
-  "extends": ["config:base", "schedule:weekly"],
+  "extends": ["config:base"],
   "packageRules": [
     {
       "matchPackagePatterns": ["*"],
@@ -9,5 +9,6 @@
       "groupName": "all non-major dependencies",
       "groupSlug": "all-minor-patch"
     }
-  ]
+  ],
+  "schedule": ["before 8pm on monday and thursday"]
 }
