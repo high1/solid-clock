@@ -37,7 +37,7 @@ export const ClockFace: Component = () => {
           >
             {({ isHour }, index) => (
               <Hand
-                transform={`rotate(${(360 * index()) / 60})`}
+                transform={rotate(index() / 60, 0)}
                 class={
                   isHour
                     ? 'stroke-neutral-800 @dark:stroke-neutral-200 stroke-width-2'
