@@ -1,5 +1,4 @@
-import { mergeProps, splitProps } from 'solid-js';
-import type { Component, JSX } from 'solid-js';
+import { mergeProps, splitProps, type JSX } from 'solid-js';
 
 type HandProps = {
   length: number;
@@ -7,7 +6,7 @@ type HandProps = {
   stationary?: boolean;
 } & JSX.LineSVGAttributes<SVGLineElement>;
 
-export const Hand: Component<HandProps> = (props) => {
+export const Hand = (props: HandProps) => {
   const props_ = mergeProps({ length: 0, limit: 94, class: '' }, props);
   const [local, rest] = splitProps(props_, [
     'class',
