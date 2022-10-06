@@ -1,12 +1,12 @@
 import { mergeProps, splitProps, type JSX } from 'solid-js';
 
-type HandProps = {
+type ClockHandProps = {
   length: number;
   limit?: number;
   stationary?: boolean;
 } & JSX.LineSVGAttributes<SVGLineElement>;
 
-export const Hand = (props: HandProps) => {
+export const ClockHand = (props: ClockHandProps) => {
   const props_ = mergeProps({ length: 0, limit: 94, class: '' }, props);
   const [local, rest] = splitProps(props_, [
     'class',
