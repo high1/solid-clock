@@ -14,15 +14,13 @@ jobs:
 
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.1.0
 
       - name: Pnpm 🧱
-        uses: pnpm/action-setup@v2
-        with:
-          version: 7
+        uses: pnpm/action-setup@v2.2.4
 
-      - name: Use Node.js ${{ matrix.node-version }} ⚓
-        uses: actions/setup-node@v3
+      - name: Node.js ${{ matrix.node-version }} ⚓
+        uses: actions/setup-node@v3.5.1
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
@@ -35,7 +33,6 @@ jobs:
 
       - name: Deploy 🚀
         if: github.ref == 'refs/heads/main'
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
-          branch: gh-pages
           folder: dist
