@@ -8,10 +8,7 @@ type ClockHandProps = {
 
 export const ClockHand = (props: ClockHandProps) => {
   const props_ = mergeProps({ length: 0, limit: 94, class: '' }, props);
-  const [local, rest] = splitProps(
-    mergeProps({ length: 0, limit: 94, class: '' }, props),
-    ['length', 'limit', 'stationary']
-  );
+  const [local, rest] = splitProps(props_, ['length', 'limit', 'stationary']);
 
   return (
     <line
