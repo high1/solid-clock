@@ -11,7 +11,7 @@ specifiers:
   eslint-plugin-prettier: 4.2.1
   eslint-plugin-solid: 0.7.3
   prettier: 2.7.1
-  solid-js: 1.5.7
+  solid-js: 1.5.8
   typescript: 4.8.4
   unocss: 0.45.29
   vite: 3.1.8
@@ -19,7 +19,7 @@ specifiers:
   vite-tsconfig-paths: 3.5.1
 
 dependencies:
-  solid-js: 1.5.7
+  solid-js: 1.5.8
 
 devDependencies:
   '@typescript-eslint/eslint-plugin': 5.40.0_25sstg4uu2sk4pm7xcyzuov7xq
@@ -35,7 +35,7 @@ devDependencies:
   typescript: 4.8.4
   unocss: 0.45.29_vite@3.1.8
   vite: 3.1.8
-  vite-plugin-solid: 2.3.9_solid-js@1.5.7+vite@3.1.8
+  vite-plugin-solid: 2.3.9_solid-js@1.5.8+vite@3.1.8
   vite-tsconfig-paths: 3.5.1_vite@3.1.8
 
 packages:
@@ -2777,12 +2777,12 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
-  /solid-js/1.5.7:
-    resolution: {integrity: sha512-L1UuyMuZZARAwzXo5NZDhE6yxc14aqNbVOUoGzvlcxRZo1Cm4ExhPV0diEfwDyiKG/igqNNLkNurHkXiI5sVEg==}
+  /solid-js/1.5.8:
+    resolution: {integrity: sha512-Rm7A8msFxSQCUXMzn1YSV+y1Gavy/66s8wp52Cz9nVgsO1JYDAqbp33V4Kg8aMJZZCYhEwgHxsg8JxgIFmwouw==}
     dependencies:
       csstype: 3.1.0
 
-  /solid-refresh/0.4.1_solid-js@1.5.7:
+  /solid-refresh/0.4.1_solid-js@1.5.8:
     resolution: {integrity: sha512-v3tD/OXQcUyXLrWjPW1dXZyeWwP7/+GQNs8YTL09GBq+5FguA6IejJWUvJDrLIA4M0ho9/5zK2e9n+uy+4488g==}
     peerDependencies:
       solid-js: ^1.3
@@ -2790,7 +2790,7 @@ packages:
       '@babel/generator': 7.18.7
       '@babel/helper-module-imports': 7.18.6
       '@babel/types': 7.18.8
-      solid-js: 1.5.7
+      solid-js: 1.5.8
     dev: true
 
   /source-map-js/1.0.2:
@@ -3037,7 +3037,7 @@ packages:
       punycode: 2.1.1
     dev: true
 
-  /vite-plugin-solid/2.3.9_solid-js@1.5.7+vite@3.1.8:
+  /vite-plugin-solid/2.3.9_solid-js@1.5.8+vite@3.1.8:
     resolution: {integrity: sha512-+lprsYgt9DVNp0kbDj2d2HWAPI13L8ff5xslk9SjiPBcsY/YUZ/1Wj0J/Oj5aiVAhwfPm8IcM3bzyHJUPlmc8w==}
     peerDependencies:
       solid-js: ^1.3.17
@@ -3047,8 +3047,8 @@ packages:
       '@babel/preset-typescript': 7.18.6_@babel+core@7.18.6
       babel-preset-solid: 1.4.6_@babel+core@7.18.6
       merge-anything: 5.0.2
-      solid-js: 1.5.7
-      solid-refresh: 0.4.1_solid-js@1.5.7
+      solid-js: 1.5.8
+      solid-refresh: 0.4.1_solid-js@1.5.8
       vite: 3.1.8
     transitivePeerDependencies:
       - supports-color
