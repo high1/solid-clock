@@ -15,20 +15,20 @@
     "@typescript-eslint/parser": "5.40.1",
     "eslint": "8.25.0",
     "eslint-config-prettier": "8.5.0",
-    "eslint-import-resolver-typescript": "3.5.1",
+    "eslint-import-resolver-typescript": "3.5.2",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-jsx-a11y": "6.6.1",
     "eslint-plugin-prettier": "4.2.1",
     "eslint-plugin-solid": "0.7.3",
     "prettier": "2.7.1",
     "typescript": "4.8.4",
-    "unocss": "0.45.29",
+    "unocss": "0.45.30",
     "vite": "3.1.8",
     "vite-plugin-solid": "2.3.9",
     "vite-tsconfig-paths": "3.5.1"
   },
   "dependencies": {
-    "solid-js": "1.5.9"
+    "solid-js": "1.6.0"
   },
-  "packageManager": "pnpm@7.13.5"
+  "packageManager": "pnpm@7.13.6"
 }
