@@ -7,7 +7,7 @@ type ClockHandProps = {
 } & JSX.LineSVGAttributes<SVGLineElement>;
 
 export const ClockHand = (props: ClockHandProps) => {
-  const props_ = mergeProps({ length: 0, limit: 94, class: '' }, props);
+  const props_ = mergeProps({ length: 0, limit: 94 }, props);
   const [local, rest] = splitProps(props_, ['length', 'limit', 'stationary']);
 
   return (

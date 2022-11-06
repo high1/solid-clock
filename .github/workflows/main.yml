@@ -5,6 +5,9 @@ on:
       - main
   pull_request:
 
+env:
+  BASE: /${{ github.event.repository.name }}/
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
