@@ -42,10 +42,6 @@
         "plugin:jsonc/prettier",
         "plugin:prettier/recommended"
       ]
-    },
-    {
-      "files": ["*.toml"],
-      "extends": ["eslint:recommended", "plugin:toml/standard"]
     }
   ]
 }
