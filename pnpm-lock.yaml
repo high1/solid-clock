@@ -12,7 +12,6 @@ specifiers:
   eslint-plugin-jsx-a11y: 6.6.1
   eslint-plugin-prettier: 4.2.1
   eslint-plugin-solid: 0.7.4
-  eslint-plugin-toml: ^0.3.1
   prettier: 2.7.1
   solid-js: 1.6.1
   typescript: 4.8.4
@@ -36,7 +35,6 @@ devDependencies:
   eslint-plugin-jsx-a11y: 6.6.1_eslint@8.26.0
   eslint-plugin-prettier: 4.2.1_aniwkeyvlpmwkidetuytnokvcm
   eslint-plugin-solid: 0.7.4_wyqvi574yv7oiwfeinomdzmc3m
-  eslint-plugin-toml: 0.3.1_eslint@8.26.0
   prettier: 2.7.1
   typescript: 4.8.4
   unocss: 0.46.1_vite@3.2.1
@@ -1734,20 +1732,6 @@ packages:
       - typescript
     dev: true
 
-  /eslint-plugin-toml/0.3.1_eslint@8.26.0:
-    resolution: {integrity: sha512-glaDFIEeDUYb9VrNdKGiSOmeRQ+jAFJVV5xhu3chYOF8+YfMYiUQhpCwzgYYiFTR2Hv5TYlO02oRwKxjMIw17Q==}
-    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-    peerDependencies:
-      eslint: '>=6.0.0'
-    dependencies:
-      debug: 4.3.4
-      eslint: 8.26.0
-      lodash: 4.17.21
-      toml-eslint-parser: 0.4.0
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-
   /eslint-scope/5.1.1:
     resolution: {integrity: sha512-2NxwbF/hZ0KpepYN0cNbo+FN6XoK7GaHlQhgx/hIZl6Va0bF45RQOOwhLIy8lQDbuCiadSLCBnH2CFYquit5bw==}
     engines: {node: '>=8.0.0'}
@@ -2450,10 +2434,6 @@ packages:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
     dev: true
 
-  /lodash/4.17.21:
-    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
-    dev: true
-
   /lru-cache/6.0.0:
     resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
     engines: {node: '>=10'}
@@ -2989,13 +2969,6 @@ packages:
     engines: {node: '>=8.0'}
     dependencies:
       is-number: 7.0.0
-    dev: true
-
-  /toml-eslint-parser/0.4.0:
-    resolution: {integrity: sha512-lwMC8RPBoAksoMFpQnB4c3zz+o9JPv1sxsduVH9AHb2o4kxQl7mtP5YaYoS33+6IdVrzHAXxi4JgowJDERoynw==}
-    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-    dependencies:
-      eslint-visitor-keys: 3.3.0
     dev: true
 
   /totalist/3.0.0:
