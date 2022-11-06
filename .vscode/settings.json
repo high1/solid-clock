@@ -1,9 +1,6 @@
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
+    "source.fixAll.eslint": true
   },
-  "files.associations": {
-    ".eslintrc": "json",
-    ".prettierrc": "json"
-  }
+  "eslint.validate": ["typescript", "typescriptreact", "json", "jsonc", "toml"]
 }

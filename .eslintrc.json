@@ -1,9 +1,9 @@
 {
   "root": true,
-  "ignorePatterns": ["dist/*"],
+  "ignorePatterns": ["dist", "!**/.*"],
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx"],
+      "files": ["*.{ts,tsx}"],
       "parser": "@typescript-eslint/parser",
       "extends": [
         "eslint:recommended",
@@ -17,11 +17,12 @@
       ],
       "env": {
         "browser": true,
-        "es2022": true
+        "node": true
       },
       "parserOptions": {
         "sourceType": "module",
         "project": "tsconfig.json",
+        "ecmaVersion": "latest",
         "ecmaFeatures": {
           "jsx": true
         }
@@ -30,8 +31,21 @@
         "import/resolver": {
           "typescript": {}
         },
-        "import/core-modules": [ "uno.css" ]
+        "import/core-modules": ["uno.css"]
       }
+    },
+    {
+      "files": ["*.json"],
+      "extends": [
+        "eslint:recommended",
+        "plugin:jsonc/recommended-with-json",
+        "plugin:jsonc/prettier",
+        "plugin:prettier/recommended"
+      ]
+    },
+    {
+      "files": ["*.toml"],
+      "extends": ["eslint:recommended", "plugin:toml/standard"]
     }
   ]
 }
