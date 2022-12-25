@@ -27,7 +27,7 @@
     "unocss": "0.47.6",
     "vite": "4.0.3",
     "vite-plugin-solid": "2.5.0",
-    "vite-tsconfig-paths": "3.6.0"
+    "vite-tsconfig-paths": "4.0.3"
   },
   "dependencies": {
     "solid-js": "1.6.5"
