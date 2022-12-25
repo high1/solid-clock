@@ -30,12 +30,8 @@ export const ClockFace = () => {
             class="stroke-neutral-900 @dark:stroke-neutral-100 fill-none"
             r="99"
           />
-          <For
-            each={Array.from({ length }, (_, index) => ({
-              isHour: index % 5 === 0,
-            }))}
-          >
-            {({ isHour }, index) => (
+          <For each={Array.from({ length }, (_, index) => index % 5 === 0)}>
+            {(isHour, index) => (
               <ClockHand
                 transform={rotate(index() / length, 0)}
                 class={

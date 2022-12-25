@@ -12,7 +12,7 @@ export const ClockHand = (props: ClockHandProps) => {
 
   return (
     <line
-      y1={local.stationary ? local.length - local.limit : undefined}
+      {...(local.stationary && { y1: local.length - local.limit })}
       y2={-(local.stationary ? local.limit : local.length)}
       stroke-linecap="round"
       {...rest}

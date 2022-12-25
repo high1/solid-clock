@@ -1,6 +1,6 @@
 # SVG clock implemented in <a href="https://solidjs.com"><img src="https://www.solidjs.com/img/logo/without-wordmark/logo.svg" alt="Solid" height="60"></a>
 
-![Build and Deploy](https://github.com/high1/solid-clock/actions/workflows/main.yml/badge.svg?branch=main)   
+![Build and Deploy](https://github.com/high1/solid-clock/actions/workflows/main.yml/badge.svg?event=push)   
 [![Netlify Status](https://api.netlify.com/api/v1/badges/df10c2bc-17c5-4a77-b052-4ceed459cd80/deploy-status)](https://app.netlify.com/sites/solid-clock/deploys)
 
 Inspired by [sauron clock](https://ivanceras.github.io/svg-clock/) and [voby](https://github.com/vobyjs/voby)   
