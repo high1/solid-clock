@@ -1,6 +1,6 @@
 {
   "root": true,
-  "ignorePatterns": ["dist", "node_modules", "!**/.*"],
+  "ignorePatterns": ["dist", "node_modules", "!**/.*", "pnpm-lock.yaml"],
   "overrides": [
     {
       "files": ["*.{ts,tsx}"],
@@ -45,6 +45,14 @@
       "extends": [
         "plugin:jsonc/recommended-with-jsonc",
         "plugin:jsonc/prettier",
+        "plugin:prettier/recommended"
+      ]
+    },
+    {
+      "files": ["*.yml"],
+      "extends": [
+        "plugin:yml/standard",
+        "plugin:yml/prettier",
         "plugin:prettier/recommended"
       ]
     }
