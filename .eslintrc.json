@@ -13,6 +13,7 @@
         "plugin:jsx-a11y/recommended",
         "plugin:import/recommended",
         "plugin:import/typescript",
+        "@unocss",
         "plugin:prettier/recommended"
       ],
       "parserOptions": {

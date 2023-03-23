@@ -2,5 +2,6 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "eslint.validate": ["typescript", "typescriptreact", "json", "jsonc", "yaml"]
+  "eslint.validate": ["json", "jsonc", "yaml"],
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

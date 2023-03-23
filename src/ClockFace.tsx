@@ -23,12 +23,12 @@ export const ClockFace = () => {
   onCleanup(() => cancelAnimationFrame(frame));
 
   return (
-    <div class="flex items-center justify-center h-screen @dark:bg-neutral-700">
+    <div class="grid h-screen place-content-center @dark:bg-neutral-700">
       <svg viewBox="0 0 200 200" class="h-95vmin">
-        <g class="translate-100px">
+        <g class="translate-1/2">
           <circle
-            class="stroke-neutral-900 @dark:stroke-neutral-100 fill-none"
-            r="99"
+            class="fill-none stroke-neutral-600 @dark:stroke-neutral-200"
+            r="98"
           />
           <For each={Array.from({ length }, (_, index) => index % 5 === 0)}>
             {(isHour, index) => (
@@ -36,35 +36,35 @@ export const ClockFace = () => {
                 transform={rotate(index() / length, 0)}
                 class={
                   isHour
-                    ? 'stroke-neutral-800 @dark:stroke-neutral-200 stroke-width-2'
-                    : 'stroke-neutral-400 @dark:stroke-neutral-600'
+                    ? 'stroke-neutral-600 stroke-2 @dark:stroke-neutral-200'
+                    : 'stroke-neutral-200 @dark:stroke-neutral-600'
                 }
-                length={isHour ? 7 : 3}
+                length={isHour ? 6 : 2.5}
                 stationary
               />
             )}
           </For>
         </g>
-        <g class="translate-100px">
+        <g class="translate-1/2">
           <ClockHand
             transform={subsecond()}
-            class="stroke-neutral-200 @dark:stroke-neutral-600 stroke-width-5"
-            length={83}
+            class="stroke-neutral-200 stroke-4 @dark:stroke-neutral-600"
+            length={82}
           />
           <ClockHand
             transform={hour()}
-            class="stroke-neutral-800 @dark:stroke-neutral-200 stroke-width-4"
-            length={50}
+            class="stroke-neutral-600 stroke-4 @dark:stroke-neutral-200"
+            length={46}
           />
           <ClockHand
             transform={minute()}
-            class="stroke-neutral-800 @dark:stroke-neutral-200 stroke-width-3"
-            length={70}
+            class="stroke-neutral-400 stroke-3"
+            length={64}
           />
           <ClockHand
             transform={second()}
-            class="stroke-red-500 stroke-width-2"
-            length={77}
+            class="stroke-#518ac8 stroke-2"
+            length={76}
           />
         </g>
       </svg>
