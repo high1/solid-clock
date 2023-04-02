@@ -13,27 +13,27 @@
   },
   "devDependencies": {
     "@types/node": "^18.15.3",
-    "@typescript-eslint/eslint-plugin": "5.56.0",
-    "@typescript-eslint/parser": "5.56.0",
+    "@typescript-eslint/eslint-plugin": "5.57.0",
+    "@typescript-eslint/parser": "5.57.0",
     "@unocss/eslint-config": "^0.50.6",
-    "eslint": "8.36.0",
+    "eslint": "8.37.0",
     "eslint-config-prettier": "8.8.0",
-    "eslint-import-resolver-typescript": "3.5.3",
+    "eslint-import-resolver-typescript": "3.5.4",
     "eslint-plugin-import": "2.27.5",
     "eslint-plugin-jsonc": "^2.7.0",
     "eslint-plugin-jsx-a11y": "6.7.1",
     "eslint-plugin-prettier": "4.2.1",
-    "eslint-plugin-solid": "0.11.0",
+    "eslint-plugin-solid": "0.12.0",
     "eslint-plugin-yml": "^1.5.0",
     "prettier": "2.8.7",
-    "typescript": "5.0.2",
+    "typescript": "5.0.3",
     "unocss": "0.50.6",
     "vite": "4.2.1",
     "vite-plugin-solid": "2.6.1",
     "vite-tsconfig-paths": "4.0.7"
   },
   "dependencies": {
-    "solid-js": "1.6.16"
+    "solid-js": "1.7.1"
   },
-  "packageManager": "pnpm@7.30.3"
+  "packageManager": "pnpm@7.30.5"
 }
