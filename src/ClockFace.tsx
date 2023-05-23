@@ -53,7 +53,7 @@ export const ClockFace = () => {
           />
           <ClockHand
             transform={hour()}
-            class="stroke-gray-600 stroke-4 @dark:stroke-gray-200"
+            class="stroke-gray-600 @dark:stroke-gray-200 stroke-4"
             length={46}
           />
           <ClockHand
