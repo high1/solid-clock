@@ -23,11 +23,11 @@ export const ClockFace = () => {
   onCleanup(() => cancelAnimationFrame(frame));
 
   return (
-    <div class="grid h-screen place-content-center @dark:bg-neutral-700">
-      <svg viewBox="0 0 200 200" class="h-95vmin">
+    <div class="grid h-screen place-content-center @dark:bg-gray-800">
+      <svg viewBox="0 0 200 200" class="h-95vmin z-1">
         <g class="translate-1/2">
           <circle
-            class="fill-none stroke-neutral-600 @dark:stroke-neutral-200"
+            class="fill-none stroke-gray-600 @dark:stroke-gray-200"
             r="98"
           />
           <For each={Array.from({ length }, (_, index) => index % 5 === 0)}>
@@ -36,8 +36,8 @@ export const ClockFace = () => {
                 transform={rotate(index() / length, 0)}
                 class={
                   isHour
-                    ? 'stroke-neutral-600 stroke-2 @dark:stroke-neutral-200'
-                    : 'stroke-neutral-200 @dark:stroke-neutral-600'
+                    ? 'stroke-gray-600 stroke-2 @dark:stroke-gray-200'
+                    : 'stroke-gray-200 @dark:stroke-gray-600'
                 }
                 length={isHour ? 6 : 2.5}
                 stationary
@@ -48,22 +48,22 @@ export const ClockFace = () => {
         <g class="translate-1/2">
           <ClockHand
             transform={subsecond()}
-            class="stroke-neutral-200 stroke-4 @dark:stroke-neutral-600"
+            class="stroke-gray-200 @dark:stroke-gray-600 stroke-3"
             length={82}
           />
           <ClockHand
             transform={hour()}
-            class="stroke-neutral-600 stroke-4 @dark:stroke-neutral-200"
+            class="stroke-gray-600 @dark:stroke-gray-200 stroke-4"
             length={46}
           />
           <ClockHand
             transform={minute()}
-            class="stroke-neutral-400 stroke-3"
+            class="stroke-3 stroke-gray-400"
             length={64}
           />
           <ClockHand
             transform={second()}
-            class="stroke-#518ac8 stroke-2"
+            class="stroke-2 stroke-solid"
             length={76}
           />
         </g>
