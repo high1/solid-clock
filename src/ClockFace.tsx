@@ -20,7 +20,9 @@ export const ClockFace = () => {
     frame = requestAnimationFrame(loop);
   });
 
-  onCleanup(() => cancelAnimationFrame(frame));
+  onCleanup(() => {
+    cancelAnimationFrame(frame);
+  });
 
   return (
     <div class="grid h-screen place-content-center @dark:bg-gray-800">
