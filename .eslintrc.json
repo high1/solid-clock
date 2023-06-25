@@ -21,7 +21,8 @@
         "ecmaVersion": "latest",
         "ecmaFeatures": {
           "jsx": true
-        }
+        },
+        "warnOnUnsupportedTypeScriptVersion": false
       },
       "settings": {
         "import/resolver": {
