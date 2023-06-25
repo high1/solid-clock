@@ -1,10 +1,10 @@
-import { defineConfig, presetUno } from 'unocss';
+import { defineConfig } from 'unocss';
+import { colors } from 'unocss/preset-mini';
 
-const { theme } = presetUno();
 export default defineConfig({
   theme: {
     colors: {
-      gray: theme?.colors?.['zinc'] ?? {},
+      gray: colors.zinc,
       solid: '#518ac8',
     },
   },
