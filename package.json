@@ -24,7 +24,7 @@
     "eslint-plugin-prettier": "4.2.1",
     "eslint-plugin-solid": "0.12.1",
     "eslint-plugin-yml": "1.8.0",
-    "prettier": "2.8.8",
+    "prettier": "3.0.0",
     "typescript": "5.1.6",
     "unocss": "0.53.4",
     "vite": "4.3.9",
