@@ -17,7 +17,7 @@
       ],
       "parserOptions": {
         "sourceType": "module",
-        "project": "tsconfig.json",
+        "project": true,
         "ecmaVersion": "latest",
         "ecmaFeatures": {
           "jsx": true
