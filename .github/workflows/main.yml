@@ -34,7 +34,7 @@ jobs:
           touch dist/.nojekyll
 
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.4.2
+        uses: JamesIves/github-pages-deploy-action@v4.4.3
         if: github.ref == 'refs/heads/main'
         with:
           folder: dist
