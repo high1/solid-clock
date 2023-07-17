@@ -15,7 +15,7 @@
     "@typescript-eslint/eslint-plugin": "6.0.0",
     "@typescript-eslint/parser": "6.0.0",
     "@unocss/eslint-config": "0.53.5",
-    "eslint": "8.44.0",
+    "eslint": "8.45.0",
     "eslint-config-prettier": "8.8.0",
     "eslint-import-resolver-typescript": "3.5.5",
     "eslint-plugin-import": "2.27.5",
@@ -27,7 +27,7 @@
     "prettier": "3.0.0",
     "typescript": "5.1.6",
     "unocss": "0.53.5",
-    "vite": "4.4.3",
+    "vite": "4.4.4",
     "vite-plugin-checker": "0.6.1",
     "vite-plugin-solid": "2.7.0",
     "vite-tsconfig-paths": "4.2.0"
