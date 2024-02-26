@@ -11,11 +11,11 @@
     "start": "vite"
   },
   "devDependencies": {
-    "@types/node": "20.11.17",
+    "@types/node": "20.11.20",
     "@typescript-eslint/eslint-plugin": "6.21.0",
     "@typescript-eslint/parser": "6.21.0",
     "@unocss/eslint-config": "0.58.5",
-    "eslint": "8.56.0",
+    "eslint": "8.57.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-import-resolver-typescript": "3.6.1",
     "eslint-plugin-import": "2.29.1",
@@ -29,11 +29,11 @@
     "unocss": "0.58.5",
     "vite": "4.5.2",
     "vite-plugin-checker": "0.6.4",
-    "vite-plugin-solid": "2.9.1",
+    "vite-plugin-solid": "2.10.1",
     "vite-tsconfig-paths": "4.3.1"
   },
   "dependencies": {
-    "solid-js": "1.8.14"
+    "solid-js": "1.8.15"
   },
-  "packageManager": "pnpm@8.15.1"
+  "packageManager": "pnpm@8.15.4"
 }
