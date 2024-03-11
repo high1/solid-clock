@@ -11,7 +11,7 @@
     "start": "vite"
   },
   "devDependencies": {
-    "@types/node": "20.11.24",
+    "@types/node": "20.11.25",
     "@typescript-eslint/eslint-plugin": "6.21.0",
     "@typescript-eslint/parser": "6.21.0",
     "@unocss/eslint-config": "0.58.5",
@@ -25,7 +25,7 @@
     "eslint-plugin-solid": "0.13.1",
     "eslint-plugin-yml": "1.12.2",
     "prettier": "3.2.5",
-    "typescript": "5.3.3",
+    "typescript": "5.4.2",
     "unocss": "0.58.5",
     "vite": "4.5.2",
     "vite-plugin-checker": "0.6.4",
