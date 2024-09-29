@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v4.2.0
 
       - name: Pnpm 🧱
         uses: pnpm/action-setup@v2.4.1
@@ -34,7 +34,7 @@ jobs:
           touch dist/.nojekyll
 
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.6.4
+        uses: JamesIves/github-pages-deploy-action@v4.6.8
         if: github.ref == 'refs/heads/main'
         with:
           folder: dist
