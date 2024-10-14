@@ -30,7 +30,7 @@
     "vite": "4.5.5",
     "vite-plugin-checker": "0.8.0",
     "vite-plugin-solid": "2.10.2",
-    "vite-tsconfig-paths": "4.3.2"
+    "vite-tsconfig-paths": "5.0.1"
   },
   "dependencies": {
     "solid-js": "1.9.2"
