@@ -11,8 +11,8 @@ dependencies:
 
 devDependencies:
   '@types/node':
-    specifier: 20.17.1
-    version: 20.17.1
+    specifier: 20.17.6
+    version: 20.17.6
   '@typescript-eslint/eslint-plugin':
     specifier: 6.21.0
     version: 6.21.0(@typescript-eslint/parser@6.21.0)(eslint@8.57.1)(typescript@5.6.3)
@@ -47,8 +47,8 @@ devDependencies:
     specifier: 0.14.3
     version: 0.14.3(eslint@8.57.1)(typescript@5.6.3)
   eslint-plugin-yml:
-    specifier: 1.14.0
-    version: 1.14.0(eslint@8.57.1)
+    specifier: 1.15.0
+    version: 1.15.0(eslint@8.57.1)
   prettier:
     specifier: 3.3.3
     version: 3.3.3
@@ -57,10 +57,10 @@ devDependencies:
     version: 5.6.3
   unocss:
     specifier: 0.63.6
-    version: 0.63.6(postcss@8.4.38)(typescript@5.6.3)(vite@4.5.5)
+    version: 0.63.6(postcss@8.4.47)(typescript@5.6.3)(vite@4.5.5)
   vite:
     specifier: 4.5.5
-    version: 4.5.5(@types/node@20.17.1)
+    version: 4.5.5(@types/node@20.17.6)
   vite-plugin-checker:
     specifier: 0.8.0
     version: 0.8.0(eslint@8.57.1)(typescript@5.6.3)(vite@4.5.5)
@@ -125,7 +125,7 @@ packages:
       '@babel/traverse': 7.25.3
       '@babel/types': 7.25.2
       convert-source-map: 2.0.0
-      debug: 4.3.6
+      debug: 4.3.7
       gensync: 1.0.0-beta.2
       json5: 2.2.3
       semver: 6.3.1
@@ -900,8 +900,8 @@ packages:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: true
 
-  /@types/node@20.17.1:
-    resolution: {integrity: sha512-j2VlPv1NnwPJbaCNv69FO/1z4lId0QmGvpT41YxitRtWlg96g/j8qcv2RKsLKe2F6OJgyXhupN1Xo17b2m139Q==}
+  /@types/node@20.17.6:
+    resolution: {integrity: sha512-VEI7OdvK2wP7XHnsuXbAJnEpEkF6NjSN45QJlL4VGqZSXsnicpesdTWsg9RISeSdYd3yeRj/y3k5KGjUXYnFwQ==}
     dependencies:
       undici-types: 6.19.6
     dev: true
@@ -1030,7 +1030,7 @@ packages:
     dependencies:
       '@typescript-eslint/types': 6.21.0
       '@typescript-eslint/visitor-keys': 6.21.0
-      debug: 4.3.6
+      debug: 4.3.7
       globby: 11.1.0
       is-glob: 4.0.3
       minimatch: 9.0.3
@@ -1175,7 +1175,7 @@ packages:
       '@unocss/core': 0.63.6
       '@unocss/reset': 0.63.6
       '@unocss/vite': 0.63.6(typescript@5.6.3)(vite@4.5.5)
-      vite: 4.5.5(@types/node@20.17.1)
+      vite: 4.5.5(@types/node@20.17.6)
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -1263,7 +1263,7 @@ packages:
       - typescript
     dev: true
 
-  /@unocss/postcss@0.63.6(postcss@8.4.38):
+  /@unocss/postcss@0.63.6(postcss@8.4.47):
     resolution: {integrity: sha512-XI6U1jMwbQoSHVWpZZu3Cxp3t1PVj5VOj+IYtz7xmcWP9GVK+eyETo/xyB0l4muD4emXfSrhNDrFYzSyIyF5cg==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -1273,7 +1273,7 @@ packages:
       '@unocss/core': 0.63.6
       '@unocss/rule-utils': 0.63.6
       css-tree: 3.0.0
-      postcss: 8.4.38
+      postcss: 8.4.47
       tinyglobby: 0.2.9
     transitivePeerDependencies:
       - supports-color
@@ -1391,7 +1391,7 @@ packages:
       chokidar: 3.6.0
       magic-string: 0.30.11
       tinyglobby: 0.2.9
-      vite: 4.5.5(@types/node@20.17.1)
+      vite: 4.5.5(@types/node@20.17.6)
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -2390,13 +2390,13 @@ packages:
       - typescript
     dev: true
 
-  /eslint-plugin-yml@1.14.0(eslint@8.57.1):
-    resolution: {integrity: sha512-ESUpgYPOcAYQO9czugcX5OqRvn/ydDVwGCPXY4YjPqc09rHaUVUA6IE6HLQys4rXk/S+qx3EwTd1wHCwam/OWQ==}
+  /eslint-plugin-yml@1.15.0(eslint@8.57.1):
+    resolution: {integrity: sha512-leC8APYVOsKyWUlvRwVhewytK5wS70BfMqIaUplFstRfzCoVp0YoEroV4cUEvQrBj93tQ3M9LcjO/ewr6D4kjA==}
     engines: {node: ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: '>=6.0.0'
     dependencies:
-      debug: 4.3.4
+      debug: 4.3.7
       eslint: 8.57.1
       eslint-compat-utils: 0.5.0(eslint@8.57.1)
       lodash: 4.17.21
@@ -3952,7 +3952,7 @@ packages:
     engines: {node: '>= 10.0.0'}
     dev: true
 
-  /unocss@0.63.6(postcss@8.4.38)(typescript@5.6.3)(vite@4.5.5):
+  /unocss@0.63.6(postcss@8.4.47)(typescript@5.6.3)(vite@4.5.5):
     resolution: {integrity: sha512-OKJJKEFWVz+Lsf3JdOgRiRtL+QOUQRBov89taUcCPFPZtrhP6pPVFCZHD9qMvY4IChMX7dzalQax3ZXJ3hbtkQ==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -3967,7 +3967,7 @@ packages:
       '@unocss/astro': 0.63.6(typescript@5.6.3)(vite@4.5.5)
       '@unocss/cli': 0.63.6
       '@unocss/core': 0.63.6
-      '@unocss/postcss': 0.63.6(postcss@8.4.38)
+      '@unocss/postcss': 0.63.6(postcss@8.4.47)
       '@unocss/preset-attributify': 0.63.6
       '@unocss/preset-icons': 0.63.6
       '@unocss/preset-mini': 0.63.6
@@ -3981,7 +3981,7 @@ packages:
       '@unocss/transformer-directives': 0.63.6
       '@unocss/transformer-variant-group': 0.63.6
       '@unocss/vite': 0.63.6(typescript@5.6.3)(vite@4.5.5)
-      vite: 4.5.5(@types/node@20.17.1)
+      vite: 4.5.5(@types/node@20.17.6)
     transitivePeerDependencies:
       - postcss
       - rollup
@@ -4056,7 +4056,7 @@ packages:
       strip-ansi: 6.0.1
       tiny-invariant: 1.3.1
       typescript: 5.6.3
-      vite: 4.5.5(@types/node@20.17.1)
+      vite: 4.5.5(@types/node@20.17.6)
       vscode-languageclient: 7.0.0
       vscode-languageserver: 7.0.0
       vscode-languageserver-textdocument: 1.0.8
@@ -4079,7 +4079,7 @@ packages:
       merge-anything: 5.1.7
       solid-js: 1.9.3
       solid-refresh: 0.6.3(solid-js@1.9.3)
-      vite: 4.5.5(@types/node@20.17.1)
+      vite: 4.5.5(@types/node@20.17.6)
       vitefu: 0.2.5(vite@4.5.5)
     transitivePeerDependencies:
       - supports-color
@@ -4096,13 +4096,13 @@ packages:
       debug: 4.3.4
       globrex: 0.1.2
       tsconfck: 3.0.3(typescript@5.6.3)
-      vite: 4.5.5(@types/node@20.17.1)
+      vite: 4.5.5(@types/node@20.17.6)
     transitivePeerDependencies:
       - supports-color
       - typescript
     dev: true
 
-  /vite@4.5.5(@types/node@20.17.1):
+  /vite@4.5.5(@types/node@20.17.6):
     resolution: {integrity: sha512-ifW3Lb2sMdX+WU91s3R0FyQlAyLxOzCSCP37ujw0+r5POeHPwe6udWVIElKQq8gk3t7b8rkmvqC6IHBpCff4GQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -4130,7 +4130,7 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 20.17.1
+      '@types/node': 20.17.6
       esbuild: 0.18.12
       postcss: 8.4.38
       rollup: 3.28.0
@@ -4146,7 +4146,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 4.5.5(@types/node@20.17.1)
+      vite: 4.5.5(@types/node@20.17.6)
     dev: true
 
   /vscode-jsonrpc@6.0.0:
