@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
 @theme {
-  --color-solid: #518ac8;
+  --color-solid: #2c4f7c;
+  --color-solid-light: #446b9e;
 }
