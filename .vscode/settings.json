@@ -1,7 +1,9 @@
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": "explicit"
   },
   "eslint.validate": ["json", "jsonc", "yaml"],
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "files.associations": {
+    "*.css": "tailwindcss"
+  }
 }
