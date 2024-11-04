@@ -1,4 +1,4 @@
-import 'uno.css';
+import 'index.css';
 import { render } from 'solid-js/web';
 import { ClockFace } from 'ClockFace';
 
