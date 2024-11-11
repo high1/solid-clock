@@ -18,7 +18,7 @@
     "eslint-config-prettier": "9.1.0",
     "eslint-import-resolver-typescript": "3.6.3",
     "eslint-plugin-import-x": "4.4.0",
-    "eslint-plugin-jsonc": "2.16.0",
+    "eslint-plugin-jsonc": "2.18.1",
     "eslint-plugin-jsx-a11y": "6.10.2",
     "eslint-plugin-prettier": "5.2.1",
     "eslint-plugin-solid": "0.14.3",
@@ -30,7 +30,7 @@
     "vite": "5.4.10",
     "vite-plugin-checker": "0.8.0",
     "vite-plugin-solid": "2.10.2",
-    "vite-tsconfig-paths": "5.1.0"
+    "vite-tsconfig-paths": "5.1.2"
   },
   "dependencies": {
     "solid-js": "1.9.3"
