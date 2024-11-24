@@ -2,19 +2,18 @@ import { createSignal, For, onCleanup } from 'solid-js';
 import { ClockHand } from 'ClockHand';
 
 const base = 60;
+const getSecondsSinceMidnight = (): number =>
+  (Date.now() - new Date().setHours(0, 0, 0, 0)) / 1000;
+const [time, setTime] = createSignal(getSecondsSinceMidnight());
+
+const rotate = (rotate: number, fractionDigits = 1) =>
+  `rotate(${(rotate * 360).toFixed(fractionDigits)})`;
+const subsecond = () => rotate(time() % 1, 0);
+const second = () => rotate((time() % base) / base);
+const minute = () => rotate(((time() / base) % base) / base);
+const hour = () => rotate(((time() / base ** 2) % 12) / 12);
 
 export const ClockFace = () => {
-  const getSecondsSinceMidnight = (): number =>
-    (Date.now() - new Date().setHours(0, 0, 0, 0)) / 1000;
-  const [time, setTime] = createSignal(getSecondsSinceMidnight());
-
-  const rotate = (rotate: number, fractionDigits = 1) =>
-    `rotate(${(rotate * 360).toFixed(fractionDigits)})`;
-  const subsecond = () => rotate(time() % 1, 0);
-  const second = () => rotate((time() % base) / base);
-  const minute = () => rotate(((time() / base) % base) / base);
-  const hour = () => rotate(((time() / base ** 2) % 12) / 12);
-
   let frame = requestAnimationFrame(function loop() {
     setTime(getSecondsSinceMidnight());
     frame = requestAnimationFrame(loop);

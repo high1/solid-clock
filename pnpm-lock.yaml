@@ -12,6 +12,12 @@ importers:
         specifier: 1.9.3
         version: 1.9.3
     devDependencies:
+      '@html-eslint/eslint-plugin':
+        specifier: 0.27.0
+        version: 0.27.0
+      '@html-eslint/parser':
+        specifier: 0.27.0
+        version: 0.27.0
       '@tailwindcss/vite':
         specifier: 4.0.0-beta.2
         version: 4.0.0-beta.2(@babel/core@7.26.0)(postcss@8.4.47)(svelte@5.2.3)(typescript@5.7.2)(vite@5.4.11(@types/node@22.9.3)(lightningcss@1.28.1))
@@ -327,6 +333,14 @@ packages:
   '@eslint/plugin-kit@0.2.3':
     resolution: {integrity: sha512-2b/g5hRmpbb1o4GnTZax9N9m0FXzz9OV42ZzI4rDDMDuHUqigAiQCEWChBWCY4ztAGVRjoWT19v0yMmc5/L5kA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@html-eslint/eslint-plugin@0.27.0':
+    resolution: {integrity: sha512-aAF14sgDKidMCCQpJ4kIhe+fwyAaAbvDlgVTIgd99F+HOWxokTTXDt39a3gewMBo76IeEHDaoizUDJQ/Vc7Mdg==}
+    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+
+  '@html-eslint/parser@0.27.0':
+    resolution: {integrity: sha512-F/A1M0jnDAYoRvJiiSC7pIBD9DAsf4EhbndbvEi81aozD/wI8WWXON50xZPUaGHCI1C+2syTVifxDz8MvDKaQA==}
+    engines: {node: '>=8.10.0'}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -898,6 +912,9 @@ packages:
   es-errors@1.3.0:
     resolution: {integrity: sha512-Zf5H2Kxt2xjTvbJvP2ZWLEICxA6j+hAmMzIlypy4xcBg1vKVnx89Wy0GbS+kf5cwCVFFzdCFh2XSCFNULS6csw==}
     engines: {node: '>= 0.4'}
+
+  es-html-parser@0.0.9:
+    resolution: {integrity: sha512-oniQMi+466VFsDzcdron9Ry/sqUJpDJg1bbDn0jFJKDdxXhwIOYDr4DgBnO5/yPLGj2xv+n5yy4L1Q0vAC5TYQ==}
 
   es-object-atoms@1.0.0:
     resolution: {integrity: sha512-MZ4iQ6JwHOBQjahnjwaC1ZtIBH+2ohjamzAO3oaHcXYup7qxjF2fixyH+Q71voWHeOkI2q/TnJao/KfXYIZWbw==}
@@ -2256,6 +2273,12 @@ snapshots:
     dependencies:
       levn: 0.4.1
 
+  '@html-eslint/eslint-plugin@0.27.0': {}
+
+  '@html-eslint/parser@0.27.0':
+    dependencies:
+      es-html-parser: 0.0.9
+
   '@humanfs/core@0.19.1': {}
 
   '@humanfs/node@0.16.6':
@@ -2874,6 +2897,8 @@ snapshots:
       get-intrinsic: 1.2.4
 
   es-errors@1.3.0: {}
+
+  es-html-parser@0.0.9: {}
 
   es-object-atoms@1.0.0:
     dependencies:
