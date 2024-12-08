@@ -1,6 +1,4 @@
 /* eslint-disable import-x/no-named-as-default-member */
-// @ts-check
-
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
@@ -45,6 +43,7 @@ export default tseslint.config(
       ],
     },
   },
+  // @ts-expect-error ts(2379) exactOptionalPropertyTypes
   ...eslintPluginJsonc.configs['flat/recommended-with-jsonc'],
   ...eslintPluginYml.configs['flat/recommended'],
   {
