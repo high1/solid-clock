@@ -6,6 +6,8 @@
 Inspired by [sauron clock](https://ivanceras.github.io/svg-clock/) and [voby](https://github.com/vobyjs/voby)   
 
 [![View in GitHub Pages](https://img.shields.io/badge/View%20in-GitHub%20Pages-success?style=for-the-badge&logo=github)](https://high1.github.io/solid-clock/)   
-[![View in Netlify](https://img.shields.io/badge/View%20in-Netlify-success?style=for-the-badge&logo=netlify)](https://solid-clock.netlify.app)   
+[![View in Netlify](https://img.shields.io/badge/View%20in-Netlify-success?style=for-the-badge&logo=netlify)](https://solid-clock.netlify.app)
+<!---   
 [![Open in CodeSandbox](https://img.shields.io/badge/Open%20in-CodeSandbox-blue?style=for-the-badge&logo=codesandbox)](https://githubbox.com/high1/solid-clock)  
 [![Open in StackBlitz](https://img.shields.io/badge/Open%20in-StackBlitz-blue?style=for-the-badge&logo=stackblitz)](https://stackblitz.com/github/high1/solid-clock)   
+-->
