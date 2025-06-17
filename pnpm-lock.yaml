@@ -44,7 +44,7 @@ importers:
         version: 22.15.32
       '@vitest/coverage-v8':
         specifier: 3.2.3
-        version: 3.2.3(vitest@3.2.3(@types/node@22.15.32)(happy-dom@17.6.3)(jiti@2.4.2)(jsdom@26.0.0)(lightningcss@1.30.1)(yaml@2.8.0))
+        version: 3.2.3(vitest@3.2.3(@types/node@22.15.32)(happy-dom@18.0.1)(jiti@2.4.2)(jsdom@26.0.0)(lightningcss@1.30.1)(yaml@2.8.0))
       eslint:
         specifier: 9.29.0
         version: 9.29.0(jiti@2.4.2)
@@ -73,8 +73,8 @@ importers:
         specifier: 1.18.0
         version: 1.18.0(eslint@9.29.0(jiti@2.4.2))
       happy-dom:
-        specifier: 17.6.3
-        version: 17.6.3
+        specifier: 18.0.1
+        version: 18.0.1
       prettier:
         specifier: 3.5.3
         version: 3.5.3
@@ -104,7 +104,7 @@ importers:
         version: 5.1.4(typescript@5.8.3)(vite@7.0.0-beta.2(@types/node@22.15.32)(jiti@2.4.2)(lightningcss@1.30.1)(yaml@2.8.0))
       vitest:
         specifier: 3.2.3
-        version: 3.2.3(@types/node@22.15.32)(happy-dom@17.6.3)(jiti@2.4.2)(jsdom@26.0.0)(lightningcss@1.30.1)(yaml@2.8.0)
+        version: 3.2.3(@types/node@22.15.32)(happy-dom@18.0.1)(jiti@2.4.2)(jsdom@26.0.0)(lightningcss@1.30.1)(yaml@2.8.0)
 
 packages:
 
@@ -801,8 +801,14 @@ packages:
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
 
+  '@types/node@20.19.1':
+    resolution: {integrity: sha512-jJD50LtlD2dodAEO653i3YF04NWak6jN3ky+Ri3Em3mGR39/glWiboM/IePaRbgwSfqM1TpGXfAg8ohn/4dTgA==}
+
   '@types/node@22.15.32':
     resolution: {integrity: sha512-3jigKqgSjsH6gYZv2nEsqdXfZqIFGAV36XYYjf9KGZ3PSG+IhLecqPnI310RvjutyMwifE2hhhNEklOUrvx/wA==}
+
+  '@types/whatwg-mimetype@3.0.2':
+    resolution: {integrity: sha512-c2AKvDT8ToxLIOUlN51gTiHXflsfIFisS4pO7pDPoKouJCESkhZnEy623gwP9laCy5lnLDAw1vAzu2vM2YLOrA==}
 
   '@typescript-eslint/eslint-plugin@8.34.1':
     resolution: {integrity: sha512-STXcN6ebF6li4PxwNeFnqF8/2BNDvBupf2OPx2yWNzr6mKNGF7q49VM00Pz5FaomJyqvbXpY6PhO+T9w139YEQ==}
@@ -1806,8 +1812,8 @@ packages:
   graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
 
-  happy-dom@17.6.3:
-    resolution: {integrity: sha512-UVIHeVhxmxedbWPCfgS55Jg2rDfwf2BCKeylcPSqazLz5w3Kri7Q4xdBJubsr/+VUzFLh0VjIvh13RaDA2/Xug==}
+  happy-dom@18.0.1:
+    resolution: {integrity: sha512-qn+rKOW7KWpVTtgIUi6RVmTBZJSe2k0Db0vh1f7CWrWclkkc7/Q+FrOfkZIb2eiErLyqu5AXEzE7XthO9JVxRA==}
     engines: {node: '>=20.0.0'}
 
   has-bigints@1.1.0:
@@ -3676,9 +3682,15 @@ snapshots:
 
   '@types/json-schema@7.0.15': {}
 
+  '@types/node@20.19.1':
+    dependencies:
+      undici-types: 6.21.0
+
   '@types/node@22.15.32':
     dependencies:
       undici-types: 6.21.0
+
+  '@types/whatwg-mimetype@3.0.2': {}
 
   '@typescript-eslint/eslint-plugin@8.34.1(@typescript-eslint/parser@8.34.1(eslint@9.29.0(jiti@2.4.2))(typescript@5.8.3))(eslint@9.29.0(jiti@2.4.2))(typescript@5.8.3)':
     dependencies:
@@ -3973,7 +3985,7 @@ snapshots:
   '@unrs/resolver-binding-win32-x64-msvc@1.9.0':
     optional: true
 
-  '@vitest/coverage-v8@3.2.3(vitest@3.2.3(@types/node@22.15.32)(happy-dom@17.6.3)(jiti@2.4.2)(jsdom@26.0.0)(lightningcss@1.30.1)(yaml@2.8.0))':
+  '@vitest/coverage-v8@3.2.3(vitest@3.2.3(@types/node@22.15.32)(happy-dom@18.0.1)(jiti@2.4.2)(jsdom@26.0.0)(lightningcss@1.30.1)(yaml@2.8.0))':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@bcoe/v8-coverage': 1.0.2
@@ -3988,7 +4000,7 @@ snapshots:
       std-env: 3.9.0
       test-exclude: 7.0.1
       tinyrainbow: 2.0.0
-      vitest: 3.2.3(@types/node@22.15.32)(happy-dom@17.6.3)(jiti@2.4.2)(jsdom@26.0.0)(lightningcss@1.30.1)(yaml@2.8.0)
+      vitest: 3.2.3(@types/node@22.15.32)(happy-dom@18.0.1)(jiti@2.4.2)(jsdom@26.0.0)(lightningcss@1.30.1)(yaml@2.8.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -4836,9 +4848,10 @@ snapshots:
 
   graphemer@1.4.0: {}
 
-  happy-dom@17.6.3:
+  happy-dom@18.0.1:
     dependencies:
-      webidl-conversions: 7.0.0
+      '@types/node': 20.19.1
+      '@types/whatwg-mimetype': 3.0.2
       whatwg-mimetype: 3.0.0
 
   has-bigints@1.1.0: {}
@@ -5958,7 +5971,7 @@ snapshots:
     optionalDependencies:
       vite: 7.0.0-beta.2(@types/node@22.15.32)(jiti@2.4.2)(lightningcss@1.30.1)(yaml@2.8.0)
 
-  vitest@3.2.3(@types/node@22.15.32)(happy-dom@17.6.3)(jiti@2.4.2)(jsdom@26.0.0)(lightningcss@1.30.1)(yaml@2.8.0):
+  vitest@3.2.3(@types/node@22.15.32)(happy-dom@18.0.1)(jiti@2.4.2)(jsdom@26.0.0)(lightningcss@1.30.1)(yaml@2.8.0):
     dependencies:
       '@types/chai': 5.2.2
       '@vitest/expect': 3.2.3
@@ -5985,7 +5998,7 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 22.15.32
-      happy-dom: 17.6.3
+      happy-dom: 18.0.1
       jsdom: 26.0.0
     transitivePeerDependencies:
       - jiti
@@ -6008,7 +6021,8 @@ snapshots:
       xml-name-validator: 5.0.0
     optional: true
 
-  webidl-conversions@7.0.0: {}
+  webidl-conversions@7.0.0:
+    optional: true
 
   whatwg-encoding@3.1.1:
     dependencies:
