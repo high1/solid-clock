@@ -18,7 +18,7 @@
     "@html-eslint/eslint-plugin": "0.44.0",
     "@html-eslint/parser": "0.44.0",
     "@solidjs/testing-library": "0.8.10",
-    "@stylistic/eslint-plugin": "4.4.1",
+    "@stylistic/eslint-plugin": "5.2.3",
     "@tailwindcss/vite": "4.1.11",
     "@testing-library/jest-dom": "6.6.4",
     "@types/eslint-plugin-jsx-a11y": "6.10.0",
