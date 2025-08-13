@@ -1,13 +1,13 @@
 import { For } from 'solid-js';
 import { ClockLine as Graduation } from 'ClockLine';
-import { base, rotate } from 'common';
+import { rotate, seconds } from 'common';
 
 export const Graduations = () => (
   <>
-    <For each={Array.from({ length: base }, (_, index) => index % 5 === 0)}>
+    <For each={Array.from({ length: seconds }, (_, index) => index % 5 === 0)}>
       {(isHour, index) => (
         <Graduation
-          transform={rotate(index() / base, 0)}
+          transform={rotate(index() / seconds, 0)}
           class={
             isHour
               ? 'stroke-zinc-600 stroke-2 dark:stroke-zinc-200'

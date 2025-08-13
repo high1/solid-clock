@@ -1,17 +1,18 @@
 import { createSignal, onCleanup } from 'solid-js';
 import { ClockLine as ClockHand } from 'ClockLine';
-import { base, rotate } from 'common';
+import { hours, rotate, seconds } from 'common';
 import { getTestId } from 'utilities';
 
+const getSecondsSinceMidnight = (): number =>
+  (Date.now() - new Date().setHours(0, 0, 0, 0)) / 1000;
+
 export const ClockHands = () => {
-  const getSecondsSinceMidnight = (): number =>
-    (Date.now() - new Date().setHours(0, 0, 0, 0)) / 1000;
   const [time, setTime] = createSignal(getSecondsSinceMidnight());
 
   const subsecond = () => rotate(time() % 1, 0);
-  const second = () => rotate((time() % base) / base);
-  const minute = () => rotate(((time() / base) % base) / base);
-  const hour = () => rotate(((time() / base ** 2) % 12) / 12);
+  const second = () => rotate((time() % seconds) / seconds);
+  const minute = () => rotate(((time() / seconds) % seconds) / seconds);
+  const hour = () => rotate(((time() / seconds ** 2) % hours) / hours);
 
   let frame = requestAnimationFrame(function loop() {
     setTime(getSecondsSinceMidnight());
