@@ -30,6 +30,9 @@ jobs:
       - name: Install 🔧
         run: |
           pnpm i
+
+      - name: Build 🚧
+        run: |
           pnpm build
           touch dist/.nojekyll
 
