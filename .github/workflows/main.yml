@@ -31,6 +31,10 @@ jobs:
         run: |
           pnpm i
 
+      - name: Test 🧪
+        run: |
+          pnpm test
+
       - name: Build 🚧
         run: |
           pnpm build
