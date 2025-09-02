@@ -33,7 +33,7 @@ jobs:
 
       - name: Test 🧪
         run: |
-          pnpm tes
+          pnpm test
 
       - name: Build 🚧
         run: |
