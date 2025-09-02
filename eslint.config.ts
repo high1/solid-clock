@@ -1,10 +1,9 @@
-/* eslint-disable import-x/no-named-as-default-member */
 import eslint from '@eslint/js';
 import { includeIgnoreFile } from '@eslint/compat';
-import { globalIgnores } from 'eslint/config';
-import tseslint from 'typescript-eslint';
+import { defineConfig, globalIgnores } from 'eslint/config';
+import { configs as tseslintConfigs } from 'typescript-eslint';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
-import solid from 'eslint-plugin-solid';
+import solidTsConfig from 'eslint-plugin-solid/configs/typescript';
 import prettierRecommended from 'eslint-plugin-prettier/recommended';
 import jsonc from 'eslint-plugin-jsonc';
 import yml from 'eslint-plugin-yml';
@@ -13,12 +12,13 @@ import stylistic from '@stylistic/eslint-plugin';
 import html from '@html-eslint/eslint-plugin';
 import { fileURLToPath } from 'node:url';
 
-export default tseslint.config(
+export default defineConfig(
   eslint.configs.recommended,
-  tseslint.configs.strictTypeChecked,
-  tseslint.configs.stylisticTypeChecked,
+  tseslintConfigs.strictTypeChecked,
+  tseslintConfigs.stylisticTypeChecked,
   jsxA11y.flatConfigs.strict,
-  solid.configs['flat/typescript'],
+  // @ts-expect-error Target allows only 0 element(s) but source may have more.ts(2345)
+  solidTsConfig,
   importX.flatConfigs.recommended,
   importX.flatConfigs.typescript,
   stylistic.configs.recommended,
@@ -57,13 +57,12 @@ export default tseslint.config(
       '@html-eslint/attrs-newline': 'off',
     },
   },
-  // @ts-expect-error Type 'undefined' is not assignable to type '(string | string[])[]'.ts(2345)
   jsonc.configs['flat/recommended-with-jsonc'],
   jsonc.configs['flat/prettier'],
   yml.configs['flat/recommended'],
   yml.configs['flat/prettier'],
   {
     files: ['**/*.{html,json,yml,yaml}'],
-    ...tseslint.configs.disableTypeChecked,
+    ...tseslintConfigs.disableTypeChecked,
   },
 );
