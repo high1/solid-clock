@@ -1,8 +1,8 @@
 {
   // jsonc
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
+    "target": "esnext",
+    "module": "esnext",
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "verbatimModuleSyntax": true,
