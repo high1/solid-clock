@@ -18,7 +18,7 @@ export default defineConfig(
   tseslintConfigs.strictTypeChecked,
   tseslintConfigs.stylisticTypeChecked,
   jsxA11y.flatConfigs.strict,
-  // @ts-expect-error Target allows only 0 element(s) but source may have more.ts(2345)
+  // @ts-expect-error Argument of type is not assignable to parameter of type 'InfiniteArray<ConfigWithExtends>'ts(2345)
   solidTsConfig,
   importX.flatConfigs.recommended,
   importX.flatConfigs.typescript,
