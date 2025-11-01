@@ -22,7 +22,9 @@ export default defineConfig(
   solidTsConfig,
   importX.flatConfigs.recommended,
   importX.flatConfigs.typescript,
-  stylistic.configs.recommended,
+  stylistic.configs.customize({
+    semi: true,
+  }),
   prettierRecommended,
   includeIgnoreFile(fileURLToPath(new URL('.gitignore', import.meta.url))),
   globalIgnores(['pnpm-lock.yaml']),
