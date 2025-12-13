@@ -22,7 +22,7 @@ jobs:
         uses: pnpm/action-setup@v4.2.0
 
       - name: Node.js ⚓
-        uses: actions/setup-node@v6.0.0
+        uses: actions/setup-node@v6.1.0
         with:
           node-version: latest
           cache: pnpm
@@ -41,7 +41,7 @@ jobs:
           touch dist/.nojekyll
 
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.7.4
+        uses: JamesIves/github-pages-deploy-action@v4.7.6
         if: github.ref == 'refs/heads/main'
         with:
           folder: dist
