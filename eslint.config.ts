@@ -9,7 +9,6 @@ import jsonc from 'eslint-plugin-jsonc';
 import yml from 'eslint-plugin-yml';
 import { importX } from 'eslint-plugin-import-x';
 import stylistic from '@stylistic/eslint-plugin';
-import html from '@html-eslint/eslint-plugin';
 import { fileURLToPath } from 'node:url';
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 
@@ -49,26 +48,12 @@ export default defineConfig(
       'import-x/resolver-next': [createTypeScriptImportResolver()],
     },
   },
-  {
-    files: ['**/*.html'],
-    ...html.configs['flat/recommended'],
-    rules: {
-      ...html.configs['flat/recommended'].rules,
-      '@html-eslint/indent': ['error', 2],
-      '@html-eslint/require-closing-tags': ['error', { selfClosing: 'always' }],
-      '@html-eslint/no-extra-spacing-attrs': [
-        'error',
-        { enforceBeforeSelfClose: true },
-      ],
-      '@html-eslint/attrs-newline': 'off',
-    },
-  },
   jsonc.configs['flat/recommended-with-jsonc'],
   jsonc.configs['flat/prettier'],
   yml.configs['flat/recommended'],
   yml.configs['flat/prettier'],
   {
-    files: ['**/*.{html,json,yml,yaml}'],
+    files: ['**/*.{json,yml,yaml}'],
     ...tseslintConfigs.disableTypeChecked,
   },
 );
