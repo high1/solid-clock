@@ -94,8 +94,8 @@ importers:
         specifier: 2.11.10
         version: 2.11.10(@testing-library/jest-dom@6.9.1)(rolldown-vite@7.2.11(@types/node@24.10.4)(esbuild@0.25.9)(jiti@2.6.1)(yaml@2.8.1))(solid-js@1.9.10)
       vite-tsconfig-paths:
-        specifier: 5.1.4
-        version: 5.1.4(rolldown-vite@7.2.11(@types/node@24.10.4)(esbuild@0.25.9)(jiti@2.6.1)(yaml@2.8.1))(typescript@5.9.3)
+        specifier: 6.0.3
+        version: 6.0.3(rolldown-vite@7.2.11(@types/node@24.10.4)(esbuild@0.25.9)(jiti@2.6.1)(yaml@2.8.1))(typescript@5.9.3)
       vitest:
         specifier: 4.0.15
         version: 4.0.15(@types/node@24.10.4)(happy-dom@20.0.11)(jiti@2.6.1)(lightningcss@1.30.2)(yaml@2.8.1)
@@ -2577,8 +2577,8 @@ packages:
       '@testing-library/jest-dom':
         optional: true
 
-  vite-tsconfig-paths@5.1.4:
-    resolution: {integrity: sha512-cYj0LRuLV2c2sMqhqhGpaO3LretdtMn/BVX4cPLanIZuwwrkVl+lK84E/miEXkCHWXuq65rhNN4rXsBcOB3S4w==}
+  vite-tsconfig-paths@6.0.3:
+    resolution: {integrity: sha512-7bL7FPX/DSviaZGYUKowWF1AiDVWjMjxNbE8lyaVGDezkedWqfGhlnQ4BZXre0ZN5P4kAgIJfAlgFDVyjrCIyg==}
     peerDependencies:
       vite: '*'
     peerDependenciesMeta:
@@ -5196,9 +5196,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vite-tsconfig-paths@5.1.4(rolldown-vite@7.2.11(@types/node@24.10.4)(esbuild@0.25.9)(jiti@2.6.1)(yaml@2.8.1))(typescript@5.9.3):
+  vite-tsconfig-paths@6.0.3(rolldown-vite@7.2.11(@types/node@24.10.4)(esbuild@0.25.9)(jiti@2.6.1)(yaml@2.8.1))(typescript@5.9.3):
     dependencies:
-      debug: 4.4.1
+      debug: 4.4.3
       globrex: 0.1.2
       tsconfck: 3.1.6(typescript@5.9.3)
     optionalDependencies:
