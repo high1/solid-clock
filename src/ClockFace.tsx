@@ -1,6 +1,6 @@
-import { ClockHands } from 'ClockHands';
-import { getTestId } from 'utilities';
-import { Graduations } from 'Graduations';
+import { ClockHands } from '@/ClockHands';
+import { getTestId } from '@/utilities';
+import { Graduations } from '@/Graduations';
 
 export const ClockFace = () => (
   <div

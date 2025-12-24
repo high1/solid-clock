@@ -1,7 +1,7 @@
 import { createSignal, onCleanup } from 'solid-js';
-import { ClockLine as ClockHand } from 'ClockLine';
-import { hours, rotate, seconds } from 'common';
-import { getTestId } from 'utilities';
+import { ClockLine as ClockHand } from '@/ClockLine';
+import { hours, rotate, seconds } from '@/common';
+import { getTestId } from '@/utilities';
 
 const getSecondsSinceMidnight = (): number =>
   (Date.now() - new Date().setHours(0, 0, 0, 0)) / 1000;
