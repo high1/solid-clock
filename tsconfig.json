@@ -9,7 +9,6 @@
     "noEmit": true,
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
-    "baseUrl": "src",
     "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -23,6 +22,9 @@
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "noPropertyAccessFromIndexSignature": true,
-    "erasableSyntaxOnly": true
+    "erasableSyntaxOnly": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   }
 }

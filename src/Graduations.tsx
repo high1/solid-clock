@@ -1,6 +1,6 @@
 import { For } from 'solid-js';
-import { ClockLine as Graduation } from 'ClockLine';
-import { rotate, seconds } from 'common';
+import { ClockLine as Graduation } from '@/ClockLine';
+import { rotate, seconds } from '@/common';
 
 export const Graduations = () => (
   <>

@@ -9,7 +9,7 @@ import { checker } from 'vite-plugin-checker';
 export default defineConfig(({ mode }) => ({
   base: loadEnv(mode, process.cwd(), '')['BASE'] ?? '',
   plugins: [
-    tsconfigPaths(),
+    ...(mode === 'test' ? [tsconfigPaths({ projectDiscovery: 'lazy' })] : []),
     tailwindcss(),
     solid(),
     checker({
@@ -22,9 +22,9 @@ export default defineConfig(({ mode }) => ({
   ],
   test: {
     environment: 'happy-dom',
-    setupFiles: 'test/vitest-setup.ts',
   },
   resolve: {
     conditions: ['development', 'browser'],
+    tsconfigPaths: true,
   },
 }));

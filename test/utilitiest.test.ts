@@ -1,5 +1,5 @@
 import { afterAll, beforeAll, describe, expect, vi, test } from 'vitest';
-import { getTestId } from 'utilities';
+import { getTestId } from '@/utilities';
 
 beforeAll(() => void vi.stubEnv('MODE', 'development'));
 afterAll(() => void vi.unstubAllEnvs());
