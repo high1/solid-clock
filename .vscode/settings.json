@@ -3,14 +3,14 @@
     "source.fixAll.eslint": "explicit"
   },
   "eslint.validate": [
-    "typescript",
-    "typescriptreact",
+    "css",
+    "html",
     "javascript",
     "json",
     "jsonc",
+    "typescript",
+    "typescriptreact",
     "yaml"
   ],
-  "files.associations": {
-    "*.css": "tailwindcss"
-  }
+  "css.customData": ["./.vscode/tailwind.json"]
 }

@@ -1,10 +1,10 @@
 /// <reference types="vitest/config" />
 
-import { defineConfig, loadEnv } from 'vite';
-import solid from 'vite-plugin-solid';
 import tailwindcss from '@tailwindcss/vite';
-import tsconfigPaths from 'vite-tsconfig-paths';
+import { defineConfig, loadEnv } from 'vite';
 import { checker } from 'vite-plugin-checker';
+import solid from 'vite-plugin-solid';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig(({ mode }) => ({
   base: loadEnv(mode, process.cwd(), '')['BASE'] ?? '',
@@ -13,18 +13,18 @@ export default defineConfig(({ mode }) => ({
     tailwindcss(),
     solid(),
     checker({
-      typescript: true,
       eslint: {
         lintCommand: 'eslint . --max-warnings 0',
         useFlatConfig: true,
       },
+      typescript: true,
     }),
   ],
-  test: {
-    environment: 'happy-dom',
-  },
   resolve: {
     conditions: ['development', 'browser'],
     tsconfigPaths: true,
+  },
+  test: {
+    environment: 'happy-dom',
   },
 }));
