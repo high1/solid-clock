@@ -1,5 +1,6 @@
-import { describe, expect, test } from 'vitest';
 import { render, screen } from '@solidjs/testing-library';
+import { describe, expect, test } from 'vitest';
+
 import { ClockFace } from '@/ClockFace';
 
 describe('<ClockFace />', () => {

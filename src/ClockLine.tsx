@@ -1,9 +1,9 @@
-import { mergeProps, splitProps, type JSX } from 'solid-js';
+import { type JSX, mergeProps, splitProps } from 'solid-js';
 
 interface ClockLineProps extends JSX.LineSVGAttributes<SVGLineElement> {
+  graduation?: true;
   length: number;
   limit?: number;
-  graduation?: boolean;
 }
 
 export const ClockLine = (props: ClockLineProps) => {
@@ -12,9 +12,9 @@ export const ClockLine = (props: ClockLineProps) => {
 
   return (
     <line
-      {...(local.graduation && { y1: local.length - local.limit })}
-      y2={-(local.graduation ? local.limit : local.length)}
       stroke-linecap="round"
+      y1={local.graduation && local.length - local.limit}
+      y2={-(local.graduation ? local.limit : local.length)}
       {...rest}
     />
   );

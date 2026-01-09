@@ -1,5 +1,5 @@
-import { describe, expect, test, vi } from 'vitest';
 import { render } from 'solid-js/web';
+import { describe, expect, test, vi } from 'vitest';
 
 describe('index', () => {
   test('renders without crashing', async () => {

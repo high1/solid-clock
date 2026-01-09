@@ -2,10 +2,10 @@
 /// <reference types="vitest" />
 /// <reference types="@testing-library/jest-dom/vitest" />
 
-interface ImportMetaEnv {
-  readonly BASE?: string;
-}
-
 interface ImportMeta {
   readonly env: ImportMetaEnv;
+}
+
+interface ImportMetaEnv {
+  readonly BASE?: string;
 }

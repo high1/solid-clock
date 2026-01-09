@@ -1,30 +1,21 @@
-import eslint from '@eslint/js';
+/* eslint-disable import-x/no-named-as-default-member */
 import { includeIgnoreFile } from '@eslint/compat';
-import { defineConfig, globalIgnores } from 'eslint/config';
-import { configs as tseslintConfigs } from 'typescript-eslint';
-import jsxA11y from 'eslint-plugin-jsx-a11y';
-import solidTsConfig from 'eslint-plugin-solid/configs/typescript';
-import prettierRecommended from 'eslint-plugin-prettier/recommended';
-import jsonc from 'eslint-plugin-jsonc';
-import yml from 'eslint-plugin-yml';
-import { importX } from 'eslint-plugin-import-x';
+import css from '@eslint/css';
+import eslint from '@eslint/js';
+import html from '@html-eslint/eslint-plugin';
 import stylistic from '@stylistic/eslint-plugin';
+import { importX } from 'eslint-plugin-import-x';
+import jsonc from 'eslint-plugin-jsonc';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
+import perfectionist from 'eslint-plugin-perfectionist';
+import prettierRecommended from 'eslint-plugin-prettier/recommended';
+import solidTsConfig from 'eslint-plugin-solid/configs/typescript';
+import yml from 'eslint-plugin-yml';
+import { defineConfig, globalIgnores } from 'eslint/config';
 import { fileURLToPath } from 'node:url';
-import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
+import tseslint from 'typescript-eslint';
 
 export default defineConfig(
-  eslint.configs.recommended,
-  tseslintConfigs.strictTypeChecked,
-  tseslintConfigs.stylisticTypeChecked,
-  jsxA11y.flatConfigs.strict,
-  // @ts-expect-error Argument of type is not assignable to parameter of type 'InfiniteArray<ConfigWithExtends>'ts(2345)
-  solidTsConfig,
-  importX.flatConfigs.recommended,
-  importX.flatConfigs.typescript,
-  stylistic.configs.customize({
-    semi: true,
-  }),
-  prettierRecommended,
   includeIgnoreFile(fileURLToPath(new URL('.gitignore', import.meta.url))),
   globalIgnores(['pnpm-lock.yaml']),
   {
@@ -34,26 +25,76 @@ export default defineConfig(
         ecmaFeatures: {
           jsx: true,
         },
+        extraFileExtensions: ['.css'],
         projectService: true,
         tsconfigRootDir: import.meta.dirname,
       },
     },
+  },
+  {
+    extends: [
+      eslint.configs.recommended,
+      tseslint.configs.strictTypeChecked,
+      tseslint.configs.stylisticTypeChecked,
+      jsxA11y.flatConfigs.strict,
+      // @ts-expect-error Types of property create are incompatible. (ts 2322)
+      solidTsConfig,
+      // @ts-expect-error Types of property languageOptions are incompatible. (ts 2322)
+      importX.flatConfigs.recommended,
+      // @ts-expect-error Types of property languageOptions are incompatible. (ts 2322)
+      importX.flatConfigs.typescript,
+      stylistic.configs.customize({
+        jsx: false,
+        semi: true,
+      }),
+      perfectionist.configs['recommended-natural'],
+      prettierRecommended,
+    ],
+    files: ['**/*.{ts,tsx}'],
     rules: {
       '@typescript-eslint/restrict-template-expressions': [
         'error',
         { allowNumber: true },
       ],
     },
-    settings: {
-      'import-x/resolver-next': [createTypeScriptImportResolver()],
+  },
+  {
+    extends: [
+      jsonc.configs['flat/recommended-with-jsonc'],
+      jsonc.configs['flat/prettier'],
+      prettierRecommended,
+    ],
+    files: ['**/*.json'],
+  },
+  {
+    extends: [
+      yml.configs['flat/recommended'],
+      yml.configs['flat/prettier'],
+      prettierRecommended,
+    ],
+    files: ['**/*.{yml,yaml}'],
+  },
+  {
+    extends: ['css/recommended', prettierRecommended],
+    files: ['**/*.css'],
+    language: 'css/css',
+    plugins: { css },
+    rules: {
+      'css/no-invalid-at-rules': 'off',
     },
   },
-  jsonc.configs['flat/recommended-with-jsonc'],
-  jsonc.configs['flat/prettier'],
-  yml.configs['flat/recommended'],
-  yml.configs['flat/prettier'],
   {
-    files: ['**/*.{json,yml,yaml}'],
-    ...tseslintConfigs.disableTypeChecked,
+    extends: ['html/recommended'],
+    files: ['**/*.html'],
+    language: 'html/html',
+    plugins: { html },
+    rules: {
+      'html/attrs-newline': [
+        'error',
+        { closeStyle: 'newline', ifAttrsMoreThan: 3 },
+      ],
+      'html/indent': ['error', 2],
+      'html/no-trailing-spaces': 'error',
+    },
   },
 );
