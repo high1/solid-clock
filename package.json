@@ -22,8 +22,8 @@
     "@tailwindcss/vite": "4.1.18",
     "@testing-library/jest-dom": "6.9.1",
     "@types/eslint-plugin-jsx-a11y": "6.10.1",
-    "@types/node": "25.0.6",
-    "@vitest/coverage-v8": "4.0.16",
+    "@types/node": "25.0.7",
+    "@vitest/coverage-v8": "4.0.17",
     "eslint": "9.39.2",
     "eslint-config-prettier": "10.1.8",
     "eslint-import-resolver-typescript": "4.4.4",
@@ -39,12 +39,12 @@
     "prettier-plugin-tailwindcss": "0.7.2",
     "tailwindcss": "4.1.18",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.52.0",
+    "typescript-eslint": "8.53.0",
     "vite": "8.0.0-beta.7",
     "vite-plugin-checker": "0.12.0",
     "vite-plugin-solid": "2.11.10",
     "vite-tsconfig-paths": "6.0.4",
-    "vitest": "4.0.16"
+    "vitest": "4.0.17"
   },
   "dependencies": {
     "solid-js": "1.9.10"
