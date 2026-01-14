@@ -44,7 +44,6 @@ export default defineConfig(
       // @ts-expect-error Types of property languageOptions are incompatible. (ts 2322)
       importX.flatConfigs.typescript,
       stylistic.configs.customize({
-        jsx: false,
         semi: true,
       }),
       perfectionist.configs['recommended-natural'],
@@ -61,16 +60,16 @@ export default defineConfig(
   {
     extends: [
       jsonc.configs['flat/recommended-with-jsonc'],
-      jsonc.configs['flat/prettier'],
       prettierRecommended,
+      jsonc.configs['flat/prettier'],
     ],
     files: ['**/*.json'],
   },
   {
     extends: [
       yml.configs['flat/recommended'],
-      yml.configs['flat/prettier'],
       prettierRecommended,
+      yml.configs['flat/prettier'],
     ],
     files: ['**/*.{yml,yaml}'],
   },
