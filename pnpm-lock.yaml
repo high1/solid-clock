@@ -44,7 +44,7 @@ importers:
         version: 25.0.9
       '@vitest/coverage-v8':
         specifier: 4.0.17
-        version: 4.0.17(vitest@4.0.17(@types/node@25.0.9)(happy-dom@20.3.1)(jiti@2.6.1)(lightningcss@1.30.2)(yaml@2.8.1))
+        version: 4.0.17(vitest@4.0.17(@types/node@25.0.9)(happy-dom@20.3.3)(jiti@2.6.1)(lightningcss@1.30.2)(yaml@2.8.1))
       eslint:
         specifier: 9.39.2
         version: 9.39.2(jiti@2.6.1)
@@ -73,11 +73,11 @@ importers:
         specifier: 0.14.5
         version: 0.14.5(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
       eslint-plugin-yml:
-        specifier: 2.0.0
-        version: 2.0.0(eslint@9.39.2(jiti@2.6.1))
+        specifier: 2.0.2
+        version: 2.0.2(eslint@9.39.2(jiti@2.6.1))
       happy-dom:
-        specifier: 20.3.1
-        version: 20.3.1
+        specifier: 20.3.3
+        version: 20.3.3
       prettier:
         specifier: 3.8.0
         version: 3.8.0
@@ -107,7 +107,7 @@ importers:
         version: 6.0.4(typescript@5.9.3)(vite@8.0.0-beta.8(@types/node@25.0.9)(jiti@2.6.1)(yaml@2.8.1))
       vitest:
         specifier: 4.0.17
-        version: 4.0.17(@types/node@25.0.9)(happy-dom@20.3.1)(jiti@2.6.1)(lightningcss@1.30.2)(yaml@2.8.1)
+        version: 4.0.17(@types/node@25.0.9)(happy-dom@20.3.3)(jiti@2.6.1)(lightningcss@1.30.2)(yaml@2.8.1)
 
 packages:
 
@@ -887,9 +887,6 @@ packages:
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
 
-  '@types/node@20.19.11':
-    resolution: {integrity: sha512-uug3FEEGv0r+jrecvUUpbY8lLisvIjg6AAic6a2bSP5OEOLeJsDSnvhCDov7ipFFMXS3orMpzlmi0ZcuGkBbow==}
-
   '@types/node@25.0.9':
     resolution: {integrity: sha512-/rpCXHlCWeqClNBwUhDcusJxXYDjZTyE8v5oTO7WbL8eij2nKhUeU89/6xgjU7N4/Vh3He0BtyhJdQbDyhiXAw==}
 
@@ -1416,6 +1413,10 @@ packages:
     resolution: {integrity: sha512-d4lC8xfavMeBjzGr2vECC3fsGXziXZQyJxD868h2M/mBI3PwAuODxAkLkq5HYuvrPYcUtiLzsTo8U3PgX3Ocww==}
     engines: {node: '>=10.13.0'}
 
+  entities@4.5.0:
+    resolution: {integrity: sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==}
+    engines: {node: '>=0.12'}
+
   entities@6.0.1:
     resolution: {integrity: sha512-aN97NXWF6AWBTahfVOIrB/NShkzi5H7F9r1s9mD3cDj4Ko5f2qhhVoYMibXF7GlLveb/D2ioWay8lxI97Ven3g==}
     engines: {node: '>=0.12'}
@@ -1568,8 +1569,8 @@ packages:
       eslint: ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
       typescript: '>=4.8.4'
 
-  eslint-plugin-yml@2.0.0:
-    resolution: {integrity: sha512-IJ+1H2/20Vl28/5CZqbqFbzYNr0pZlBZiazcvJVVZygFn9oULVEIQOoKYlg+P2OSYKZLetr3qLR5GfQjBDV4gg==}
+  eslint-plugin-yml@2.0.2:
+    resolution: {integrity: sha512-IkHs2qV/AMw6VNY6MQXhHVc7nBQBzafBh1GOl/cNWE10+FqY3BjiN8XsWzZhsqhQs8gghMWfgSih/xiRzmMXGA==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24.0.0}
     peerDependencies:
       eslint: '>=9.38.0'
@@ -1749,8 +1750,8 @@ packages:
   graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
 
-  happy-dom@20.3.1:
-    resolution: {integrity: sha512-tLvsizNno05Hij0PoB0QN/S8xf0YU2AGvO11/JlJDw5McA/gzyn0Ni1RwbTI1/zteUbOekJH0t6q8HFvjbxsGg==}
+  happy-dom@20.3.3:
+    resolution: {integrity: sha512-hM9gltmtQLfmWPqoPreUtRdP3nZCSzQEw7l/JC+up5CxquDykhYFKzIzoFFeVev3AGFEULNvsbE8fpZPgxUYEQ==}
     engines: {node: '>=20.0.0'}
 
   has-bigints@1.1.0:
@@ -2596,9 +2597,6 @@ packages:
   unbox-primitive@1.1.0:
     resolution: {integrity: sha512-nWJ91DjeOkej/TA8pXQ3myruKpKEYgqvpw9lz4OPHj/NWFNluYrjbz9j01CJ8yKQd2g4jFoOkINCTW2I5LEEyw==}
     engines: {node: '>= 0.4'}
-
-  undici-types@6.21.0:
-    resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
 
   undici-types@7.16.0:
     resolution: {integrity: sha512-Zz+aZWSj8LE6zoxD+xrjh4VfkIG8Ya6LvYkZqtUQGJPZjYl53ypCaUwWqo7eI0x66KBGeRo+mlBEkMSeSZ38Nw==}
@@ -3556,10 +3554,6 @@ snapshots:
 
   '@types/json-schema@7.0.15': {}
 
-  '@types/node@20.19.11':
-    dependencies:
-      undici-types: 6.21.0
-
   '@types/node@25.0.9':
     dependencies:
       undici-types: 7.16.0
@@ -3823,7 +3817,7 @@ snapshots:
   '@unrs/resolver-binding-win32-x64-msvc@1.11.1':
     optional: true
 
-  '@vitest/coverage-v8@4.0.17(vitest@4.0.17(@types/node@25.0.9)(happy-dom@20.3.1)(jiti@2.6.1)(lightningcss@1.30.2)(yaml@2.8.1))':
+  '@vitest/coverage-v8@4.0.17(vitest@4.0.17(@types/node@25.0.9)(happy-dom@20.3.3)(jiti@2.6.1)(lightningcss@1.30.2)(yaml@2.8.1))':
     dependencies:
       '@bcoe/v8-coverage': 1.0.2
       '@vitest/utils': 4.0.17
@@ -3835,7 +3829,7 @@ snapshots:
       obug: 2.1.1
       std-env: 3.10.0
       tinyrainbow: 3.0.3
-      vitest: 4.0.17(@types/node@25.0.9)(happy-dom@20.3.1)(jiti@2.6.1)(lightningcss@1.30.2)(yaml@2.8.1)
+      vitest: 4.0.17(@types/node@25.0.9)(happy-dom@20.3.3)(jiti@2.6.1)(lightningcss@1.30.2)(yaml@2.8.1)
 
   '@vitest/expect@4.0.17':
     dependencies:
@@ -4130,6 +4124,8 @@ snapshots:
       graceful-fs: 4.2.11
       tapable: 2.2.3
 
+  entities@4.5.0: {}
+
   entities@6.0.1: {}
 
   es-abstract@1.24.0:
@@ -4373,7 +4369,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-yml@2.0.0(eslint@9.39.2(jiti@2.6.1)):
+  eslint-plugin-yml@2.0.2(eslint@9.39.2(jiti@2.6.1)):
     dependencies:
       '@eslint/core': 1.0.1
       '@eslint/plugin-kit': 0.5.1
@@ -4591,11 +4587,12 @@ snapshots:
 
   graphemer@1.4.0: {}
 
-  happy-dom@20.3.1:
+  happy-dom@20.3.3:
     dependencies:
-      '@types/node': 20.19.11
+      '@types/node': 25.0.9
       '@types/whatwg-mimetype': 3.0.2
       '@types/ws': 8.18.1
+      entities: 4.5.0
       whatwg-mimetype: 3.0.0
       ws: 8.19.0
     transitivePeerDependencies:
@@ -5412,8 +5409,6 @@ snapshots:
       has-symbols: 1.1.0
       which-boxed-primitive: 1.1.1
 
-  undici-types@6.21.0: {}
-
   undici-types@7.16.0: {}
 
   unicorn-magic@0.3.0: {}
@@ -5530,7 +5525,7 @@ snapshots:
     optionalDependencies:
       vite: 8.0.0-beta.8(@types/node@25.0.9)(jiti@2.6.1)(yaml@2.8.1)
 
-  vitest@4.0.17(@types/node@25.0.9)(happy-dom@20.3.1)(jiti@2.6.1)(lightningcss@1.30.2)(yaml@2.8.1):
+  vitest@4.0.17(@types/node@25.0.9)(happy-dom@20.3.3)(jiti@2.6.1)(lightningcss@1.30.2)(yaml@2.8.1):
     dependencies:
       '@vitest/expect': 4.0.17
       '@vitest/mocker': 4.0.17(vite@7.1.4(@types/node@25.0.9)(jiti@2.6.1)(lightningcss@1.30.2)(yaml@2.8.1))
@@ -5554,7 +5549,7 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 25.0.9
-      happy-dom: 20.3.1
+      happy-dom: 20.3.3
     transitivePeerDependencies:
       - jiti
       - less
