@@ -1,11 +1,11 @@
+import { For } from 'solid-js';
+
 import { ClockLine as Graduation } from '@/ClockLine';
 import { rotate, seconds } from '@/common';
 
-// For not used because Graduations are static - minor optimization
-export const Graduations = () =>
-  [...Array(seconds).keys()]
-    .map<[boolean, number]>((index) => [index % 5 === 0, index])
-    .map(([isHour, index]) => (
+export const Graduations = () => (
+  <For each={Array.from({ length: seconds }, (_, index) => index % 5 === 0)}>
+    {(isHour, index) => (
       <Graduation
         class={
           isHour
@@ -14,6 +14,8 @@ export const Graduations = () =>
         }
         graduation
         length={isHour ? 6 : 2.5}
-        transform={rotate(index / seconds, 0)}
+        transform={rotate(index() / seconds, 0)}
       />
-    ));
+    )}
+  </For>
+);
