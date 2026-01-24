@@ -1,14 +1,29 @@
-import { onCleanup } from 'solid-js';
+import { createMemo, createSignal, onCleanup } from 'solid-js';
 
 import { ClockLine as ClockHand } from '@/ClockLine';
-import { time } from '@/time';
+import { rotate, seconds } from '@/common';
 import { getTestId } from '@/utilities';
 
+const hours = seconds / 5;
+const getSecondsSinceMidnight = (): number =>
+  (Date.now() - new Date().setHours(0, 0, 0, 0)) / 1000;
+
+const [time, setTime] = createSignal(getSecondsSinceMidnight());
+
+let frame = requestAnimationFrame(function loop() {
+  setTime(getSecondsSinceMidnight());
+  frame = requestAnimationFrame(loop);
+});
+
 export const ClockHands = () => {
-  let frame = requestAnimationFrame(function loop() {
-    time.update();
-    frame = requestAnimationFrame(loop);
-  });
+  const hour = createMemo(() =>
+    rotate(((time() / seconds ** 2) % hours) / hours),
+  );
+  const minute = createMemo(() =>
+    rotate(((time() / seconds) % seconds) / seconds),
+  );
+  const second = createMemo(() => rotate((time() % seconds) / seconds));
+  const subsecond = createMemo(() => rotate(time() % 1, 0));
 
   onCleanup(() => {
     cancelAnimationFrame(frame);
@@ -20,22 +35,22 @@ export const ClockHands = () => {
         class="stroke-zinc-200 stroke-3 dark:stroke-zinc-600"
         data-testid={getTestId('subsecond')}
         length={82}
-        transform={time.milisecond}
+        transform={subsecond()}
       />
       <ClockHand
         class="stroke-zinc-600 stroke-4 dark:stroke-zinc-200"
         length={46}
-        transform={time.hour}
+        transform={hour()}
       />
       <ClockHand
         class="stroke-zinc-400 stroke-3"
         length={64}
-        transform={time.minute}
+        transform={minute()}
       />
       <ClockHand
         class="stroke-solid-light stroke-2 dark:stroke-solid"
         length={76}
-        transform={time.second}
+        transform={second()}
       />
     </>
   );
