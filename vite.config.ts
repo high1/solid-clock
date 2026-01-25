@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => ({
   base: loadEnv(mode, process.cwd(), '')['BASE'] ?? '',
   plugins: [
     tailwindcss(),
-    solid(),
+    solid({ hot: mode === 'development' }),
     checker({
       eslint: {
         lintCommand: 'eslint . --max-warnings 0',
@@ -25,6 +25,9 @@ export default defineConfig(({ mode }) => ({
   test: {
     alias: {
       '@/': new URL('./src/', import.meta.url).pathname,
+    },
+    coverage: {
+      exclude: ['./src/index.css'],
     },
     environment: 'happy-dom',
   },
