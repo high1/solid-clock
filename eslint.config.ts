@@ -27,7 +27,6 @@ export default defineConfig(
         },
         extraFileExtensions: ['.css'],
         projectService: true,
-        tsconfigRootDir: import.meta.dirname,
       },
     },
   },
