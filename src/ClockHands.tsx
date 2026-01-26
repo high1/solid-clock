@@ -2,7 +2,6 @@ import { createMemo, createSignal, onCleanup } from 'solid-js';
 
 import { ClockLine as ClockHand } from '@/ClockLine';
 import { rotate, seconds } from '@/common';
-import { getTestId } from '@/utilities';
 
 const hours = seconds / 5;
 const getSecondsSinceMidnight = () =>
@@ -33,7 +32,6 @@ export const ClockHands = () => {
     <>
       <ClockHand
         class="stroke-zinc-200 stroke-3 dark:stroke-zinc-600"
-        data-testid={getTestId('subsecond')}
         length={82}
         transform={subsecond()}
       />
