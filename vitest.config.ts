@@ -8,9 +8,7 @@ export default defineConfig((env) =>
     viteConfig(env),
     defineConfig({
       test: {
-        alias: {
-          '@/': new URL('./src/', import.meta.url).pathname,
-        },
+        alias: { '@/': new URL('./src/', import.meta.url).pathname },
         browser: {
           enabled: true,
           headless: true,
