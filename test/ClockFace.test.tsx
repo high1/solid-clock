@@ -1,15 +1,16 @@
 import { describe, expect, test } from 'vitest';
 import { render } from 'vitest-browser-solid';
 
-import { ClockFace } from '@/ClockFace';
+import { ClockFace, clockFaceId } from '@/ClockFace';
 
 describe('<ClockFace />', () => {
   test('renders clock face', () => {
     const screen = render(() => <ClockFace />);
-    expect(screen.getByTestId('clock-face')).toBeInTheDocument();
+    expect(screen.getByTestId(clockFaceId)).toBeInTheDocument();
   });
   test('unmount clock face', () => {
-    const { unmount } = render(() => <ClockFace />);
-    unmount();
+    const screen = render(() => <ClockFace />);
+    screen.unmount();
+    expect(screen.getByTestId(clockFaceId)).not.toBeInTheDocument();
   });
 });
