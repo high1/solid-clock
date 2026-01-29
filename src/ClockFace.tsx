@@ -2,10 +2,12 @@ import { ClockHands } from '@/ClockHands';
 import { Graduations } from '@/Graduations';
 import { getTestId } from '@/utilities';
 
+export const clockFaceId = 'clock-face';
+
 export const ClockFace = () => (
   <div
     class="grid h-screen place-content-center dark:bg-zinc-800"
-    data-testid={getTestId('clock-face')}
+    data-testid={getTestId(clockFaceId)}
   >
     <svg class="h-[95vmin]" viewBox="0 0 200 200">
       <image class="size-1/6 translate-5/12" href="logo.svg" />
