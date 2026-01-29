@@ -1,8 +1,7 @@
 import { ClockHands } from '@/ClockHands';
+import { clockFaceId } from '@/common';
 import { Graduations } from '@/Graduations';
 import { getTestId } from '@/utilities';
-
-export const clockFaceId = 'clock-face';
 
 export const ClockFace = () => (
   <div
