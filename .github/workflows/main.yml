@@ -30,6 +30,7 @@ jobs:
       - name: Install 🔧
         run: |
           pnpm i
+          pnpm playwright
 
       - name: Test 🧪
         run: |
