@@ -1,7 +1,7 @@
 import { For } from 'solid-js';
 
-import { ClockLine as Graduation } from '@/ClockLine';
-import { rotate, seconds } from '@/common';
+import { ClockLine as Graduation } from '#src/ClockLine';
+import { rotate, seconds } from '#src/common';
 
 export const Graduations = () => (
   <For each={Array.from({ length: seconds }, (_, index) => index % 5 === 0)}>

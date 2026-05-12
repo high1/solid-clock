@@ -24,17 +24,17 @@ jobs:
       - name: Node.js ⚓
         uses: actions/setup-node@v6.3.0
         with:
-          node-version: latest
+          node-version: lts/*
           cache: pnpm
 
       - name: Install 🔧
-        run: |
-          pnpm i
-          pnpm playwright
+        run: pnpm i
+
+      - name: Install playwright 🌐
+        run: pnpm playwright
 
       - name: Test 🧪
-        run: |
-          pnpm test
+        run: pnpm test
 
       - name: Build 🚧
         run: |

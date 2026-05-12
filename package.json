@@ -1,9 +1,64 @@
 {
-  "type": "module",
-  "name": "solid-clock",
-  "version": "1.0.0",
-  "keywords": [],
+  "dependencies": {
+    "solid-js": "1.9.12"
+  },
   "description": "Solid-js clock, inspired by sauron clock, credits to voby",
+  "devDependencies": {
+    "@e18e/eslint-plugin": "0.4.1",
+    "@eslint/config-helpers": "0.6.0",
+    "@eslint/css": "1.2.0",
+    "@eslint/js": "10.0.1",
+    "@eslint/json": "1.2.0",
+    "@html-eslint/eslint-plugin": "0.60.0",
+    "@stylistic/eslint-plugin": "5.10.0",
+    "@tailwindcss/vite": "4.3.0",
+    "@types/eslint-plugin-jsx-a11y": "6.10.1",
+    "@types/node": "25.6.2",
+    "@vitest/browser-playwright": "4.1.5",
+    "@vitest/coverage-v8": "4.1.5",
+    "eslint": "10.3.0",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-import-resolver-typescript": "4.4.4",
+    "eslint-plugin-import-x": "4.16.2",
+    "eslint-plugin-jsx-a11y": "6.10.2",
+    "eslint-plugin-perfectionist": "5.9.0",
+    "eslint-plugin-prettier": "5.5.5",
+    "eslint-plugin-solid": "0.14.5",
+    "eslint-plugin-yml": "3.3.2",
+    "happy-dom": "20.9.0",
+    "playwright": "1.59.1",
+    "prettier": "3.8.3",
+    "prettier-plugin-tailwindcss": "0.8.0",
+    "tailwindcss": "4.3.0",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.59.2",
+    "vite": "8.0.12",
+    "vite-plugin-checker": "0.13.0",
+    "vite-plugin-solid": "2.11.12",
+    "vitest": "4.1.5",
+    "vitest-browser-solid": "1.0.1"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "onFail": "download",
+      "version": "11.1.0"
+    },
+    "runtime": {
+      "name": "node",
+      "onFail": "warn",
+      "version": ">=24"
+    }
+  },
+  "imports": {
+    "#*": [
+      "./*",
+      "./*.ts",
+      "./*.tsx"
+    ]
+  },
+  "keywords": [],
+  "name": "solid-clock",
   "scripts": {
     "build": "vite build",
     "coverage": "vitest run --coverage",
@@ -13,56 +68,6 @@
     "start": "vite",
     "test": "vitest run"
   },
-  "devDependencies": {
-    "@eslint/compat": "2.0.3",
-    "@eslint/css": "0.14.1",
-    "@eslint/js": "9.39.4",
-    "@html-eslint/eslint-plugin": "0.58.1",
-    "@stylistic/eslint-plugin": "5.10.0",
-    "@tailwindcss/vite": "4.2.1",
-    "@types/eslint-plugin-jsx-a11y": "6.10.1",
-    "@types/node": "25.3.5",
-    "@vitest/browser-playwright": "4.0.18",
-    "@vitest/coverage-v8": "4.0.18",
-    "eslint": "9.39.4",
-    "eslint-config-prettier": "10.1.8",
-    "eslint-import-resolver-typescript": "4.4.4",
-    "eslint-plugin-import-x": "4.16.1",
-    "eslint-plugin-jsonc": "2.21.1",
-    "eslint-plugin-jsx-a11y": "6.10.2",
-    "eslint-plugin-perfectionist": "5.6.0",
-    "eslint-plugin-prettier": "5.5.5",
-    "eslint-plugin-solid": "0.14.5",
-    "eslint-plugin-yml": "3.3.1",
-    "happy-dom": "20.8.3",
-    "playwright": "1.58.2",
-    "prettier": "3.8.1",
-    "prettier-plugin-tailwindcss": "0.7.2",
-    "tailwindcss": "4.2.1",
-    "typescript": "5.9.3",
-    "typescript-eslint": "8.56.1",
-    "vite": "8.0.0-beta.16",
-    "vite-plugin-checker": "0.12.0",
-    "vite-plugin-solid": "2.11.10",
-    "vitest": "4.0.18",
-    "vitest-browser-solid": "1.0.1"
-  },
-  "dependencies": {
-    "solid-js": "1.9.11"
-  },
-  "devEngines": {
-    "packageManager": {
-      "name": "pnpm"
-    }
-  },
-  "engines": {
-    "node": ">=24"
-  },
-  "packageManager": "pnpm@10.31.0",
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "unrs-resolver"
-    ]
-  }
+  "type": "module",
+  "version": "1.0.0"
 }

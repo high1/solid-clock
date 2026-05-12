@@ -1,12 +1,13 @@
 /* eslint-disable import-x/no-named-as-default-member */
-import { includeIgnoreFile } from '@eslint/compat';
+import e18e from '@e18e/eslint-plugin';
+import { includeIgnoreFile } from '@eslint/config-helpers';
 import css from '@eslint/css';
 import eslint from '@eslint/js';
+import json from '@eslint/json';
 import html from '@html-eslint/eslint-plugin';
 import stylistic from '@stylistic/eslint-plugin';
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import { importX } from 'eslint-plugin-import-x';
-import jsonc from 'eslint-plugin-jsonc';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import perfectionist from 'eslint-plugin-perfectionist';
 import prettierRecommended from 'eslint-plugin-prettier/recommended';
@@ -36,12 +37,11 @@ export default defineConfig(
       eslint.configs.recommended,
       tseslint.configs.strictTypeChecked,
       tseslint.configs.stylisticTypeChecked,
+      e18e.configs.recommended,
       jsxA11y.flatConfigs.strict,
       // @ts-expect-error Types of property create are incompatible. (ts 2322)
       solidTsConfig,
-      // @ts-expect-error Types of property languageOptions are incompatible. (ts 2322)
       importX.flatConfigs.recommended,
-      // @ts-expect-error Types of property languageOptions are incompatible. (ts 2322)
       importX.flatConfigs.typescript,
       stylistic.configs.customize({
         semi: true,
@@ -51,6 +51,7 @@ export default defineConfig(
     ],
     files: ['**/*.{ts,tsx}'],
     rules: {
+      '@typescript-eslint/no-import-type-side-effects': 'error',
       '@typescript-eslint/restrict-template-expressions': [
         'error',
         { allowNumber: true },
@@ -61,12 +62,10 @@ export default defineConfig(
     },
   },
   {
-    extends: [
-      jsonc.configs['flat/recommended-with-jsonc'],
-      prettierRecommended,
-      jsonc.configs['flat/prettier'],
-    ],
+    extends: [json.configs.recommended, prettierRecommended],
     files: ['**/*.json'],
+    language: 'json/json',
+    rules: { 'json/sort-keys': ['error', 'asc', { natural: true }] },
   },
   {
     extends: [
@@ -77,19 +76,17 @@ export default defineConfig(
     files: ['**/*.{yml,yaml}'],
   },
   {
-    extends: ['css/recommended', prettierRecommended],
+    extends: [css.configs.recommended, prettierRecommended],
     files: ['**/*.css'],
     language: 'css/css',
-    plugins: { css },
     rules: {
       'css/no-invalid-at-rules': 'off',
     },
   },
   {
-    extends: ['html/recommended'],
+    extends: [html.configs.recommended],
     files: ['**/*.html'],
     language: 'html/html',
-    plugins: { html },
     rules: {
       'html/attrs-newline': [
         'error',

@@ -1,8 +1,8 @@
 {
   "atDirectives": [
     {
-      "name": "@theme",
       "description": "Use the @theme directive to define your project's custom design tokens, like fonts, colors, and breakpoints.",
+      "name": "@theme",
       "references": [
         {
           "name": "Tailwind's “Functions & Directives” documentation",
