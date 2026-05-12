@@ -1,6 +1,6 @@
 import { afterAll, describe, expect, test, vi } from 'vitest';
 
-import { getTestId } from '@/utilities';
+import { getTestId } from '#src/utilities';
 
 afterAll(() => void vi.unstubAllEnvs());
 

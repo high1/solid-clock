@@ -1,8 +1,8 @@
 {
-  "disable_ai": true,
   "code_actions_on_format": {
     "source.fixAll.eslint": true
   },
+  "disable_ai": true,
   "languages": {
     "CSS": {
       "language_servers": ["eslint", "tailwindcss-language-server"]
@@ -11,11 +11,11 @@
       "formatter": [{ "code_action": "source.fixAll.eslint" }],
       "language_servers": ["eslint", "vscode-html-language-server"]
     },
-    "JSONC": {
+    "JSON": {
       "formatter": [{ "code_action": "source.fixAll.eslint" }],
       "language_servers": ["eslint", "json-language-server"]
     },
-    "JSON": {
+    "JSONC": {
       "formatter": [{ "code_action": "source.fixAll.eslint" }],
       "language_servers": ["eslint", "json-language-server"]
     },

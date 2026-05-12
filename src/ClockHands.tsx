@@ -1,7 +1,7 @@
 import { createMemo, createSignal, onCleanup } from 'solid-js';
 
-import { ClockLine as ClockHand } from '@/ClockLine';
-import { rotate, seconds } from '@/common';
+import { ClockLine as ClockHand } from '#src/ClockLine';
+import { rotate, seconds } from '#src/common';
 
 const hours = seconds / 5;
 const getSecondsSinceMidnight = () =>

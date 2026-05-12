@@ -1,6 +1,6 @@
 import { render } from 'solid-js/web';
 
-import '@/index.css';
-import { ClockFace } from '@/ClockFace';
+import '#src/index.css';
+import { ClockFace } from '#src/ClockFace';
 
 render(() => <ClockFace />, document.body);
