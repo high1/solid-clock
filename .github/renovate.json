@@ -9,6 +9,7 @@
       "groupSlug": "all-minor-patch",
       "matchPackageNames": ["*"],
       "matchUpdateTypes": ["minor", "patch"],
+      "minimumReleaseAge": "1 days",
       "platformAutomerge": true
     }
   ],

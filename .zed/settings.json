@@ -19,7 +19,12 @@
       "formatter": [{ "code_action": "source.fixAll.eslint" }],
       "language_servers": ["eslint", "json-language-server"]
     },
+    "Markdown": {
+      "formatter": [{ "code_action": "source.fixAll.eslint" }],
+      "language_servers": ["eslint"]
+    },
     "YAML": {
+      "formatter": [{ "code_action": "source.fixAll.eslint" }],
       "language_servers": ["eslint", "yaml-language-server"]
     }
   }

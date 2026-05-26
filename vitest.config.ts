@@ -1,7 +1,6 @@
 import { playwright } from '@vitest/browser-playwright';
 import { defineConfig, mergeConfig } from 'vitest/config';
 
-// eslint-disable-next-line import-x/no-unresolved
 import viteConfig from '#/vite.config';
 
 export default defineConfig((env) =>
