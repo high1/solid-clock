@@ -4,13 +4,13 @@ import { ClockLine as ClockHand } from '#src/ClockLine';
 import { rotate, seconds } from '#src/common';
 
 const hours = seconds / 5;
-const getSecondsSinceMidnight = () =>
-  (Date.now() - new Date().setHours(0, 0, 0, 0)) / 1000;
+const getSecondsSinceMidnight = (date: Date) =>
+  (date.getTime() - date.setHours(0, 0, 0, 0)) / 1000;
 
-const [time, setTime] = createSignal(getSecondsSinceMidnight());
+const [time, setTime] = createSignal(getSecondsSinceMidnight(new Date()));
 
 let frame = requestAnimationFrame(function loop() {
-  setTime(getSecondsSinceMidnight());
+  setTime(getSecondsSinceMidnight(new Date()));
   frame = requestAnimationFrame(loop);
 });
 
