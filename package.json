@@ -5,7 +5,7 @@
   "description": "Solid-js clock, inspired by sauron clock, credits to voby",
   "devDependencies": {
     "@e18e/eslint-plugin": "0.8.0",
-    "@eslint/css": "1.4.0",
+    "@eslint/css": "2.0.0",
     "@eslint/js": "10.0.1",
     "@eslint/json": "2.1.0",
     "@eslint/markdown": "8.0.3",
