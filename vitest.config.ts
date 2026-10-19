@@ -18,7 +18,7 @@ export default defineConfig((env) =>
         coverage: {
           exclude: ['src/index.css'],
         },
-        environment: 'happy-dom',
+        environment: 'node',
       },
     }),
   ),

@@ -25,7 +25,6 @@
     "eslint-plugin-prettier": "5.5.7",
     "eslint-plugin-solid": "0.18.1",
     "eslint-plugin-yml": "3.9.0",
-    "happy-dom": "20.14.6",
     "playwright": "1.64.1",
     "prettier": "3.9.10",
     "prettier-plugin-tailwindcss": "0.8.1",
@@ -47,7 +46,7 @@
     "runtime": {
       "name": "node",
       "onFail": "warn",
-      "version": ">=24"
+      "version": "26.12.0"
     }
   },
   "imports": {
@@ -57,12 +56,24 @@
       "./*.tsx"
     ]
   },
-  "keywords": [],
+  "keywords": [
+    "solid-js",
+    "clock",
+    "svg"
+  ],
+  "license": "MIT",
   "name": "solid-clock",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/high1/solid-clock.git"
+  },
   "scripts": {
     "build": "vite build",
+    "check": "tsc --noEmit",
     "coverage": "vitest run --coverage",
     "dev": "vite",
+    "format": "prettier --write .",
+    "lint": "eslint . --max-warnings 0",
     "playwright": "playwright install --only-shell chromium",
     "preview": "vite preview",
     "start": "vite",

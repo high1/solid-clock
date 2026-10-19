@@ -1,18 +1,47 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "automerge": true,
+  "customManagers": [
+    {
+      "customType": "jsonata",
+      "fileFormat": "json",
+      "managerFilePatterns": ["/(^|/)package\\.json$/"],
+      "matchStrings": [
+        "($pm := $.devEngines.packageManager; $pm ? ( $isArr := $type($pm) = 'array'; $pmList := $isArr ? $pm : [$pm]; $pnpmObj := $pmList[name='pnpm']; $pnpmObj ? { 'currentValue': $pnpmObj.version, 'depName': 'pnpm', 'datasource': 'npm' } : null ) : null)",
+        "($rt := $.devEngines.runtime; $rt ? ( $isArr := $type($rt) = 'array'; $rtList := $isArr ? $rt : [$rt]; $nodeObj := $rtList[name='node']; $nodeObj ? { 'currentValue': $nodeObj.version, 'depName': 'node', 'datasource': 'node-version' } : null ) : null)"
+      ]
+    }
+  ],
   "extends": ["config:recommended", "schedule:weekly"],
+  "minimumReleaseAge": "1 days",
   "packageRules": [
     {
-      "automerge": true,
-      "automergeType": "pr",
       "groupName": "all non-major dependencies",
       "groupSlug": "all-minor-patch",
       "internalChecksFilter": "strict",
       "matchPackageNames": ["*"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "minimumReleaseAge": "1 days",
-      "platformAutomerge": true
+      "matchUpdateTypes": ["minor", "patch"]
+    },
+    {
+      "matchDepNames": ["pnpm", "node"],
+      "matchManagers": ["custom.jsonata"]
+    },
+    {
+      "additionalBranchPrefix": "pnpm-",
+      "groupName": "pnpm",
+      "matchDepNames": ["pnpm"]
+    },
+    {
+      "additionalBranchPrefix": "node-",
+      "groupName": "node",
+      "matchDepNames": ["node"]
+    },
+    {
+      "automerge": false,
+      "matchDepNames": ["node"],
+      "matchUpdateTypes": ["major"]
     }
   ],
+  "platformAutomerge": true,
   "timezone": "Etc/Utc"
 }

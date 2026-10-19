@@ -10,6 +10,11 @@ on:
 env:
   BASE: /${{ github.event.repository.name }}/
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -24,7 +29,7 @@ jobs:
       - name: Node.js ⚓
         uses: actions/setup-node@v7.1.0
         with:
-          node-version: node
+          node-version-file: 'package.json'
           cache: pnpm
 
       - name: Install 🔧
@@ -33,16 +38,36 @@ jobs:
       - name: Install playwright 🌐
         run: pnpm playwright
 
+      - name: Check 🔎
+        run: pnpm check
+
+      - name: Lint 🧹
+        run: pnpm lint
+
       - name: Test 🧪
         run: pnpm test
+
+      # getSecondsSinceMidnight has to survive DST transitions, and the rules
+      # differ per region - so sweep zones with different rules and both
+      # hemispheres instead of trusting the runner's default timezone.
+      - name: Test across timezones 🌍
+        run: |
+          for tz in America/New_York Europe/Berlin Australia/Sydney; do
+            echo "::group::$tz"
+            TZ=$tz pnpm test
+            echo "::endgroup::"
+          done
 
       - name: Build 🚧
         run: |
           pnpm build
           touch dist/.nojekyll
 
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.9.0
-        if: github.ref == 'refs/heads/main'
+      - name: Upload artifact 📦
+        uses: actions/upload-pages-artifact@v5.0.0
         with:
-          folder: dist
+          path: dist
+
+      - name: Deploy to GitHub Pages 🚀
+        uses: actions/deploy-pages@v5.0.1
+        if: github.ref == 'refs/heads/main'

@@ -1,54 +1,54 @@
-import { createMemo, createSignal, onCleanup } from 'solid-js';
+import { createSignal, onCleanup, onMount } from 'solid-js';
 
 import { ClockLine as ClockHand } from '#src/ClockLine';
-import { rotate, seconds } from '#src/common';
-
-const hours = seconds / 5;
-const getSecondsSinceMidnight = (date: Date) =>
-  (date.getTime() - date.setHours(0, 0, 0, 0)) / 1000;
-
-const [time, setTime] = createSignal(getSecondsSinceMidnight(new Date()));
-
-let frame = requestAnimationFrame(function loop() {
-  setTime(getSecondsSinceMidnight(new Date()));
-  frame = requestAnimationFrame(loop);
-});
+import { clockHourId, clockMinuteId, clockSecondId } from '#src/common';
+import {
+  getSecondsSinceMidnight,
+  hourTransform,
+  minuteTransform,
+  secondTransform,
+  subsecondTransform,
+} from '#src/time';
+import { getTestId } from '#src/utilities';
 
 export const ClockHands = () => {
-  const hour = createMemo(() =>
-    rotate(((time() / seconds ** 2) % hours) / hours),
-  );
-  const minute = createMemo(() =>
-    rotate(((time() / seconds) % seconds) / seconds),
-  );
-  const second = createMemo(() => rotate((time() % seconds) / seconds));
-  const subsecond = createMemo(() => rotate(time() % 1, 0));
+  const [clock, setClock] = createSignal(getSecondsSinceMidnight());
 
-  onCleanup(() => {
-    cancelAnimationFrame(frame);
+  onMount(() => {
+    let frame = requestAnimationFrame(function loop() {
+      setClock(getSecondsSinceMidnight());
+      frame = requestAnimationFrame(loop);
+    });
+    onCleanup(() => {
+      cancelAnimationFrame(frame);
+    });
   });
 
   return (
     <>
       <ClockHand
-        class="stroke-zinc-200 stroke-3 dark:stroke-zinc-600"
+        class="stroke-zinc-200 stroke-3 dark:stroke-zinc-200"
+        data-testid={getTestId('clock-subsecond')}
         length={82}
-        transform={subsecond()}
+        transform={subsecondTransform(clock())}
       />
       <ClockHand
         class="stroke-zinc-600 stroke-4 dark:stroke-zinc-200"
+        data-testid={getTestId(clockHourId)}
         length={46}
-        transform={hour()}
+        transform={hourTransform(clock())}
       />
       <ClockHand
         class="stroke-zinc-400 stroke-3"
+        data-testid={getTestId(clockMinuteId)}
         length={64}
-        transform={minute()}
+        transform={minuteTransform(clock())}
       />
       <ClockHand
         class="stroke-solid-light stroke-2 dark:stroke-solid"
+        data-testid={getTestId(clockSecondId)}
         length={76}
-        transform={second()}
+        transform={secondTransform(clock())}
       />
     </>
   );
