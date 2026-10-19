@@ -4,8 +4,11 @@ import { ClockLine as ClockHand } from '#src/ClockLine';
 import { rotate, seconds } from '#src/common';
 
 const hours = seconds / 5;
-const getSecondsSinceMidnight = (date: Date) =>
-  (date.getTime() - date.setHours(0, 0, 0, 0)) / 1000;
+export const getSecondsSinceMidnight = (date: Date = new Date()) =>
+  date.getHours() * 3600 +
+  date.getMinutes() * 60 +
+  date.getSeconds() +
+  date.getMilliseconds() / 1000;
 
 const [time, setTime] = createSignal(getSecondsSinceMidnight(new Date()));
 
