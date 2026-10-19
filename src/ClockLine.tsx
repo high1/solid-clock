@@ -1,6 +1,6 @@
 import { type JSX, mergeProps, splitProps } from 'solid-js';
 
-export interface ClockLineProps extends Omit<
+interface ClockLineProps extends Omit<
   JSX.LineSVGAttributes<SVGLineElement>,
   'stroke-linecap' | 'y1' | 'y2'
 > {

@@ -1,8 +1,7 @@
 import { For } from 'solid-js';
 
 import { ClockLine as Graduation } from '#src/ClockLine';
-import { clockGraduationId, rotate, seconds } from '#src/common';
-import { getTestId } from '#src/utilities';
+import { rotate, seconds } from '#src/common';
 
 export const Graduations = () => (
   <For each={Array.from({ length: seconds }, (_, index) => index % 5 === 0)}>
@@ -13,7 +12,6 @@ export const Graduations = () => (
             ? 'stroke-zinc-600 stroke-2 dark:stroke-zinc-200'
             : 'stroke-zinc-200 dark:stroke-zinc-600'
         }
-        data-testid={getTestId(`${clockGraduationId}-${index()}`)}
         graduation
         length={isHour ? 6 : 2.5}
         transform={rotate(index() / seconds, 0)}
