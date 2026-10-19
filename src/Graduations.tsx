@@ -1,7 +1,7 @@
 import { For } from 'solid-js';
 
 import { ClockLine as Graduation } from '#src/ClockLine';
-import { clockGraduationId, rotate, seconds } from '#src/common';
+import { rotate, seconds } from '#src/common';
 import { getTestId } from '#src/utilities';
 
 export const Graduations = () => (
@@ -13,7 +13,7 @@ export const Graduations = () => (
             ? 'stroke-zinc-600 stroke-2 dark:stroke-zinc-200'
             : 'stroke-zinc-200 dark:stroke-zinc-600'
         }
-        data-testid={getTestId(`${clockGraduationId}-${index()}`)}
+        data-testid={getTestId(`clock-graduation-${index()}`)}
         graduation
         length={isHour ? 6 : 2.5}
         transform={rotate(index() / seconds, 0)}
