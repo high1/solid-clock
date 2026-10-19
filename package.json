@@ -56,8 +56,17 @@
       "./*.tsx"
     ]
   },
-  "keywords": [],
+  "keywords": [
+    "solid-js",
+    "clock",
+    "svg"
+  ],
+  "license": "MIT",
   "name": "solid-clock",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/high1/solid-clock.git"
+  },
   "scripts": {
     "build": "vite build",
     "check": "tsc --noEmit",
