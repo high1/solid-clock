@@ -34,7 +34,7 @@ export default defineConfig(
       tseslint.configs.stylisticTypeChecked,
       e18e.configs.recommended,
       jsxA11y.flatConfigs.strict,
-      // @ts-expect-error Type 'undefined' is not assignable to type 'RulesMeta<string, unknown[], unknown>'.ts(2322)
+      // @ts-expect-error Types of property create are incompatible. (ts 2322)
       solidTsConfig,
       importX.flatConfigs.recommended,
       importX.flatConfigs.typescript,
@@ -59,7 +59,6 @@ export default defineConfig(
         'error',
         { allowNumber: true },
       ],
-      curly: ['error', 'multi-or-nest'],
     },
     settings: {
       'import-x/resolver-next': [createTypeScriptImportResolver()],
