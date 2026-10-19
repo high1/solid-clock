@@ -1,10 +1,14 @@
-import { describe, expect, test, vi } from 'vitest';
+import { afterEach, describe, expect, test, vi } from 'vitest';
 import { render } from 'vitest-browser-solid';
 
 import { ClockHands } from '#src/ClockHands';
 import { clockHourId, clockMinuteId, clockSecondId } from '#src/common';
 
 describe('<ClockHands />', () => {
+  afterEach(() => {
+    void vi.useRealTimers();
+  });
+
   test.each([
     [0, 'rotate(0.0)'],
     [1, 'rotate(30.0)'],
