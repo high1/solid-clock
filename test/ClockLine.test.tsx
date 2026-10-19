@@ -1,13 +1,9 @@
-import { afterEach, describe, expect, test } from 'vitest';
+import { describe, expect, test } from 'vitest';
 import { render } from 'vitest-browser-solid';
 
 import { ClockLine, type ClockLineProps } from '#src/ClockLine';
 
 describe('<ClockLine />', () => {
-  afterEach(() => {
-    document.body.innerHTML = '';
-  });
-
   test('rest props do not override computed y1/y2', () => {
     const props = {
       graduation: true,
