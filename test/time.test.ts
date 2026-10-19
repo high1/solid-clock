@@ -1,6 +1,10 @@
-import { describe, expect, test } from 'vitest';
+import { afterEach, describe, expect, test, vi } from 'vitest';
 
 import { getSecondsSinceMidnight } from '#src/time';
+
+afterEach(() => {
+  vi.useRealTimers();
+});
 
 describe('getSecondsSinceMidnight', () => {
   test.each([
@@ -23,12 +27,13 @@ describe('getSecondsSinceMidnight', () => {
     expect(date.getTime()).toBe(before);
   });
 
+  // Comparing two live readings would flake across midnight, so pin the clock
+  // and assert the exact value instead.
   test('defaults to now', () => {
-    const before = getSecondsSinceMidnight();
-    const after = getSecondsSinceMidnight();
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date(2020, 0, 1, 12, 0, 0, 0));
 
-    expect(after).toBeGreaterThanOrEqual(before);
-    expect(after).toBeLessThan(86_400);
+    expect(getSecondsSinceMidnight()).toBe(43_200);
   });
 
   // A DST transition day is one where the UTC offset at local midnight differs
