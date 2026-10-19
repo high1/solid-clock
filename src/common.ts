@@ -6,4 +6,3 @@ export const clockGraduationId = 'clock-graduation';
 export const clockHourId = 'clock-hour';
 export const clockMinuteId = 'clock-minute';
 export const clockSecondId = 'clock-second';
-export const clockSubsecondId = 'clock-subsecond';

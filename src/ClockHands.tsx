@@ -1,12 +1,7 @@
 import { createSignal, onCleanup, onMount } from 'solid-js';
 
 import { ClockLine as ClockHand } from '#src/ClockLine';
-import {
-  clockHourId,
-  clockMinuteId,
-  clockSecondId,
-  clockSubsecondId,
-} from '#src/common';
+import { clockHourId, clockMinuteId, clockSecondId } from '#src/common';
 import {
   getSecondsSinceMidnight,
   hourTransform,
@@ -33,7 +28,7 @@ export const ClockHands = () => {
     <>
       <ClockHand
         class="stroke-zinc-200 stroke-3 dark:stroke-zinc-200"
-        data-testid={getTestId(clockSubsecondId)}
+        data-testid={getTestId('clock-subsecond')}
         length={82}
         transform={subsecondTransform(clock())}
       />
