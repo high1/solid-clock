@@ -25,7 +25,7 @@
     "eslint-plugin-prettier": "5.5.7",
     "eslint-plugin-solid": "0.18.1",
     "eslint-plugin-yml": "3.9.0",
-    "happy-dom": "20.14.6",
+    "happy-dom": "21.0.3",
     "playwright": "1.64.1",
     "prettier": "3.9.10",
     "prettier-plugin-tailwindcss": "0.8.1",
