@@ -109,8 +109,9 @@ describe('secondTransform', () => {
 describe('subsecondTransform', () => {
   test.each([
     [0, 'rotate(0)'],
+    [0.25, 'rotate(90)'],
     [0.5, 'rotate(180)'],
-    [0.999, 'rotate(360)'],
+    [0.75, 'rotate(270)'],
   ])('%s seconds since midnight → %s', (seconds, expected) => {
     expect(subsecondTransform(seconds)).toBe(expected);
   });
