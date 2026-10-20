@@ -27,7 +27,7 @@ export const ClockHands = () => {
   return (
     <>
       <ClockHand
-        class="stroke-zinc-200 stroke-3 dark:stroke-zinc-200"
+        class="stroke-zinc-200 stroke-3 dark:stroke-zinc-600"
         data-testid={getTestId('clock-subsecond')}
         length={82}
         transform={subsecondTransform(clock())}

@@ -72,7 +72,6 @@
     "check": "tsc --noEmit",
     "coverage": "vitest run --coverage",
     "dev": "vite",
-    "format": "prettier --write .",
     "lint": "eslint . --max-warnings 0",
     "playwright": "playwright install --only-shell chromium",
     "preview": "vite preview",
