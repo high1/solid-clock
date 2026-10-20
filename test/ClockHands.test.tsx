@@ -1,12 +1,16 @@
-import { afterEach, describe, expect, test, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { render } from 'vitest-browser-solid';
 
 import { ClockHands } from '#src/ClockHands';
 import { clockHourId, clockMinuteId, clockSecondId } from '#src/common';
 
 describe('<ClockHands />', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
   afterEach(() => {
-    void vi.useRealTimers();
+    vi.useRealTimers();
   });
 
   test.each([
@@ -17,7 +21,6 @@ describe('<ClockHands />', () => {
     [11, 'rotate(330)'],
     [12, 'rotate(0)'],
   ])('renders hour %i as %s', (hours, transform) => {
-    vi.useFakeTimers();
     vi.setSystemTime(new Date(2020, 0, 1, hours, 0, 0, 0));
     const screen = render(() => <ClockHands />);
     expect(screen.getByTestId(clockHourId)).toHaveAttribute(
@@ -25,7 +28,6 @@ describe('<ClockHands />', () => {
       transform,
     );
     screen.unmount();
-    vi.useRealTimers();
   });
 
   const minuteSecondCases = [
@@ -39,7 +41,6 @@ describe('<ClockHands />', () => {
   test.each(minuteSecondCases)(
     'renders minute %i as %s',
     (minutes, transform) => {
-      vi.useFakeTimers();
       vi.setSystemTime(new Date(2020, 0, 1, 0, minutes, 0, 0));
       const screen = render(() => <ClockHands />);
       expect(screen.getByTestId(clockMinuteId)).toHaveAttribute(
@@ -47,14 +48,12 @@ describe('<ClockHands />', () => {
         transform,
       );
       screen.unmount();
-      vi.useRealTimers();
     },
   );
 
   test.each(minuteSecondCases)(
     'renders second %i as %s',
     (seconds, transform) => {
-      vi.useFakeTimers();
       vi.setSystemTime(new Date(2020, 0, 1, 0, 0, seconds, 0));
       const screen = render(() => <ClockHands />);
       expect(screen.getByTestId(clockSecondId)).toHaveAttribute(
@@ -62,7 +61,6 @@ describe('<ClockHands />', () => {
         transform,
       );
       screen.unmount();
-      vi.useRealTimers();
     },
   );
 });
