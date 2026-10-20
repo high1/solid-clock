@@ -47,9 +47,6 @@ jobs:
       - name: Test 🧪
         run: pnpm test
 
-      # getSecondsSinceMidnight has to survive DST transitions, and the rules
-      # differ per region - so sweep zones with different rules and both
-      # hemispheres instead of trusting the runner's default timezone.
       - name: Test across timezones 🌍
         run: |
           for tz in America/New_York Europe/Berlin Australia/Sydney; do
