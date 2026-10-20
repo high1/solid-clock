@@ -54,7 +54,7 @@ jobs:
         run: |
           for tz in America/New_York Europe/Berlin Australia/Sydney; do
             echo "::group::$tz"
-            TZ=$tz pnpm vitest run test/time.test.ts
+            TZ=$tz VITE_TZ=$tz pnpm vitest run test/time.test.ts
             echo "::endgroup::"
           done
 

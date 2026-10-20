@@ -18,6 +18,7 @@ export default defineConfig((env) =>
         coverage: {
           exclude: ['src/index.css'],
         },
+        environment: 'node',
       },
     }),
   ),
