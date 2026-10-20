@@ -18,13 +18,8 @@
     {
       "groupName": "all non-major dependencies",
       "groupSlug": "all-minor-patch",
-      "internalChecksFilter": "strict",
       "matchPackageNames": ["*"],
       "matchUpdateTypes": ["minor", "patch"]
-    },
-    {
-      "matchDepNames": ["pnpm", "node"],
-      "matchManagers": ["custom.jsonata"]
     },
     {
       "additionalBranchPrefix": "pnpm-",
@@ -38,7 +33,6 @@
     },
     {
       "automerge": false,
-      "matchDepNames": ["node"],
       "matchUpdateTypes": ["major"]
     }
   ],

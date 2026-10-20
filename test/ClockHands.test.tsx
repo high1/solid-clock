@@ -10,12 +10,12 @@ describe('<ClockHands />', () => {
   });
 
   test.each([
-    [0, 'rotate(0.0)'],
-    [1, 'rotate(30.0)'],
-    [3, 'rotate(90.0)'],
-    [6, 'rotate(180.0)'],
-    [11, 'rotate(330.0)'],
-    [12, 'rotate(0.0)'],
+    [0, 'rotate(0)'],
+    [1, 'rotate(30)'],
+    [3, 'rotate(90)'],
+    [6, 'rotate(180)'],
+    [11, 'rotate(330)'],
+    [12, 'rotate(0)'],
   ])('renders hour %i as %s', (hours, transform) => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date(2020, 0, 1, hours, 0, 0, 0));
@@ -29,11 +29,11 @@ describe('<ClockHands />', () => {
   });
 
   const minuteSecondCases = [
-    [0, 'rotate(0.0)'],
-    [1, 'rotate(6.0)'],
-    [15, 'rotate(90.0)'],
-    [30, 'rotate(180.0)'],
-    [59, 'rotate(354.0)'],
+    [0, 'rotate(0)'],
+    [1, 'rotate(6)'],
+    [15, 'rotate(90)'],
+    [30, 'rotate(180)'],
+    [59, 'rotate(354)'],
   ] as const;
 
   test.each(minuteSecondCases)(
