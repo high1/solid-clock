@@ -8,15 +8,11 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     tailwindcss(),
     solid({ hot: mode === 'development' }),
-    {
-      ...checker({
-        ...(process.env['CI']
-          ? {}
-          : { eslint: { lintCommand: 'eslint . --max-warnings 0' } }),
+    !(mode === 'test' || process.env['CI']) &&
+      checker({
+        eslint: { lintCommand: 'eslint . --max-warnings 0' },
         typescript: true,
       }),
-      apply: () => mode !== 'test',
-    },
   ],
   resolve: {
     tsconfigPaths: true,
