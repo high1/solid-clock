@@ -5,8 +5,8 @@ import eslint from '@eslint/js';
 import json from '@eslint/json';
 import markdown from '@eslint/markdown';
 import html from '@html-eslint/eslint-plugin';
-import stylistic from '@stylistic/eslint-plugin';
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
+import tailwindcss from 'eslint-plugin-better-tailwindcss';
 import { importX } from 'eslint-plugin-import-x';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import perfectionist from 'eslint-plugin-perfectionist';
@@ -28,6 +28,13 @@ export default defineConfig(
     },
   },
   {
+    settings: {
+      'better-tailwindcss': {
+        entryPoint: 'src/index.css',
+      },
+    },
+  },
+  {
     extends: [
       eslint.configs.recommended,
       tseslint.configs.strictTypeChecked,
@@ -38,9 +45,7 @@ export default defineConfig(
       solidTsConfig,
       importX.flatConfigs.recommended,
       importX.flatConfigs.typescript,
-      stylistic.configs.customize({
-        semi: true,
-      }),
+      tailwindcss.configs.correctness,
       perfectionist.configs['recommended-natural'],
       prettierRecommended,
     ],
@@ -59,6 +64,14 @@ export default defineConfig(
         'error',
         { allowNumber: true },
       ],
+      // Better-tailwindcss rules that do not overlap with prettier's class sorting
+      'better-tailwindcss/enforce-canonical-classes': 'error',
+      'better-tailwindcss/enforce-consistent-important-position': 'error',
+      'better-tailwindcss/enforce-consistent-variable-syntax': 'error',
+      'better-tailwindcss/enforce-logical-properties': 'error',
+      'better-tailwindcss/enforce-shorthand-classes': 'error',
+      'better-tailwindcss/no-deprecated-classes': 'error',
+      'better-tailwindcss/no-duplicate-classes': 'error',
       curly: ['error', 'multi-or-nest'],
     },
     settings: {
@@ -70,6 +83,12 @@ export default defineConfig(
     files: ['**/*.json'],
     language: 'json/json',
     rules: { 'json/sort-keys': ['error', 'asc', { natural: true }] },
+  },
+  {
+    // pnpm writes the dependencies in plain alphabetical order, and the
+    // manifest is its to write.
+    files: ['package.json'],
+    rules: { 'json/sort-keys': ['error', 'asc'] },
   },
   {
     extends: [

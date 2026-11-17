@@ -5,17 +5,17 @@ import { getTestId } from '#src/utilities';
 
 export const ClockFace = () => (
   <div
-    class="grid h-screen place-content-center dark:bg-zinc-800"
+    class="grid place-content-center block-screen dark:bg-zinc-800"
     data-testid={getTestId(clockFaceId)}
   >
     <svg
       aria-labelledby="clock-title"
-      class="h-[95vmin]"
+      class="block-[95vmin]"
       role="img"
       viewBox="0 0 200 200"
     >
       <title id="clock-title">Clock</title>
-      <image class="size-1/6 translate-5/12" href="logo.svg" />
+      <image class="translate-5/12 block-1/6 inline-1/6" href="logo.svg" />
       <g class="translate-1/2">
         <circle class="fill-none stroke-zinc-600 dark:stroke-zinc-200" r="98" />
         <Graduations />
