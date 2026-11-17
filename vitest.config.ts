@@ -16,7 +16,7 @@ export default defineConfig((env) =>
           screenshotFailures: false,
         },
         coverage: {
-          exclude: ['src/index.css'],
+          exclude: ['**/*.svg'],
           thresholds: {
             branches: 100,
             functions: 100,
@@ -24,6 +24,7 @@ export default defineConfig((env) =>
             statements: 100,
           },
         },
+        // Avoids the jsdom default (not installed); browser mode never uses it.
         environment: 'node',
       },
     }),

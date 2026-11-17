@@ -1,7 +1,7 @@
 import tailwindcss from '@tailwindcss/vite';
 import fs from 'node:fs';
 import path from 'node:path';
-import { defineConfig, loadEnv, transformWithOxc } from 'vite';
+import { defineConfig, transformWithOxc } from 'vite';
 import { checker } from 'vite-plugin-checker';
 import solid from 'vite-plugin-solid';
 
@@ -9,7 +9,7 @@ const themeSrc = 'theme.ts';
 const themeInit = 'theme-init';
 
 export default defineConfig(({ mode }) => ({
-  base: loadEnv(mode, process.cwd(), '')['BASE'] ?? '',
+  base: process.env['BASE'] ?? '',
   plugins: [
     tailwindcss(),
     solid({ hot: mode === 'development' }),

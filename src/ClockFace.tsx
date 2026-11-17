@@ -23,7 +23,6 @@ export const ClockFace = () => {
       class="grid grid-rows-[auto_1fr] justify-center justify-items-stretch gap-2 px-2 pbs-2 pbe-2 block-dvh dark:bg-zinc-800"
       data-testid={getTestId(clockFaceId)}
     >
-      {/* The implicit column is content-sized; both cells stretch to it. */}
       <div class="flex items-center justify-between gap-2">
         <TimezonePicker
           class="grow max-inline-80 min-inline-0"
