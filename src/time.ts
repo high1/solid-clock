@@ -6,6 +6,7 @@ import {
   secondFraction,
   subsecondFraction,
 } from '#src/common';
+import { filterTimeZones } from '#src/timezone-options';
 
 export const getSecondsSinceMidnight = (date: Date = new Date()) =>
   date.getHours() * 3600 +
@@ -50,6 +51,10 @@ export const startClock = (owner: symbol) => {
 
 export const getTimeZone = () =>
   Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+export function getTimeZones(): string[] {
+  return filterTimeZones(Intl.supportedValuesOf('timeZone'));
+}
 
 const formatters = new Map<string, Intl.DateTimeFormat>();
 

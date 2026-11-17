@@ -1,9 +1,10 @@
-import { onCleanup, onMount } from 'solid-js';
+import { createSignal, onCleanup, onMount } from 'solid-js';
 
 import { ClockHands } from '#src/ClockHands';
 import { clockFaceId } from '#src/common';
 import { Graduations } from '#src/Graduations';
-import { startClock } from '#src/time';
+import { getTimeZone, getTimeZones, startClock } from '#src/time';
+import { TimezonePicker } from '#src/TimezonePicker';
 import { getTestId } from '#src/utilities';
 
 export const ClockFace = () => {
@@ -13,11 +14,21 @@ export const ClockFace = () => {
     onCleanup(startClock(owner));
   });
 
+  const [currentZone, setCurrentZone] = createSignal(getTimeZone());
+  const zones = getTimeZones();
+
   return (
     <div
-      class="grid place-content-center block-screen dark:bg-zinc-800"
+      class="grid grid-flow-row grid-cols-1 content-center justify-items-center gap-2 px-2 block-screen dark:bg-zinc-800"
       data-testid={getTestId(clockFaceId)}
     >
+      <TimezonePicker
+        class="inline-full max-inline-80"
+        id="clock-timezone"
+        onchange={setCurrentZone}
+        value={currentZone()}
+        zones={zones}
+      />
       <svg
         aria-labelledby="clock-title"
         class="block-[95vmin]"
@@ -34,7 +45,7 @@ export const ClockFace = () => {
           <Graduations />
         </g>
         <g class="translate-1/2">
-          <ClockHands />
+          <ClockHands zone={currentZone()} />
         </g>
       </svg>
     </div>
