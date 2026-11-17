@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, test } from 'vitest';
-import { cleanup, render } from 'vitest-browser-solid';
 
+import { cleanup, render } from '#src/testing/render';
 import { ThemeToggle } from '#src/ThemeToggle';
 
 const MEDIA_QUERY = '(prefers-color-scheme: dark)';

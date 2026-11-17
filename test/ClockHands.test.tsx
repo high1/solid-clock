@@ -1,10 +1,10 @@
 import { createSignal } from 'solid-js';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
-import { render } from 'vitest-browser-solid';
 
 import { ANIMATION_DURATION } from '#src/clock-animation';
 import { ClockHands } from '#src/ClockHands';
 import { clockHourId, clockMinuteId, clockSecondId } from '#src/common';
+import { render } from '#src/testing/render';
 import { getTimeZone, setNow } from '#src/time';
 
 // `now` is a module-level singleton, so every test starts from a known clock

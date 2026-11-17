@@ -1,8 +1,8 @@
 import { describe, expect, test, vi } from 'vitest';
-import { render } from 'vitest-browser-solid';
 
 import { ClockFace } from '#src/ClockFace';
 import { clockFaceId } from '#src/common';
+import { render } from '#src/testing/render';
 
 describe('<ClockFace />', () => {
   test('renders clock face', () => {

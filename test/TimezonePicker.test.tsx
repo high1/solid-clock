@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest';
-import { render } from 'vitest-browser-solid';
 
+import { render } from '#src/testing/render';
 import { TimezonePicker } from '#src/TimezonePicker';
 
 const zones = [

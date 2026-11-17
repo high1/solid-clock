@@ -279,9 +279,6 @@ importers:
       vitest:
         specifier: 5.1.0
         version: 5.1.0(@types/node@26.6.6)(@vitest/browser-playwright@5.1.0)(@vitest/coverage-v8@5.1.0)(@vitest/ui@5.1.0)(vite@8.3.8(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))
-      vitest-browser-solid:
-        specifier: 1.0.1
-        version: 1.0.1(solid-js@1.9.17)(vitest@5.1.0)
 
 packages:
 
@@ -2965,13 +2962,6 @@ packages:
     peerDependenciesMeta:
       vite:
         optional: true
-
-  vitest-browser-solid@1.0.1:
-    resolution: {integrity: sha512-2vVwkX/zmksRgmzarldKWu93meKObPN6Ttv18D8LE9CXU9pEuTrDc3sI/lendKG6L+dOycUkSgOwrGnCLllCRw==}
-    engines: {node: ^18.0.0 || >=20.0.0}
-    peerDependencies:
-      solid-js: ^1.8.0
-      vitest: ^4.0.0
 
   vitest@5.1.0:
     resolution: {integrity: sha512-MzmNFnrwa8v8lF1bLxw3UJ4EREwVOVb75VqJZmUDRjJ6EluK/x9th7qTbaeDk41WxE1GxWqmTXcdsfobfH5sOA==}
@@ -5968,11 +5958,6 @@ snapshots:
   vitefu@1.1.3(vite@8.3.8(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1)):
     optionalDependencies:
       vite: 8.3.8(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1)
-
-  vitest-browser-solid@1.0.1(solid-js@1.9.17)(vitest@5.1.0):
-    dependencies:
-      solid-js: 1.9.17
-      vitest: 5.1.0(@types/node@26.6.6)(@vitest/browser-playwright@5.1.0)(@vitest/coverage-v8@5.1.0)(@vitest/ui@5.1.0)(vite@8.3.8(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))
 
   vitest@5.1.0(@types/node@26.6.6)(@vitest/browser-playwright@5.1.0)(@vitest/coverage-v8@5.1.0)(@vitest/ui@5.1.0)(vite@8.3.8(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1)):
     dependencies:

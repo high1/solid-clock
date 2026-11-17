@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, test } from 'vitest';
-import { render } from 'vitest-browser-solid';
 
 import { ClockLine, type ClockLineProps } from '#src/ClockLine';
+import { render } from '#src/testing/render';
 
 describe('<ClockLine />', () => {
   afterEach(() => {
