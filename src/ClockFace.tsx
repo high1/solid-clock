@@ -20,7 +20,7 @@ export const ClockFace = () => {
 
   return (
     <div
-      class="grid grid-flow-row grid-cols-1 content-center justify-items-center gap-2 px-2 block-screen dark:bg-zinc-800"
+      class="flex flex-col items-center gap-2 px-2 pbs-2 block-dvh dark:bg-zinc-800"
       data-testid={getTestId(clockFaceId)}
     >
       <TimezonePicker
@@ -33,7 +33,7 @@ export const ClockFace = () => {
       <ThemeToggle />
       <svg
         aria-labelledby="clock-title"
-        class="block-[95vmin]"
+        class="grow block-full inline-full"
         role="img"
         viewBox="0 0 200 200"
       >
