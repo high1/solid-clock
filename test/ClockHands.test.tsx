@@ -100,4 +100,14 @@ describe('<ClockHands />', () => {
     );
     screen.unmount();
   });
+
+  test('defaults to the runtime timezone', () => {
+    setLocalTime(3);
+    const screen = render(() => <ClockHands />);
+    expect(screen.getByTestId(clockHourId)).toHaveAttribute(
+      'transform',
+      'rotate(90)',
+    );
+    screen.unmount();
+  });
 });
