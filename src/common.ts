@@ -1,6 +1,7 @@
 export const seconds = 60;
-export const rotate = (turns: number, fractionDigits = 1) =>
-  `rotate(${Number((turns * 360).toFixed(fractionDigits))})`;
+/** Converts a 0–1 fraction of a full turn into a CSS `rotate(...)` string. */
+export const rotate = (fraction: number, fractionDigits: number) =>
+  `rotate(${Number((fraction * 360).toFixed(fractionDigits))})`;
 
 // Turns seconds since midnight into one full revolution per hand.
 const hoursPerClock = 12; // 12 hour positions on the dial
