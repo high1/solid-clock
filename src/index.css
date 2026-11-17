@@ -4,3 +4,9 @@
   --color-solid: #2c4f7c;
   --color-solid-light: #446b9e;
 }
+
+@custom-variant dark {
+  &:where(.dark, .dark *) {
+    @slot;
+  }
+}

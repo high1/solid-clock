@@ -3,6 +3,7 @@
     "source.fixAll.eslint": true
   },
   "disable_ai": true,
+  "format_on_save": "on",
   "formatter": [{ "code_action": "source.fixAll.eslint" }],
 
   "languages": {
@@ -19,7 +20,6 @@
       "language_servers": ["eslint", "json-language-server"]
     },
     "Markdown": {
-      "format_on_save": "on",
       "language_servers": ["eslint"]
     },
     "YAML": {

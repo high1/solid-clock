@@ -1,13 +1,44 @@
 import tailwindcss from '@tailwindcss/vite';
-import { defineConfig, loadEnv } from 'vite';
+import fs from 'node:fs';
+import path from 'node:path';
+import { defineConfig, loadEnv, transformWithOxc } from 'vite';
 import { checker } from 'vite-plugin-checker';
 import solid from 'vite-plugin-solid';
+
+const themeSrc = 'theme.ts';
+const themeInit = 'theme-init';
 
 export default defineConfig(({ mode }) => ({
   base: loadEnv(mode, process.cwd(), '')['BASE'] ?? '',
   plugins: [
     tailwindcss(),
     solid({ hot: mode === 'development' }),
+    {
+      name: themeInit,
+      async transformIndexHtml(html) {
+        return {
+          html,
+          tags: [
+            {
+              attrs: {
+                id: themeInit,
+              },
+              children: (
+                await transformWithOxc(
+                  fs.readFileSync(
+                    path.resolve(import.meta.dirname, 'src', themeSrc),
+                    'utf-8',
+                  ),
+                  themeSrc,
+                )
+              ).code,
+              injectTo: 'head-prepend',
+              tag: 'script',
+            },
+          ],
+        };
+      },
+    },
     !(mode === 'test' || process.env['CI']) &&
       checker({
         eslint: { lintCommand: 'eslint . --max-warnings 0' },

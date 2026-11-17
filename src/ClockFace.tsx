@@ -3,6 +3,7 @@ import { createSignal, onCleanup, onMount } from 'solid-js';
 import { ClockHands } from '#src/ClockHands';
 import { clockFaceId } from '#src/common';
 import { Graduations } from '#src/Graduations';
+import { ThemeToggle } from '#src/ThemeToggle';
 import { getTimeZone, getTimeZones, startClock } from '#src/time';
 import { TimezonePicker } from '#src/TimezonePicker';
 import { getTestId } from '#src/utilities';
@@ -29,6 +30,7 @@ export const ClockFace = () => {
         value={currentZone()}
         zones={zones}
       />
+      <ThemeToggle />
       <svg
         aria-labelledby="clock-title"
         class="block-[95vmin]"
