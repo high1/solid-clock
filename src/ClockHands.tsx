@@ -1,10 +1,13 @@
+import { createClockAnimation } from '#src/clock-animation';
 import { ClockLine as ClockHand } from '#src/ClockLine';
 import { clockHourId, clockMinuteId, clockSecondId, rotate } from '#src/common';
 import { createTime, getTimeZone } from '#src/time';
 import { getTestId } from '#src/utilities';
 
 export const ClockHands = (props: { zone?: string }) => {
-  const time = createTime(() => props.zone ?? getTimeZone());
+  const time = createClockAnimation(
+    createTime(() => props.zone ?? getTimeZone()),
+  );
 
   return (
     <>
