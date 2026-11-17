@@ -17,6 +17,12 @@ export default defineConfig((env) =>
         },
         coverage: {
           exclude: ['src/index.css'],
+          thresholds: {
+            branches: 100,
+            functions: 100,
+            lines: 100,
+            statements: 100,
+          },
         },
         environment: 'node',
       },
