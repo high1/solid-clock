@@ -16,7 +16,7 @@ export default defineConfig((env) =>
           screenshotFailures: false,
         },
         coverage: {
-          exclude: ['**/*.svg'],
+          exclude: ['**/*.svg', 'src/index.css'],
           thresholds: {
             branches: 100,
             functions: 100,
