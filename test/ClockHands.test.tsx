@@ -1,6 +1,8 @@
+import { createSignal } from 'solid-js';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { render } from 'vitest-browser-solid';
 
+import { ANIMATION_DURATION } from '#src/clock-animation';
 import { ClockHands } from '#src/ClockHands';
 import { clockHourId, clockMinuteId, clockSecondId } from '#src/common';
 import { getTimeZone, setNow } from '#src/time';
@@ -107,6 +109,189 @@ describe('<ClockHands />', () => {
     expect(screen.getByTestId(clockHourId)).toHaveAttribute(
       'transform',
       'rotate(90)',
+    );
+    screen.unmount();
+  });
+});
+
+describe('<ClockHands /> zone change animation', () => {
+  const start = Date.UTC(2020, 0, 1, 0, 0, 0, 0);
+  const mid = ANIMATION_DURATION / 5;
+
+  const angleOf = (el: Element | null) =>
+    Number(el?.getAttribute('transform')?.split('(')[1]?.split(')')[0]);
+
+  test('animates the hour hand when the zone changes', () => {
+    setNow(start);
+    const [zone, setZone] = createSignal('UTC');
+    const screen = render(() => <ClockHands zone={zone()} />);
+
+    expect(screen.getByTestId(clockHourId)).toHaveAttribute(
+      'transform',
+      'rotate(0)',
+    );
+
+    // Europe/Berlin is UTC+1, so the hour hand moves from 0° to 30°.
+    setZone('Europe/Berlin');
+
+    // Mid-animation: the hand is between the old and the new position.
+    setNow(start + mid);
+    expect(screen.getByTestId(clockHourId)).not.toHaveAttribute(
+      'transform',
+      'rotate(0)',
+    );
+    expect(screen.getByTestId(clockHourId)).not.toHaveAttribute(
+      'transform',
+      'rotate(30)',
+    );
+
+    // Animation complete.
+    setNow(start + ANIMATION_DURATION);
+    expect(screen.getByTestId(clockHourId)).toHaveAttribute(
+      'transform',
+      'rotate(30)',
+    );
+    screen.unmount();
+  });
+
+  test('animates the minute hand when the zone changes', () => {
+    setNow(start);
+    const [zone, setZone] = createSignal('UTC');
+    const screen = render(() => <ClockHands zone={zone()} />);
+
+    expect(screen.getByTestId(clockMinuteId)).toHaveAttribute(
+      'transform',
+      'rotate(0)',
+    );
+
+    // Asia/Kathmandu is UTC+5:45, so the minute hand moves from 0° to 270°.
+    setZone('Asia/Kathmandu');
+
+    setNow(start + mid);
+    expect(screen.getByTestId(clockMinuteId)).not.toHaveAttribute(
+      'transform',
+      'rotate(0)',
+    );
+    expect(screen.getByTestId(clockMinuteId)).not.toHaveAttribute(
+      'transform',
+      'rotate(270)',
+    );
+
+    setNow(start + ANIMATION_DURATION);
+    expect(angleOf(screen.getByTestId(clockMinuteId).element())).toBeCloseTo(
+      270,
+      0,
+    );
+    screen.unmount();
+  });
+
+  test('does not animate when switching between zones with the same offset', () => {
+    // France and Germany share the same DST rules (CET/CEST).
+    // At 00:00 UTC both show 01:00 (CET, UTC+1 in January).
+    setNow(start);
+    const [zone, setZone] = createSignal('Europe/Paris');
+    const screen = render(() => <ClockHands zone={zone()} />);
+
+    expect(screen.getByTestId(clockHourId)).toHaveAttribute(
+      'transform',
+      'rotate(30)',
+    );
+
+    setZone('Europe/Berlin');
+
+    setNow(start + ANIMATION_DURATION);
+    expect(screen.getByTestId(clockHourId)).toHaveAttribute(
+      'transform',
+      'rotate(30)',
+    );
+    screen.unmount();
+  });
+
+  test('animates forward across zones more than 12h apart', () => {
+    // LA (UTC−8 in January) → Sydney (UTC+11): Sydney is ahead,
+    // the hands should advance, not retreat.
+    setNow(Date.UTC(2020, 0, 1, 12, 0, 0, 0)); // 04:00 in LA, 23:00 in Sydney
+    const [zone, setZone] = createSignal('America/Los_Angeles');
+    const screen = render(() => <ClockHands zone={zone()} />);
+
+    expect(screen.getByTestId(clockHourId)).toHaveAttribute(
+      'transform',
+      'rotate(120)',
+    );
+
+    setZone('Australia/Sydney');
+
+    setNow(Date.UTC(2020, 0, 1, 12, 0, 0, ANIMATION_DURATION));
+    expect(screen.getByTestId(clockHourId)).toHaveAttribute(
+      'transform',
+      'rotate(330)',
+    );
+    screen.unmount();
+  });
+
+  test('does not animate the minute hand between whole-hour offset zones', () => {
+    setNow(Date.UTC(2020, 0, 1, 12, 0, 0, 0)); // Belgrade = 13:00, Khandyga = 21:00
+    const [zone, setZone] = createSignal('Asia/Khandyga');
+    const screen = render(() => <ClockHands zone={zone()} />);
+
+    setZone('Europe/Belgrade');
+
+    setNow(Date.UTC(2020, 0, 1, 12, 0, 0, 600));
+    expect(angleOf(screen.getByTestId(clockMinuteId).element())).toBeCloseTo(
+      0,
+      0,
+    );
+    screen.unmount();
+  });
+
+  test('redirects a minute-hand animation mid-flight', () => {
+    setNow(start);
+    const [zone, setZone] = createSignal('UTC');
+    const screen = render(() => <ClockHands zone={zone()} />);
+
+    // Start animating toward Asia/Kathmandu (UTC+5:45) — minute hand moves.
+    setZone('Asia/Kathmandu');
+
+    // Mid-flight: minute hand is partway to 270°.
+    setNow(start + mid);
+    expect(screen.getByTestId(clockMinuteId)).not.toHaveAttribute(
+      'transform',
+      'rotate(0)',
+    );
+
+    // Redirect to Asia/Tokyo (UTC+9, on the hour) — minute hand moves back.
+    setZone('Asia/Tokyo');
+
+    setNow(start + mid + ANIMATION_DURATION);
+    expect(angleOf(screen.getByTestId(clockMinuteId).element())).toBeCloseTo(
+      0,
+      0,
+    );
+    screen.unmount();
+  });
+
+  test('redirects the animation when the zone changes mid-animation', () => {
+    setNow(start);
+    const [zone, setZone] = createSignal('UTC');
+    const screen = render(() => <ClockHands zone={zone()} />);
+
+    // Start animating toward Europe/Berlin (+1 hour).
+    setZone('Europe/Berlin');
+
+    // Berlin is on the hour — the minute hand does not move.
+    setNow(start + mid);
+    expect(screen.getByTestId(clockMinuteId)).toHaveAttribute(
+      'transform',
+      'rotate(0)',
+    );
+
+    // Redirect to Asia/Kathmandu (UTC+5:45) — minute hand moves.
+    setZone('Asia/Kathmandu');
+
+    setNow(start + mid + ANIMATION_DURATION);
+    expect(angleOf(screen.getByTestId(clockMinuteId).element())).toBeCloseTo(
+      270,
+      0,
     );
     screen.unmount();
   });
