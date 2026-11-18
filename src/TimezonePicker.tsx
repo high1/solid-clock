@@ -5,6 +5,7 @@ import {
   For,
   onSettled,
   Show,
+  untrack,
 } from 'solid-js';
 
 import { getTimezoneGroups, zoneLabel } from '#src/timezone-options';
@@ -68,8 +69,9 @@ export const TimezonePicker = (props: Props) => {
   }
 
   function getActiveOption() {
+    const index = untrack(() => activeIndex());
     return (
-      listBox.querySelector<HTMLElement>(`[data-index="${activeIndex()}"]`)
+      listBox.querySelector<HTMLElement>(`[data-index="${index}"]`)
       ?? undefined
     );
   }
