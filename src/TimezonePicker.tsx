@@ -9,6 +9,7 @@ import {
 } from 'solid-js';
 
 import { getTimezoneGroups, zoneLabel } from '#src/timezone-options';
+import { cn } from '#src/utilities';
 
 interface Props {
   class?: string;
@@ -221,7 +222,7 @@ export const TimezonePicker = (props: Props) => {
 
   return (
     <div
-      class={['relative', props.class ?? ''].filter(Boolean).join(' ')}
+      class={cn('relative', props.class)}
       onFocusOut={(event) => {
         const next = event.relatedTarget;
 
