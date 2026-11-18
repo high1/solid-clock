@@ -2,9 +2,8 @@
   "code_actions_on_format": {
     "source.fixAll.eslint": true
   },
-  "disable_ai": true,
+  "format_on_save": "on",
   "formatter": [{ "code_action": "source.fixAll.eslint" }],
-
   "languages": {
     "CSS": {
       "language_servers": ["eslint", "tailwindcss-language-server"]
@@ -19,11 +18,21 @@
       "language_servers": ["eslint", "json-language-server"]
     },
     "Markdown": {
-      "format_on_save": "on",
       "language_servers": ["eslint"]
     },
     "YAML": {
       "language_servers": ["eslint", "yaml-language-server"]
+    }
+  },
+  "lsp": {
+    "vscode-html-language-server": {
+      "settings": {
+        "css": {
+          "lint": {
+            "validProperties": {}
+          }
+        }
+      }
     }
   }
 }

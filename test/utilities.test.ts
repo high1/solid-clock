@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
-import { getTestId } from '#src/utilities';
+import { cn, getTestId } from '#src/utilities';
 
 afterEach(() => {
   vi.unstubAllEnvs();
@@ -25,5 +25,28 @@ describe('getTestId', () => {
     vi.stubEnv('MODE', 'test');
 
     expect(getTestId('test')).toBe('test');
+  });
+});
+
+describe('cn', () => {
+  test('joins truthy classes with a single space', () => {
+    expect(cn('relative', 'block', 'flex')).toBe('relative block flex');
+  });
+
+  test('omits falsy classes', () => {
+    expect(cn('relative', undefined, 'block')).toBe('relative block');
+    expect(cn('relative', '', false, 'block')).toBe('relative block');
+    expect(cn('relative', null, 'flex')).toBe('relative flex');
+  });
+
+  test('returns an empty string when passed nothing', () => {
+    expect(cn()).toBe('');
+  });
+
+  test('returns an empty string for a single falsy argument', () => {
+    expect(cn(false)).toBe('');
+    expect(cn(null)).toBe('');
+    expect(cn(undefined)).toBe('');
+    expect(cn('')).toBe('');
   });
 });

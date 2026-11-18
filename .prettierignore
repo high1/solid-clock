@@ -1,1 +1,6 @@
+pnpm-lock.yaml
 index.html
+*.ts
+*.tsx
+*.yml
+*.yaml

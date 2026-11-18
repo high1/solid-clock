@@ -4,10 +4,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solid Clock</title>
-    <link rel="preload" as="image" href="logo.svg">
-    <link rel="icon" type="image/svg+xml" href="/logo.svg">
+    <link
+      rel="preload"
+      as="image"
+      href="logo-light.svg"
+      media="(prefers-color-scheme: light)"
+    >
+    <link
+      rel="preload"
+      as="image"
+      href="logo-dark.svg"
+      media="(prefers-color-scheme: dark)"
+    >
+    <link rel="icon" type="image/svg+xml" href="icon-flat.svg">
   </head>
-  <body class="m-0">
+  <body class="m-0 **:motion-safe:transition-colors **:motion-safe:duration-250">
     <script type="module" src="/src/index.tsx"></script>
   </body>
 </html>

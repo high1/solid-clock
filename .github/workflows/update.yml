@@ -1,0 +1,62 @@
+name: Update Dependencies 🔄
+
+on:
+  schedule:
+    - cron: "0 0 * * 1" # Every Monday at midnight UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: update-dependencies
+  cancel-in-progress: false
+
+jobs:
+  update-dependencies:
+    if: github.repository == 'high1/solid-clock' # Don't run on forks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Pnpm 🧱
+        uses: pnpm/setup@v3.2.0
+
+      - name: Update dependencies 🔄
+        # The only tag is older than the action's own fixes, so a commit is
+        # pinned instead.
+        uses: pnpm/update@2457663d4150026edd3adb62b660eb85571bc7cb
+        with:
+          token: ${{ secrets.UPDATE_TOKEN }}
+          # The browser has to match the playwright the update brought in, so
+          # it is installed after the update and before the verification.
+          post-update: pnpm lint --fix && pnpm playwright
+          # TypeScript 7 is the native rewrite, and the eslint plugins need
+          # the JavaScript API it does not have.
+          exclude: typescript
+          verify: |
+            pnpm check
+            pnpm lint
+            pnpm test
+            pnpm build
+            for tz in America/New_York Europe/Berlin Australia/Sydney; do
+              TZ=$tz pnpm vitest run test/time.test.ts
+            done
+
+      - name: Notify on failure 🔔
+        if: failure()
+        uses: actions/github-script@v9.0.0
+        with:
+          script: |
+            github.rest.issues.create({
+              body: 'The weekly dependency update failed. Check the workflow run for details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}',
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'Dependency update failed',
+            });

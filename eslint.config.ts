@@ -7,6 +7,7 @@ import markdown from '@eslint/markdown';
 import html from '@html-eslint/eslint-plugin';
 import stylistic from '@stylistic/eslint-plugin';
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
+import tailwindcss from 'eslint-plugin-better-tailwindcss';
 import { importX } from 'eslint-plugin-import-x';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import perfectionist from 'eslint-plugin-perfectionist';
@@ -28,6 +29,13 @@ export default defineConfig(
     },
   },
   {
+    settings: {
+      'better-tailwindcss': {
+        entryPoint: 'src/index.css',
+      },
+    },
+  },
+  {
     extends: [
       eslint.configs.recommended,
       tseslint.configs.strictTypeChecked,
@@ -38,11 +46,9 @@ export default defineConfig(
       solidTsConfig,
       importX.flatConfigs.recommended,
       importX.flatConfigs.typescript,
-      stylistic.configs.customize({
-        semi: true,
-      }),
+      stylistic.configs.customize({ semi: true }),
+      tailwindcss.configs.correctness,
       perfectionist.configs['recommended-natural'],
-      prettierRecommended,
     ],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
@@ -54,12 +60,22 @@ export default defineConfig(
       },
     },
     rules: {
+      // Class order is enforced here (v6 styles), not by prettier.
       '@typescript-eslint/no-import-type-side-effects': 'error',
       '@typescript-eslint/restrict-template-expressions': [
         'error',
         { allowNumber: true },
       ],
-      curly: ['error', 'multi-or-nest'],
+      'better-tailwindcss/enforce-canonical-classes': 'error',
+      'better-tailwindcss/enforce-consistent-class-order': 'error',
+      'better-tailwindcss/enforce-consistent-important-position': 'error',
+      'better-tailwindcss/enforce-consistent-variable-syntax': 'error',
+      'better-tailwindcss/enforce-consistent-variant-order': 'error',
+      'better-tailwindcss/enforce-logical-properties': 'error',
+      'better-tailwindcss/enforce-shorthand-classes': 'error',
+      'better-tailwindcss/no-deprecated-classes': 'error',
+      'better-tailwindcss/no-duplicate-classes': 'error',
+      'curly': ['error', 'multi-or-nest'],
     },
     settings: {
       'import-x/resolver-next': [createTypeScriptImportResolver()],
@@ -72,11 +88,13 @@ export default defineConfig(
     rules: { 'json/sort-keys': ['error', 'asc', { natural: true }] },
   },
   {
-    extends: [
-      yml.configs.recommended,
-      prettierRecommended,
-      yml.configs.prettier,
-    ],
+    // pnpm writes the dependencies in plain alphabetical order, and the
+    // manifest is its to write.
+    files: ['package.json'],
+    rules: { 'json/sort-keys': ['error', 'asc'] },
+  },
+  {
+    extends: [yml.configs.standard],
     files: ['**/*.{yml,yaml}'],
   },
   {

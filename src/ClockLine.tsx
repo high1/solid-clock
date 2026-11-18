@@ -1,4 +1,6 @@
-import { type JSX, mergeProps, splitProps } from 'solid-js';
+import type { JSX } from '@solidjs/web';
+
+import { merge, omit } from 'solid-js';
 
 export interface ClockLineProps extends Omit<
   JSX.LineSVGAttributes<SVGLineElement>,
@@ -10,15 +12,15 @@ export interface ClockLineProps extends Omit<
 }
 
 export const ClockLine = (props: ClockLineProps) => {
-  const props_ = mergeProps({ length: 0, limit: 94 }, props);
-  const [local, rest] = splitProps(props_, ['length', 'limit', 'graduation']);
+  const merged = merge({ length: 0, limit: 94 }, props);
+  const rest = omit(merged, 'length', 'limit', 'graduation');
 
   return (
     <line
       {...rest}
       stroke-linecap="round"
-      y1={local.graduation && local.length - local.limit}
-      y2={-(local.graduation ? local.limit : local.length)}
+      y1={merged.graduation && merged.length - merged.limit}
+      y2={-(merged.graduation ? merged.limit : merged.length)}
     />
   );
 };

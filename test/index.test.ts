@@ -1,7 +1,7 @@
-import { render } from 'solid-js/web';
+import { render } from '@solidjs/web';
 import { describe, expect, test, vi } from 'vitest';
 
-vi.mock('solid-js/web', { spy: true });
+vi.mock('@solidjs/web', { spy: true });
 
 describe('index', () => {
   test('renders without crashing', async () => {
