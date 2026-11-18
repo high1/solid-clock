@@ -42,4 +42,11 @@ describe('cn', () => {
   test('returns an empty string when passed nothing', () => {
     expect(cn()).toBe('');
   });
+
+  test('returns an empty string for a single falsy argument', () => {
+    expect(cn(false)).toBe('');
+    expect(cn(null)).toBe('');
+    expect(cn(undefined)).toBe('');
+    expect(cn('')).toBe('');
+  });
 });
