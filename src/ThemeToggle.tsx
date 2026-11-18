@@ -1,4 +1,4 @@
-import { createSignal, onCleanup, onMount } from 'solid-js';
+import { createSignal, onSettled } from 'solid-js';
 
 import { Moon } from '#src/Moon';
 import { Sun } from '#src/Sun';
@@ -15,7 +15,7 @@ export const ThemeToggle = () => {
     return mediaQuery;
   }
 
-  onMount(() => {
+  onSettled(() => {
     const mq = getMediaQuery();
     setIsDark(document.documentElement.classList.contains('dark'));
 
@@ -35,9 +35,9 @@ export const ThemeToggle = () => {
 
     mq.addEventListener('change', handleSystemThemeChange);
 
-    onCleanup(() => {
+    return () => {
       mq.removeEventListener('change', handleSystemThemeChange);
-    });
+    };
   });
 
   function toggleTheme() {

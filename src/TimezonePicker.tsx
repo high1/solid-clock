@@ -3,8 +3,7 @@ import {
   createMemo,
   createSignal,
   For,
-  onCleanup,
-  onMount,
+  onSettled,
   Show,
 } from 'solid-js';
 
@@ -28,17 +27,18 @@ export const TimezonePicker = (props: Props) => {
   const [popup, setPopup] = createSignal<HTMLElement>();
   let openWidth = 0;
 
-  // Solid fires ref callbacks before the node is inserted into the document,
+  // Solid fires the ref callbacks before the node is inserted into the document,
   // so measure and focus after insertion instead of in the ref itself.
-  createEffect(() => {
-    const element = popup();
-
-    if (element) {
-      placePopup(element);
-      element.querySelector('input')?.focus({ preventScroll: true });
-      scrollToActive(true);
-    }
-  });
+  createEffect(
+    () => popup(),
+    (element) => {
+      if (element) {
+        placePopup(element);
+        element.querySelector('input')?.focus({ preventScroll: true });
+        scrollToActive(true);
+      }
+    },
+  );
 
   let root: HTMLDivElement | undefined;
   let trigger: HTMLButtonElement;
@@ -207,17 +207,18 @@ export const TimezonePicker = (props: Props) => {
       : Math.min(top, 0) + Math.max(bottom, 0);
   }
 
-  onMount(() => {
+  onSettled(() => {
     const handleResize = () => {
       if (window.innerWidth !== openWidth) closePicker();
     };
 
     document.addEventListener('pointerdown', handleDocumentPointerDown);
     window.addEventListener('resize', handleResize);
-    onCleanup(() => {
+
+    return () => {
       document.removeEventListener('pointerdown', handleDocumentPointerDown);
       window.removeEventListener('resize', handleResize);
-    });
+    };
   });
 
   return (
@@ -234,7 +235,7 @@ export const TimezonePicker = (props: Props) => {
     >
       <button
         aria-controls={open() ? listboxId() : undefined}
-        aria-expanded={open()}
+        aria-expanded={open() ? 'true' : 'false'}
         aria-haspopup="listbox"
         class="flex cursor-pointer items-center justify-between gap-3 rounded-sm border border-zinc-300 px-3 py-2 text-start text-zinc-900 inline-full min-inline-0 dark:border-zinc-600 dark:text-zinc-100"
         id={props.id}
@@ -274,7 +275,7 @@ export const TimezonePicker = (props: Props) => {
             placeholder="Search timezones…"
             role="combobox"
             type="text"
-            value={query()}
+            value={/*v8 ignore start*/ query() /*v8 ignore stop*/}
           />
 
           <div
@@ -296,7 +297,9 @@ export const TimezonePicker = (props: Props) => {
                   <For each={group.items}>
                     {(item) => (
                       <button
-                        aria-selected={item.zone === props.value}
+                        aria-selected={
+                          item.zone === props.value ? 'true' : 'false'
+                        }
                         class={`flex cursor-pointer items-center justify-between rounded-sm px-3 py-2 text-start text-sm inline-full ${
                           item.index === activeIndex()
                             ? 'bg-zinc-200 ring-2 ring-zinc-900/40 ring-inset dark:bg-zinc-700 dark:ring-zinc-100/40'

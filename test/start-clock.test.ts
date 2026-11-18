@@ -1,3 +1,4 @@
+import { flush } from 'solid-js';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 
 import { now, setNow, startClock } from '#src/time';
@@ -38,6 +39,7 @@ describe('startClock', () => {
 
     const before = now();
     vi.advanceTimersToNextFrame();
+    flush();
     expect(now()).not.toBe(before);
 
     stop();
@@ -61,6 +63,7 @@ describe('startClock', () => {
     const stop = start();
 
     vi.advanceTimersToNextFrame();
+    flush();
     const afterRun = now();
     expect(afterRun).toBeGreaterThan(0);
 
@@ -76,6 +79,7 @@ describe('startClock', () => {
     const stopThird = start();
 
     vi.advanceTimersToNextFrame();
+    flush();
     const before = now();
     expect(before).toBeGreaterThan(0);
 
@@ -83,6 +87,7 @@ describe('startClock', () => {
     stopSecond();
 
     vi.advanceTimersToNextFrame();
+    flush();
     expect(now()).not.toBe(before);
 
     stopThird();
@@ -138,6 +143,7 @@ describe('startClock', () => {
   test('setNow updates the shared instance', () => {
     const before = now();
     setNow(before + 1_000);
+    flush();
 
     expect(now()).toBe(before + 1_000);
   });

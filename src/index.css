@@ -1,8 +1,8 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-solid: #2c4f7c;
-  --color-solid-light: #446b9e;
+  --color-solid: #0aa0ef;
+  --color-solid-light: #0265b2;
 }
 
 @custom-variant dark {

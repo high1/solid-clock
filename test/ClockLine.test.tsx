@@ -33,11 +33,11 @@ describe('<ClockLine />', () => {
     expect(line?.getAttribute('y2')).toBe('-10'); // -limit
   });
 
-  test('regular line sets y1 to false and y2 to -length', () => {
+  test('regular line omits y1 and sets y2 to -length', () => {
     render(() => <ClockLine length={80} />);
     const line = document.querySelector('line');
     expect(line).not.toBeNull();
-    expect(line?.getAttribute('y1')).toBe('false');
+    expect(line?.getAttribute('y1')).toBeNull();
     expect(line?.getAttribute('y2')).toBe('-80');
   });
 });

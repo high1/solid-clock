@@ -25,40 +25,41 @@ export function createClockAnimation(
   const [animationStart, setAnimationStart] = createSignal<number>();
   let previousZone: string | undefined;
 
-  createEffect(() => {
-    const newZone = time.zone(); // tracked — re-runs when the zone changes
+  createEffect(
+    () => time.zone(), // tracked — re-runs when the zone changes
+    (zone) => {
+      if (
+        prefersReducedMotion() ||
+        previousZone === undefined ||
+        previousZone === zone
+      ) {
+        previousZone = zone;
+        return;
+      }
 
-    if (
-      prefersReducedMotion() ||
-      previousZone === undefined ||
-      previousZone === newZone
-    ) {
-      previousZone = newZone;
-      return;
-    }
+      const nowValue = untrack(() => now());
+      const oldParts = zonedParts(nowValue, previousZone);
+      const newParts = zonedParts(nowValue, zone);
+      const forward = newParts.offset >= oldParts.offset;
 
-    const nowValue = untrack(() => now());
-    const oldParts = zonedParts(nowValue, previousZone);
-    const newParts = zonedParts(nowValue, newZone);
-    const forward = newParts.offset >= oldParts.offset;
-
-    setHourDelta(
-      directionalDelta(
-        hourFraction(oldParts.wallSeconds),
-        hourFraction(newParts.wallSeconds),
-        forward,
-      ),
-    );
-    setMinuteDelta(
-      directionalDelta(
-        minuteFraction(oldParts.wallSeconds),
-        minuteFraction(newParts.wallSeconds),
-        forward,
-      ),
-    );
-    setAnimationStart(nowValue);
-    previousZone = newZone;
-  });
+      setHourDelta(
+        directionalDelta(
+          hourFraction(oldParts.wallSeconds),
+          hourFraction(newParts.wallSeconds),
+          forward,
+        ),
+      );
+      setMinuteDelta(
+        directionalDelta(
+          minuteFraction(oldParts.wallSeconds),
+          minuteFraction(newParts.wallSeconds),
+          forward,
+        ),
+      );
+      setAnimationStart(nowValue);
+      previousZone = zone;
+    },
+  );
 
   // When no animation is running, don't read now() at all.
   const progress = createMemo(() => {
@@ -74,10 +75,12 @@ export function createClockAnimation(
 
   // Pin animationStart to undefined once the animation completes so we
   // stop reading now() and stop re-deriving per frame.
-  createEffect(() => {
-    if (animationStart() === undefined) return;
-    if (progress() === 1) setAnimationStart(undefined);
-  });
+  createEffect(
+    () => animationStart() !== undefined && progress() === 1,
+    (done) => {
+      if (done) setAnimationStart(undefined);
+    },
+  );
 
   return {
     get hour() {

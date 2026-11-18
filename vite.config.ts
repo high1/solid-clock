@@ -1,9 +1,9 @@
+import solid from '@solidjs/vite-plugin';
 import tailwindcss from '@tailwindcss/vite';
 import fs from 'node:fs';
 import path from 'node:path';
 import { defineConfig, transformWithOxc } from 'vite';
 import { checker } from 'vite-plugin-checker';
-import solid from 'vite-plugin-solid';
 
 const themeSrc = 'theme.ts';
 const themeInit = 'theme-init';
@@ -12,7 +12,7 @@ export default defineConfig(({ mode }) => ({
   base: process.env['BASE'] ?? '',
   plugins: [
     tailwindcss(),
-    solid({ hot: mode === 'development' }),
+    solid(),
     {
       name: themeInit,
       async transformIndexHtml(html) {

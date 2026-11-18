@@ -1,3 +1,4 @@
+import { flush } from 'solid-js';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
 import { render } from '#src/testing/render';
@@ -52,6 +53,7 @@ describe('<TimezonePicker />', () => {
     input.dispatchEvent(
       new KeyboardEvent('keydown', { bubbles: true, key: 'Escape' }),
     );
+    flush();
 
     expect(hasListbox()).toBe(false);
     expect(document.activeElement).toBe(trigger);
@@ -69,6 +71,7 @@ describe('<TimezonePicker />', () => {
     outside.focus();
 
     outside.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }));
+    flush();
 
     expect(hasListbox()).toBe(false);
     expect(document.activeElement).toBe(outside);
@@ -86,6 +89,7 @@ describe('<TimezonePicker />', () => {
     input.dispatchEvent(
       new KeyboardEvent('keydown', { bubbles: true, key: 'Tab' }),
     );
+    flush();
 
     expect(hasListbox()).toBe(false);
     screen.unmount();
@@ -101,6 +105,7 @@ describe('<TimezonePicker />', () => {
     input.dispatchEvent(
       new KeyboardEvent('keydown', { bubbles: true, key: 'ArrowDown' }),
     );
+    flush();
     expect(input.getAttribute('aria-activedescendant')).toBe(
       'tz-listbox-option-4',
     );
@@ -109,6 +114,7 @@ describe('<TimezonePicker />', () => {
       input.dispatchEvent(
         new KeyboardEvent('keydown', { bubbles: true, key: 'ArrowUp' }),
       );
+      flush();
     }
     expect(input.getAttribute('aria-activedescendant')).toBe(
       'tz-listbox-option-0',
@@ -117,6 +123,7 @@ describe('<TimezonePicker />', () => {
     input.dispatchEvent(
       new KeyboardEvent('keydown', { bubbles: true, key: 'ArrowUp' }),
     );
+    flush();
     expect(input.getAttribute('aria-activedescendant')).toBe(
       'tz-listbox-option-0',
     );
@@ -133,6 +140,7 @@ describe('<TimezonePicker />', () => {
     input.dispatchEvent(
       new KeyboardEvent('keydown', { bubbles: true, key: 'Home' }),
     );
+    flush();
     expect(input.getAttribute('aria-activedescendant')).toBe(
       'tz-home-end-listbox-option-0',
     );
@@ -140,6 +148,7 @@ describe('<TimezonePicker />', () => {
     input.dispatchEvent(
       new KeyboardEvent('keydown', { bubbles: true, key: 'End' }),
     );
+    flush();
     expect(input.getAttribute('aria-activedescendant')).toBe(
       'tz-home-end-listbox-option-4',
     );
@@ -156,6 +165,7 @@ describe('<TimezonePicker />', () => {
     input.dispatchEvent(
       new KeyboardEvent('keydown', { bubbles: true, key: 'Enter' }),
     );
+    flush();
 
     expect(onchange).toHaveBeenCalledWith('UTC');
     expect(hasListbox()).toBe(false);
@@ -176,6 +186,7 @@ describe('<TimezonePicker />', () => {
         key: 'Enter',
       }),
     );
+    flush();
 
     expect(onchange).not.toHaveBeenCalled();
     expect(hasListbox()).toBe(true);
@@ -203,6 +214,7 @@ describe('<TimezonePicker />', () => {
     if (input instanceof HTMLInputElement) input.value = 'tok';
 
     input.dispatchEvent(new Event('input', { bubbles: true }));
+    flush();
 
     expect(hasText('Tokyo')).toBe(true);
     expect(hasText('Berlin')).toBe(false);
@@ -219,6 +231,7 @@ describe('<TimezonePicker />', () => {
     if (input instanceof HTMLInputElement) input.value = 'zzzzz';
 
     input.dispatchEvent(new Event('input', { bubbles: true }));
+    flush();
 
     expect(hasText('No matching timezones')).toBe(true);
     screen.unmount();
@@ -275,6 +288,7 @@ describe('<TimezonePicker /> additional branches', () => {
     trigger.dispatchEvent(
       new KeyboardEvent('keydown', { bubbles: true, key: 'ArrowDown' }),
     );
+    flush();
 
     expect(document.querySelector('[role="listbox"]')).not.toBeNull();
     screen.unmount();
@@ -288,6 +302,7 @@ describe('<TimezonePicker /> additional branches', () => {
     trigger.dispatchEvent(
       new KeyboardEvent('keydown', { bubbles: true, key: 'ArrowUp' }),
     );
+    flush();
 
     expect(document.querySelector('[role="listbox"]')).not.toBeNull();
     screen.unmount();
@@ -314,11 +329,13 @@ describe('<TimezonePicker /> additional branches', () => {
     if (input instanceof HTMLInputElement) input.value = 'zzzzz';
 
     input.dispatchEvent(new Event('input', { bubbles: true }));
+    flush();
 
     const before = input.getAttribute('aria-activedescendant');
     input.dispatchEvent(
       new KeyboardEvent('keydown', { bubbles: true, key: 'ArrowDown' }),
     );
+    flush();
 
     expect(input.getAttribute('aria-activedescendant')).toBe(before);
     screen.unmount();
@@ -334,10 +351,12 @@ describe('<TimezonePicker /> additional branches', () => {
     if (input instanceof HTMLInputElement) input.value = 'zzzzz';
 
     input.dispatchEvent(new Event('input', { bubbles: true }));
+    flush();
 
     input.dispatchEvent(
       new KeyboardEvent('keydown', { bubbles: true, key: 'Enter' }),
     );
+    flush();
 
     expect(onchange).not.toHaveBeenCalled();
     screen.unmount();
@@ -352,6 +371,7 @@ describe('<TimezonePicker /> additional branches', () => {
     // A resize that leaves the viewport width unchanged, such as the mobile
     // keyboard opening, keeps the popup open.
     window.dispatchEvent(new Event('resize'));
+    flush();
     expect(document.querySelector('[role="listbox"]')).not.toBeNull();
 
     // A resize that changes the viewport width closes the popup.
@@ -362,6 +382,7 @@ describe('<TimezonePicker /> additional branches', () => {
       writable: true,
     });
     window.dispatchEvent(new Event('resize'));
+    flush();
     expect(document.querySelector('[role="listbox"]')).toBeNull();
 
     Object.defineProperty(window, 'innerWidth', {
@@ -380,6 +401,7 @@ describe('<TimezonePicker /> additional branches', () => {
     trigger.dispatchEvent(
       new KeyboardEvent('keydown', { bubbles: true, key: 'Tab' }),
     );
+    flush();
 
     expect(document.querySelector('[role="listbox"]')).toBeNull();
     screen.unmount();
@@ -393,6 +415,7 @@ describe('<TimezonePicker /> additional branches', () => {
     document.body.appendChild(outside);
 
     outside.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }));
+    flush();
 
     expect(document.querySelector('[role="listbox"]')).toBeNull();
 
@@ -413,6 +436,7 @@ describe('<TimezonePicker /> document pointerdown', () => {
     document.body.appendChild(outside);
 
     outside.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }));
+    flush();
 
     expect(document.querySelector('[role="listbox"]')).toBeNull();
 
@@ -433,6 +457,7 @@ describe('<TimezonePicker /> closed-state trigger', () => {
     if (input instanceof HTMLInputElement) input.value = 'tok';
 
     input.dispatchEvent(new Event('input', { bubbles: true }));
+    flush();
 
     const trigger = screen.getByRole('button').element();
     const activeBefore = input.getAttribute('aria-activedescendant');
@@ -441,6 +466,7 @@ describe('<TimezonePicker /> closed-state trigger', () => {
     trigger.dispatchEvent(
       new KeyboardEvent('keydown', { bubbles: true, key: 'ArrowDown' }),
     );
+    flush();
 
     expect(document.querySelector('[role="listbox"]')).not.toBeNull();
     expect(input instanceof HTMLInputElement ? input.value : '').toBe('tok');
@@ -476,6 +502,7 @@ describe('<TimezonePicker /> scroll reset', () => {
     if (input instanceof HTMLInputElement) input.value = 'europe';
 
     input.dispatchEvent(new Event('input', { bubbles: true }));
+    flush();
 
     expect(listbox.scrollTop).toBe(0);
     screen.unmount();
@@ -518,6 +545,7 @@ describe('<TimezonePicker /> scroll reset', () => {
       // Use click() directly so the test doesn't scroll the trigger into view.
       const button = screen.getByRole('button').element();
       if (button instanceof HTMLButtonElement) button.click();
+      flush();
 
       const listbox = screen.getByRole('listbox').element();
       const input = screen.getByRole('combobox').element();
@@ -532,6 +560,7 @@ describe('<TimezonePicker /> scroll reset', () => {
         input.dispatchEvent(
           new KeyboardEvent('keydown', { bubbles: true, key: 'ArrowDown' }),
         );
+        flush();
       }
 
       expect(listbox.scrollTop).toBeGreaterThan(0);

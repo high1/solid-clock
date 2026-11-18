@@ -1,7 +1,7 @@
 /** Local render helper for the browser-mode component tests. */
-import type { JSX } from 'solid-js';
+import type { JSX } from '@solidjs/web';
 
-import { render as solidRender } from 'solid-js/web';
+import { render as solidRender } from '@solidjs/web';
 import { utils } from 'vitest/browser';
 
 const containers = new Map<HTMLElement, () => void>();

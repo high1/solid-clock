@@ -1,4 +1,4 @@
-import { createSignal, onCleanup, onMount } from 'solid-js';
+import { createSignal, onSettled } from 'solid-js';
 
 import { ClockHands } from '#src/ClockHands';
 import { clockFaceId } from '#src/common';
@@ -11,9 +11,7 @@ import { getTestId } from '#src/utilities';
 export const ClockFace = () => {
   const owner = Symbol();
 
-  onMount(() => {
-    onCleanup(startClock(owner));
-  });
+  onSettled(() => startClock(owner));
 
   const [currentZone, setCurrentZone] = createSignal(getTimeZone());
   const zones = getTimeZones();

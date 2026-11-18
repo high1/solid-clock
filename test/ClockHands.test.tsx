@@ -1,4 +1,4 @@
-import { createSignal } from 'solid-js';
+import { createSignal, flush } from 'solid-js';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 
 import { ANIMATION_DURATION } from '#src/clock-animation';
@@ -12,6 +12,7 @@ import { getTimeZone, setNow } from '#src/time';
 const setLocalTime = (hours = 0, minutes = 0, seconds = 0) => {
   vi.setSystemTime(new Date(2020, 0, 1, hours, minutes, seconds, 0));
   setNow(Date.now());
+  flush();
 };
 
 beforeEach(() => {
@@ -40,6 +41,7 @@ describe('<ClockHands /> in a fixed zone', () => {
     [11, 'rotate(330)'],
   ])('renders hour %i in UTC as %s', (hours, transform) => {
     setNow(Date.UTC(2020, 0, 1, hours, 0, 0, 0));
+    flush();
     const screen = render(() => <ClockHands zone="UTC" />);
     expect(screen.getByTestId(clockHourId)).toHaveAttribute(
       'transform',
@@ -50,6 +52,7 @@ describe('<ClockHands /> in a fixed zone', () => {
 
   test('renders second 15 in UTC', () => {
     setNow(Date.UTC(2020, 0, 1, 0, 0, 15, 0));
+    flush();
     const screen = render(() => <ClockHands zone="UTC" />);
     expect(screen.getByTestId(clockSecondId)).toHaveAttribute(
       'transform',
@@ -62,6 +65,7 @@ describe('<ClockHands /> in a fixed zone', () => {
     'renders minute %i in UTC as %s',
     (minutes, transform) => {
       setNow(Date.UTC(2020, 0, 1, 0, minutes, 0, 0));
+      flush();
       const screen = render(() => <ClockHands zone="UTC" />);
       expect(screen.getByTestId(clockMinuteId)).toHaveAttribute(
         'transform',
@@ -75,6 +79,7 @@ describe('<ClockHands /> in a fixed zone', () => {
     'renders second %i in UTC as %s',
     (seconds, transform) => {
       setNow(Date.UTC(2020, 0, 1, 0, 0, seconds, 0));
+      flush();
       const screen = render(() => <ClockHands zone="UTC" />);
       expect(screen.getByTestId(clockSecondId)).toHaveAttribute(
         'transform',
@@ -123,6 +128,7 @@ describe('<ClockHands /> zone change animation', () => {
 
   test('animates the hour hand when the zone changes', () => {
     setNow(start);
+    flush();
     const [zone, setZone] = createSignal('UTC');
     const screen = render(() => <ClockHands zone={zone()} />);
 
@@ -133,9 +139,11 @@ describe('<ClockHands /> zone change animation', () => {
 
     // Europe/Berlin is UTC+1, so the hour hand moves from 0° to 30°.
     setZone('Europe/Berlin');
+    flush();
 
     // Mid-animation: the hand is between the old and the new position.
     setNow(start + mid);
+    flush();
     expect(screen.getByTestId(clockHourId)).not.toHaveAttribute(
       'transform',
       'rotate(0)',
@@ -147,6 +155,7 @@ describe('<ClockHands /> zone change animation', () => {
 
     // Animation complete.
     setNow(start + ANIMATION_DURATION);
+    flush();
     expect(screen.getByTestId(clockHourId)).toHaveAttribute(
       'transform',
       'rotate(30)',
@@ -156,6 +165,7 @@ describe('<ClockHands /> zone change animation', () => {
 
   test('animates the minute hand when the zone changes', () => {
     setNow(start);
+    flush();
     const [zone, setZone] = createSignal('UTC');
     const screen = render(() => <ClockHands zone={zone()} />);
 
@@ -166,8 +176,10 @@ describe('<ClockHands /> zone change animation', () => {
 
     // Asia/Kathmandu is UTC+5:45, so the minute hand moves from 0° to 270°.
     setZone('Asia/Kathmandu');
+    flush();
 
     setNow(start + mid);
+    flush();
     expect(screen.getByTestId(clockMinuteId)).not.toHaveAttribute(
       'transform',
       'rotate(0)',
@@ -178,6 +190,7 @@ describe('<ClockHands /> zone change animation', () => {
     );
 
     setNow(start + ANIMATION_DURATION);
+    flush();
     expect(angleOf(screen.getByTestId(clockMinuteId).element())).toBeCloseTo(
       270,
       0,
@@ -189,6 +202,7 @@ describe('<ClockHands /> zone change animation', () => {
     // France and Germany share the same DST rules (CET/CEST).
     // At 00:00 UTC both show 01:00 (CET, UTC+1 in January).
     setNow(start);
+    flush();
     const [zone, setZone] = createSignal('Europe/Paris');
     const screen = render(() => <ClockHands zone={zone()} />);
 
@@ -198,8 +212,10 @@ describe('<ClockHands /> zone change animation', () => {
     );
 
     setZone('Europe/Berlin');
+    flush();
 
     setNow(start + ANIMATION_DURATION);
+    flush();
     expect(screen.getByTestId(clockHourId)).toHaveAttribute(
       'transform',
       'rotate(30)',
@@ -210,7 +226,7 @@ describe('<ClockHands /> zone change animation', () => {
   test('animates forward across zones more than 12h apart', () => {
     // LA (UTC−8 in January) → Sydney (UTC+11): Sydney is ahead,
     // the hands should advance, not retreat.
-    setNow(Date.UTC(2020, 0, 1, 12, 0, 0, 0)); // 04:00 in LA, 23:00 in Sydney
+    setNow(Date.UTC(2020, 0, 1, 12, 0, 0, 0));
     const [zone, setZone] = createSignal('America/Los_Angeles');
     const screen = render(() => <ClockHands zone={zone()} />);
 
@@ -220,8 +236,10 @@ describe('<ClockHands /> zone change animation', () => {
     );
 
     setZone('Australia/Sydney');
+    flush();
 
-    setNow(Date.UTC(2020, 0, 1, 12, 0, 0, ANIMATION_DURATION));
+    setNow(Date.UTC(2020, 0, 1, 12, 0, 0, ANIMATION_DURATION)); // 04:00 in LA, 23:00 in Sydney
+    flush();
     expect(screen.getByTestId(clockHourId)).toHaveAttribute(
       'transform',
       'rotate(330)',
@@ -231,12 +249,15 @@ describe('<ClockHands /> zone change animation', () => {
 
   test('does not animate the minute hand between whole-hour offset zones', () => {
     setNow(Date.UTC(2020, 0, 1, 12, 0, 0, 0)); // Belgrade = 13:00, Khandyga = 21:00
+    flush();
     const [zone, setZone] = createSignal('Asia/Khandyga');
     const screen = render(() => <ClockHands zone={zone()} />);
 
     setZone('Europe/Belgrade');
+    flush();
 
     setNow(Date.UTC(2020, 0, 1, 12, 0, 0, 600));
+    flush();
     expect(angleOf(screen.getByTestId(clockMinuteId).element())).toBeCloseTo(
       0,
       0,
@@ -246,14 +267,17 @@ describe('<ClockHands /> zone change animation', () => {
 
   test('redirects a minute-hand animation mid-flight', () => {
     setNow(start);
+    flush();
     const [zone, setZone] = createSignal('UTC');
     const screen = render(() => <ClockHands zone={zone()} />);
 
     // Start animating toward Asia/Kathmandu (UTC+5:45) — minute hand moves.
     setZone('Asia/Kathmandu');
+    flush();
 
     // Mid-flight: minute hand is partway to 270°.
     setNow(start + mid);
+    flush();
     expect(screen.getByTestId(clockMinuteId)).not.toHaveAttribute(
       'transform',
       'rotate(0)',
@@ -261,8 +285,10 @@ describe('<ClockHands /> zone change animation', () => {
 
     // Redirect to Asia/Tokyo (UTC+9, on the hour) — minute hand moves back.
     setZone('Asia/Tokyo');
+    flush();
 
     setNow(start + mid + ANIMATION_DURATION);
+    flush();
     expect(angleOf(screen.getByTestId(clockMinuteId).element())).toBeCloseTo(
       0,
       0,
@@ -272,14 +298,17 @@ describe('<ClockHands /> zone change animation', () => {
 
   test('redirects the animation when the zone changes mid-animation', () => {
     setNow(start);
+    flush();
     const [zone, setZone] = createSignal('UTC');
     const screen = render(() => <ClockHands zone={zone()} />);
 
     // Start animating toward Europe/Berlin (+1 hour).
     setZone('Europe/Berlin');
+    flush();
 
     // Berlin is on the hour — the minute hand does not move.
     setNow(start + mid);
+    flush();
     expect(screen.getByTestId(clockMinuteId)).toHaveAttribute(
       'transform',
       'rotate(0)',
@@ -287,8 +316,10 @@ describe('<ClockHands /> zone change animation', () => {
 
     // Redirect to Asia/Kathmandu (UTC+5:45) — minute hand moves.
     setZone('Asia/Kathmandu');
+    flush();
 
     setNow(start + mid + ANIMATION_DURATION);
+    flush();
     expect(angleOf(screen.getByTestId(clockMinuteId).element())).toBeCloseTo(
       270,
       0,
