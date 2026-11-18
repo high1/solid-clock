@@ -1,4 +1,4 @@
-# SVG clock in <a href="https://solidjs.com"><img src="https://www.solidjs.com/img/logo/without-wordmark/logo.svg" alt="Solid" height="60"></a>
+# SVG clock in <a href="https://solidjs.com"><picture><source srcset="https://www.solidjs.com/img/logos/lockup/solid-lockup-dark.svg" media="(prefers-color-scheme: dark)"><img src="https://www.solidjs.com/img/logos/lockup/solid-lockup-light.svg" alt="Solid" height="60"></picture></a>
 
 ![Build and Deploy](https://github.com/high1/solid-clock/actions/workflows/main.yml/badge.svg?event=push)  
 [![Netlify Status](https://api.netlify.com/api/v1/badges/df10c2bc-17c5-4a77-b052-4ceed459cd80/deploy-status)](https://app.netlify.com/sites/solid-clock/deploys)

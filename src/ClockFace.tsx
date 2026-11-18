@@ -25,7 +25,7 @@ export const ClockFace = () => {
     >
       <div class="flex items-center justify-between gap-2">
         <TimezonePicker
-          class="grow max-inline-80 min-inline-0"
+          class="grow max-inline-100 min-inline-0"
           id="clock-timezone"
           onchange={setCurrentZone}
           value={currentZone()}
@@ -40,7 +40,14 @@ export const ClockFace = () => {
         viewBox="0 0 200 200"
       >
         <title id="clock-title">Clock</title>
-        <image class="translate-5/12 block-1/6 inline-1/6" href="logo.svg" />
+        <image
+          class="translate-5/12 block-1/6 inline-1/6 dark:hidden"
+          href="logo-light.svg"
+        />
+        <image
+          class="hidden translate-5/12 block-1/6 inline-1/6 dark:inline"
+          href="logo-dark.svg"
+        />
         <g class="translate-1/2">
           <circle
             class="fill-none stroke-zinc-600 dark:stroke-zinc-200"
