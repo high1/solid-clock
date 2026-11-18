@@ -62,7 +62,7 @@ export const ThemeToggle = () => {
   return (
     <button
       aria-label={title()}
-      class="group absolute inset-e-2 inset-bs-2 z-10 flex cursor-pointer items-center justify-center rounded-full border border-zinc-200 text-zinc-600 block-10 inline-10 hover:text-zinc-900 focus:outline-none dark:border-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-100"
+      class="group relative flex cursor-pointer items-center justify-center rounded-full border border-zinc-200 text-zinc-600 block-10 inline-10 hover:text-zinc-900 focus:outline-none dark:border-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-100"
       onClick={toggleTheme}
       title={title()}
     >
