@@ -528,8 +528,8 @@ describe('<TimezonePicker /> scroll reset', () => {
     // The test page doesn't load the app's CSS, so give the options a fixed
     // block layout that makes the list tall enough to scroll.
     const style = document.createElement('style');
-    style.textContent =
-      '[role="option"] { display: block; height: 30px; width: 100%; }';
+    style.textContent
+      = '[role="option"] { display: block; height: 30px; width: 100%; }';
     document.head.appendChild(style);
 
     const html = document.documentElement;
@@ -565,7 +565,8 @@ describe('<TimezonePicker /> scroll reset', () => {
 
       expect(listbox.scrollTop).toBeGreaterThan(0);
       expect(window.scrollY).toBe(initialScrollY);
-    } finally {
+    }
+    finally {
       html.style.overflowAnchor = originalOverflowAnchor;
       style.remove();
       spacer.remove();

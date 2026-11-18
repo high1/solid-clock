@@ -8,7 +8,7 @@ export interface TimezoneGroup {
 
 export function filterTimeZones(zones: readonly string[]): string[] {
   return [
-    ...new Set(['UTC', ...zones.filter((zone) => !zone.startsWith('Etc/GMT'))]),
+    ...new Set(['UTC', ...zones.filter(zone => !zone.startsWith('Etc/GMT'))]),
   ];
 }
 
@@ -26,9 +26,9 @@ export function getTimezoneGroups(
   // interpretation. Otherwise every token is matched against the full zone id,
   // which is what lets "new york" match America/New_York.
   const regionPrefix = tokens[0] ?? '';
-  const isRegionPrefix =
-    regionPrefix.length >= 2 &&
-    zones.some((zone) => normalize(zoneRegion(zone)).startsWith(regionPrefix));
+  const isRegionPrefix
+    = regionPrefix.length >= 2
+      && zones.some(zone => normalize(zoneRegion(zone)).startsWith(regionPrefix));
   const regionFilter = isRegionPrefix ? regionPrefix : null;
   const terms = regionFilter ? tokens.slice(1) : tokens;
 
@@ -41,7 +41,7 @@ export function getTimezoneGroups(
     // Terms are matched against the full normalized id (region + label), so a
     // multi-word query can match anywhere in "region/label".
     const haystack = normalize(zone);
-    return terms.every((term) => haystack.includes(term));
+    return terms.every(term => haystack.includes(term));
   });
 
   return buildGroups(matches);
@@ -74,7 +74,7 @@ function buildGroups(zones: readonly string[]): TimezoneGroup[] {
   let index = 0;
 
   return Array.from(byRegion, ([region, items]) => ({
-    items: items.map((zone) => ({ index: index++, zone })),
+    items: items.map(zone => ({ index: index++, zone })),
     region,
   }));
 }

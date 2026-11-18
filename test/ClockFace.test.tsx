@@ -29,10 +29,10 @@ describe('<ClockFace /> zone selection', () => {
     const screen = render(() => <ClockFace />);
 
     const initialZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    const selectedZone =
-      initialZone === 'Pacific/Auckland' ? 'UTC' : 'Pacific/Auckland';
-    const expectedLabel =
-      selectedZone === 'Pacific/Auckland' ? 'Auckland' : 'UTC';
+    const selectedZone
+      = initialZone === 'Pacific/Auckland' ? 'UTC' : 'Pacific/Auckland';
+    const expectedLabel
+      = selectedZone === 'Pacific/Auckland' ? 'Auckland' : 'UTC';
 
     const trigger = document.getElementById('clock-timezone');
     trigger?.click();

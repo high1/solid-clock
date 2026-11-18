@@ -223,14 +223,14 @@ describe('timeZones', () => {
   });
 
   test('contains no Etc/GMT entries', () => {
-    expect(getTimeZones().some((zone) => zone.startsWith('Etc/GMT'))).toBe(
+    expect(getTimeZones().some(zone => zone.startsWith('Etc/GMT'))).toBe(
       false,
     );
   });
 
   test('retains the source order of the geographical entries', () => {
     const source = Intl.supportedValuesOf('timeZone').filter(
-      (zone) => !zone.startsWith('Etc/GMT'),
+      zone => !zone.startsWith('Etc/GMT'),
     );
     expect(getTimeZones().slice(1)).toEqual(source);
   });

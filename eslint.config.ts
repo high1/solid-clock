@@ -5,6 +5,7 @@ import eslint from '@eslint/js';
 import json from '@eslint/json';
 import markdown from '@eslint/markdown';
 import html from '@html-eslint/eslint-plugin';
+import stylistic from '@stylistic/eslint-plugin';
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import tailwindcss from 'eslint-plugin-better-tailwindcss';
 import { importX } from 'eslint-plugin-import-x';
@@ -45,9 +46,9 @@ export default defineConfig(
       solidTsConfig,
       importX.flatConfigs.recommended,
       importX.flatConfigs.typescript,
+      stylistic.configs.customize({ semi: true }),
       tailwindcss.configs.correctness,
       perfectionist.configs['recommended-natural'],
-      prettierRecommended,
     ],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
@@ -72,7 +73,7 @@ export default defineConfig(
       'better-tailwindcss/enforce-shorthand-classes': 'error',
       'better-tailwindcss/no-deprecated-classes': 'error',
       'better-tailwindcss/no-duplicate-classes': 'error',
-      curly: ['error', 'multi-or-nest'],
+      'curly': ['error', 'multi-or-nest'],
     },
     settings: {
       'import-x/resolver-next': [createTypeScriptImportResolver()],

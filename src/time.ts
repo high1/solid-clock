@@ -9,10 +9,10 @@ import {
 import { filterTimeZones } from '#src/timezone-options';
 
 export const getSecondsSinceMidnight = (date: Date = new Date()) =>
-  date.getHours() * 3600 +
-  date.getMinutes() * 60 +
-  date.getSeconds() +
-  date.getMilliseconds() / 1000;
+  date.getHours() * 3600
+  + date.getMinutes() * 60
+  + date.getSeconds()
+  + date.getMilliseconds() / 1000;
 
 // The shared instant. Every clock reads from this single value, so one loop
 // drives them all instead of one loop per clock.
@@ -111,11 +111,11 @@ export const zonedParts = (timestamp: number, zone: string) => {
     }
   }
 
-  const wallSeconds =
-    hour * 3600 +
-    minute * 60 +
-    second +
-    (((timestamp % 1000) + 1000) % 1000) / 1000;
+  const wallSeconds
+    = hour * 3600
+      + minute * 60
+      + second
+      + (((timestamp % 1000) + 1000) % 1000) / 1000;
 
   const asUTC = Date.UTC(
     year,

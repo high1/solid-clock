@@ -49,8 +49,8 @@ describe('<ThemeToggle />', () => {
   test('toggles the theme class on the document element', async () => {
     const screen = render(() => <ThemeToggle />);
     const initialHasDark = document.documentElement.classList.contains('dark');
-    const initialHasLight =
-      document.documentElement.classList.contains('light');
+    const initialHasLight
+      = document.documentElement.classList.contains('light');
 
     await screen.getByRole('button').click();
 
@@ -71,7 +71,8 @@ describe('<ThemeToggle />', () => {
       fire(true);
 
       expect(document.documentElement.classList.contains('dark')).toBe(true);
-    } finally {
+    }
+    finally {
       restore();
     }
   });
@@ -86,7 +87,8 @@ describe('<ThemeToggle />', () => {
       fire(true);
 
       expect(document.documentElement.classList.contains('dark')).toBe(false);
-    } finally {
+    }
+    finally {
       restore();
     }
   });
@@ -162,7 +164,8 @@ describe('<ThemeToggle />', () => {
       await screen.getByRole('button').click();
 
       expect(localStorage.getItem('theme')).toBe('light');
-    } finally {
+    }
+    finally {
       restore();
     }
   });

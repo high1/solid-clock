@@ -49,7 +49,7 @@ export const TimezonePicker = (props: Props) => {
   const groups = createMemo(() => getTimezoneGroups(props.zones, query()));
 
   const options = createMemo(() =>
-    groups().flatMap((group) => group.items.map((item) => item.zone)),
+    groups().flatMap(group => group.items.map(item => item.zone)),
   );
 
   const activeOptionId = createMemo(() =>
@@ -71,17 +71,17 @@ export const TimezonePicker = (props: Props) => {
 
   function getActiveOption() {
     return (
-      listBox.querySelector<HTMLElement>(`[data-index="${activeIndex()}"]`) ??
-      undefined
+      listBox.querySelector<HTMLElement>(`[data-index="${activeIndex()}"]`)
+      ?? undefined
     );
   }
 
   function handleDocumentPointerDown(event: PointerEvent) {
     if (
-      open() &&
-      event.target instanceof Node &&
-      root &&
-      !root.contains(event.target)
+      open()
+      && event.target instanceof Node
+      && root
+      && !root.contains(event.target)
     )
       closePicker();
   }
@@ -179,8 +179,8 @@ export const TimezonePicker = (props: Props) => {
 
     // Popup height plus its gap to the trigger. The margin sits on the top or
     // the bottom depending on the previous placement, so add both.
-    const needed =
-      node.offsetHeight + parseFloat(marginTop) + parseFloat(marginBottom);
+    const needed
+      = node.offsetHeight + parseFloat(marginTop) + parseFloat(marginBottom);
 
     setPlacement(
       roomBelow < needed && roomAbove > roomBelow ? 'above' : 'below',
@@ -197,8 +197,8 @@ export const TimezonePicker = (props: Props) => {
     if (!option) return;
 
     // Option edges relative to the visible area of the list.
-    const top =
-      option.getBoundingClientRect().top - listBox.getBoundingClientRect().top;
+    const top
+      = option.getBoundingClientRect().top - listBox.getBoundingClientRect().top;
     const bottom = top + option.offsetHeight - listBox.clientHeight;
 
     // Only the list scrolls. Center on open, otherwise move as little as needed.
@@ -275,7 +275,7 @@ export const TimezonePicker = (props: Props) => {
             placeholder="Search timezones…"
             role="combobox"
             type="text"
-            value={/*v8 ignore start*/ query() /*v8 ignore stop*/}
+            value={/* v8 ignore start */ query() /* v8 ignore stop */}
           />
 
           <div
@@ -288,14 +288,14 @@ export const TimezonePicker = (props: Props) => {
             role="listbox"
           >
             <For each={groups()}>
-              {(group) => (
+              {group => (
                 <div aria-label={group.region} role="group">
                   <div class="px-3 py-1 text-xs font-semibold text-zinc-500 dark:text-zinc-400">
                     {group.region}
                   </div>
 
                   <For each={group.items}>
-                    {(item) => (
+                    {item => (
                       <button
                         aria-selected={
                           item.zone === props.value ? 'true' : 'false'

@@ -39,11 +39,11 @@ export default defineConfig(({ mode }) => ({
         };
       },
     },
-    !(mode === 'test' || process.env['CI']) &&
-      checker({
-        eslint: { lintCommand: 'eslint . --max-warnings 0' },
-        typescript: true,
-      }),
+    !(mode === 'test' || process.env['CI'])
+    && checker({
+      eslint: { lintCommand: 'eslint . --max-warnings 0' },
+      typescript: true,
+    }),
   ],
   resolve: {
     tsconfigPaths: true,

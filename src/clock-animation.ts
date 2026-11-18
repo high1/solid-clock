@@ -6,8 +6,8 @@ import { type createTime, now, zonedParts } from '#src/time';
 export const ANIMATION_DURATION = 500;
 
 const prefersReducedMotion = () =>
-  typeof window !== 'undefined' &&
-  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  typeof window !== 'undefined'
+  && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /**
  * Animates hour/minute fractions toward their targets when the zone changes.
@@ -29,9 +29,9 @@ export function createClockAnimation(
     () => time.zone(), // tracked — re-runs when the zone changes
     (zone) => {
       if (
-        prefersReducedMotion() ||
-        previousZone === undefined ||
-        previousZone === zone
+        prefersReducedMotion()
+        || previousZone === undefined
+        || previousZone === zone
       ) {
         previousZone = zone;
         return;
