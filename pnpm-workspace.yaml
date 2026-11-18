@@ -4,7 +4,7 @@ auditConfig:
   ignoreGhsas:
     - GHSA-fc5q-39xc-vjpf
 minimumReleaseAgeExclude:
-  - '@solidjs/vite-plugin@3.0.1'
+  - "@solidjs/vite-plugin@3.0.1"
   - eslint-plugin-solid@0.20.0
 overrides:
   katex@>=0.11.0 <0.18.2: ^0.18.2

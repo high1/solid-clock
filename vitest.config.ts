@@ -28,5 +28,4 @@ export default defineConfig(env =>
         environment: 'node',
       },
     }),
-  ),
-);
+  ));

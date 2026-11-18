@@ -68,12 +68,12 @@ export const ThemeToggle = () => {
     >
       <div class="relative block-5 inline-5 group-hover:rotate-10 motion-safe:transition-transform">
         <div
-          class={`absolute inset-0 block-5 inline-5 [&&]:motion-safe:transition-all ${iconClass(!isDark(), 'rotate-90')}`}
+          class={`absolute inset-0 block-5 inline-5 motion-safe:[&&]:transition-all ${iconClass(!isDark(), 'rotate-90')}`}
         >
           <Sun />
         </div>
         <div
-          class={`absolute inset-0 block-5 inline-5 [&&]:motion-safe:transition-all ${iconClass(isDark(), '-rotate-90')}`}
+          class={`absolute inset-0 block-5 inline-5 motion-safe:[&&]:transition-all ${iconClass(isDark(), '-rotate-90')}`}
         >
           <Moon />
         </div>

@@ -60,15 +60,17 @@ export default defineConfig(
       },
     },
     rules: {
+      // Class order is enforced here (v6 styles), not by prettier.
       '@typescript-eslint/no-import-type-side-effects': 'error',
       '@typescript-eslint/restrict-template-expressions': [
         'error',
         { allowNumber: true },
       ],
-      // Better-tailwindcss rules that do not overlap with prettier's class sorting
       'better-tailwindcss/enforce-canonical-classes': 'error',
+      'better-tailwindcss/enforce-consistent-class-order': 'error',
       'better-tailwindcss/enforce-consistent-important-position': 'error',
       'better-tailwindcss/enforce-consistent-variable-syntax': 'error',
+      'better-tailwindcss/enforce-consistent-variant-order': 'error',
       'better-tailwindcss/enforce-logical-properties': 'error',
       'better-tailwindcss/enforce-shorthand-classes': 'error',
       'better-tailwindcss/no-deprecated-classes': 'error',
@@ -92,11 +94,7 @@ export default defineConfig(
     rules: { 'json/sort-keys': ['error', 'asc'] },
   },
   {
-    extends: [
-      yml.configs.recommended,
-      prettierRecommended,
-      yml.configs.prettier,
-    ],
+    extends: [yml.configs.standard],
     files: ['**/*.{yml,yaml}'],
   },
   {

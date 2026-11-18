@@ -49,14 +49,12 @@ export const TimezonePicker = (props: Props) => {
   const groups = createMemo(() => getTimezoneGroups(props.zones, query()));
 
   const options = createMemo(() =>
-    groups().flatMap(group => group.items.map(item => item.zone)),
-  );
+    groups().flatMap(group => group.items.map(item => item.zone)));
 
   const activeOptionId = createMemo(() =>
     options()[activeIndex()] === undefined
       ? undefined
-      : optionId(activeIndex()),
-  );
+      : optionId(activeIndex()));
 
   function choose(zone: string) {
     props.onchange(zone);
