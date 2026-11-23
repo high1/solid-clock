@@ -1,4 +1,4 @@
-import { createMemo, createSignal } from 'solid-js';
+import { createMemo, createRoot, createSignal } from 'solid-js';
 
 import {
   hourFraction,
@@ -9,23 +9,31 @@ import {
 import { filterTimeZones } from '#src/timezone-options';
 
 export const getSecondsSinceMidnight = (date: Date = new Date()) =>
-  date.getHours() * 3600
-  + date.getMinutes() * 60
-  + date.getSeconds()
-  + date.getMilliseconds() / 1000;
+  toSeconds(
+    date.getHours(),
+    date.getMinutes(),
+    date.getSeconds(),
+    date.getMilliseconds(),
+  );
 
-// The shared instant. Every clock reads from this single value, so one loop
-// drives them all instead of one loop per clock.
-const [now, setNow] = createSignal(Date.now());
+export const toSeconds = (
+  hours: number,
+  minutes: number,
+  seconds: number,
+  milliseconds: number,
+) => hours * 3600 + minutes * 60 + seconds + milliseconds / 1000;
+
+// Intentional client-only shared clock: one rAF loop drives every time instance.
+const { now, setNow } = createRoot(() => {
+  const [now, setNow] = createSignal(Date.now());
+  return { now, setNow };
+});
 
 export { now, setNow };
 
 const subscribers = new Map<symbol, () => void>();
-// Single shared rAF loop; runs while any subscriber remains.
 let frame = 0;
 
-// Each call adds a subscriber; idempotent per owner (same owner → same cleanup).
-// Pair each startClock() with one cleanup call.
 export const startClock = (owner: symbol) => {
   const existing = subscribers.get(owner);
   if (existing) return existing;
@@ -37,11 +45,10 @@ export const startClock = (owner: symbol) => {
   };
 
   if (subscribers.size === 0) {
-    const loop = () => {
+    frame = requestAnimationFrame(function loop() {
       setNow(Date.now());
       frame = requestAnimationFrame(loop);
-    };
-    frame = requestAnimationFrame(loop);
+    });
   }
 
   subscribers.set(owner, cleanup);
@@ -63,13 +70,14 @@ const formatterFor = (zone: string) => {
   if (existing) return existing;
 
   const formatter = new Intl.DateTimeFormat(undefined, {
-    day: '2-digit',
-    hour: '2-digit',
+    calendar: 'gregory',
+    day: 'numeric',
+    hour: 'numeric',
     hourCycle: 'h23',
-    minute: '2-digit',
-    month: '2-digit',
+    minute: 'numeric',
+    month: 'numeric',
     numberingSystem: 'latn',
-    second: '2-digit',
+    second: 'numeric',
     timeZone: zone,
     year: 'numeric',
   });
@@ -77,74 +85,33 @@ const formatterFor = (zone: string) => {
   return formatter;
 };
 
-/** Wall-clock parts of `zone` at `timestamp`: local seconds and UTC offset. */
 export const zonedParts = (timestamp: number, zone: string) => {
-  const parts = formatterFor(zone).formatToParts(timestamp);
+  const {
+    day = 1,
+    hour = 0,
+    minute = 0,
+    month = 1,
+    second = 0,
+    year = 0,
+  } = formatterFor(zone).formatToParts(timestamp)
+    .reduce<Partial<Record<Intl.DateTimeFormatPartTypes, number>>>(
+      (numbers, { type, value }) => {
+        numbers[type] = Number(value);
+        return numbers;
+      },
+      {},
+    );
 
-  let hour = 0;
-  let minute = 0;
-  let second = 0;
-  let year = 0;
-  let month = 1;
-  let day = 1;
-
-  for (const part of parts) {
-    switch (part.type) {
-      case 'day':
-        day = Number(part.value);
-        break;
-      case 'hour':
-        hour = Number(part.value);
-        break;
-      case 'minute':
-        minute = Number(part.value);
-        break;
-      case 'month':
-        month = Number(part.value);
-        break;
-      case 'second':
-        second = Number(part.value);
-        break;
-      case 'year':
-        year = Number(part.value);
-        break;
-    }
-  }
-
-  const wallSeconds
-    = hour * 3600
-      + minute * 60
-      + second
-      + (((timestamp % 1000) + 1000) % 1000) / 1000;
-
-  const asUTC = Date.UTC(
-    year,
-    month - 1,
-    day,
-    hour,
-    minute,
-    second,
-    ((timestamp % 1000) + 1000) % 1000,
-  );
+  const ms = ((timestamp % 1000) + 1000) % 1000;
 
   return {
-    offset: Math.floor((asUTC - timestamp) / 1000),
-    wallSeconds,
+    offset: Math.floor((Date.UTC(year, month - 1, day, hour, minute, second, ms) - timestamp) / 1000),
+    wallSeconds: toSeconds(hour, minute, second, ms),
   };
 };
 
-/** UTC offset of `zone` at `timestamp`, in seconds. */
-export const getTimezoneOffset = (timestamp: number, zone: string) =>
-  zonedParts(timestamp, zone).offset;
-
-// Wall-clock seconds since local midnight in `zone`.
-export const getSecondsSinceMidnightIn = (timestamp: number, zone: string) =>
-  zonedParts(timestamp, zone).wallSeconds;
-
-// One clock in `zone`: the shared instant as hand fractions.
 export const createTime = (zone: () => string) => {
-  const clock = createMemo(() => getSecondsSinceMidnightIn(now(), zone()));
-
+  const clock = createMemo(() => zonedParts(now(), zone()).wallSeconds);
   return {
     get hour() {
       return hourFraction(clock());
@@ -158,6 +125,8 @@ export const createTime = (zone: () => string) => {
     get subsecond() {
       return subsecondFraction(clock());
     },
-    zone,
+    get zone() {
+      return zone();
+    },
   };
 };

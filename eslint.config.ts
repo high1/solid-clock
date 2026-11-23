@@ -6,17 +6,18 @@ import json from '@eslint/json';
 import markdown from '@eslint/markdown';
 import html from '@html-eslint/eslint-plugin';
 import stylistic from '@stylistic/eslint-plugin';
-import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import tailwindcss from 'eslint-plugin-better-tailwindcss';
 import { importX } from 'eslint-plugin-import-x';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import perfectionist from 'eslint-plugin-perfectionist';
 import prettierRecommended from 'eslint-plugin-prettier/recommended';
-import solidTsConfig from 'eslint-plugin-solid/configs/typescript';
+import solidTsConfig from 'eslint-plugin-solid';
 import yml from 'eslint-plugin-yml';
 import { defineConfig, globalIgnores, includeIgnoreFile } from 'eslint/config';
 import { fileURLToPath } from 'node:url';
 import tseslint from 'typescript-eslint';
+
+import requireSpaceAfterControlParen from '#/eslint-rule';
 
 export default defineConfig(
   includeIgnoreFile(fileURLToPath(new URL('.gitignore', import.meta.url))),
@@ -42,8 +43,9 @@ export default defineConfig(
       tseslint.configs.stylisticTypeChecked,
       e18e.configs.recommended,
       jsxA11y.flatConfigs.strict,
+      // TODO: drop this once eslint-plugin-solid types `meta` without `| undefined`.
       // @ts-expect-error Type 'undefined' is not assignable to type 'RulesMeta<string, unknown[], unknown>'.ts(2322)
-      solidTsConfig,
+      solidTsConfig.configs['v2-strict'],
       importX.flatConfigs.recommended,
       importX.flatConfigs.typescript,
       stylistic.configs.customize({ semi: true }),
@@ -57,6 +59,11 @@ export default defineConfig(
         ecmaFeatures: {
           jsx: true,
         },
+      },
+    },
+    plugins: {
+      local: {
+        rules: { 'space-after-control-paren': requireSpaceAfterControlParen },
       },
     },
     rules: {
@@ -76,9 +83,10 @@ export default defineConfig(
       'better-tailwindcss/no-deprecated-classes': 'error',
       'better-tailwindcss/no-duplicate-classes': 'error',
       'curly': ['error', 'multi-or-nest'],
-    },
-    settings: {
-      'import-x/resolver-next': [createTypeScriptImportResolver()],
+      'local/space-after-control-paren': 'error',
+      // TS-only overrides; the `typescript` preset would reset v2-strict severities.
+      'solid/jsx-no-undef': ['error', { typescriptEnabled: true }],
+      'solid/no-unknown-namespaces': 'off',
     },
   },
   {
@@ -88,8 +96,6 @@ export default defineConfig(
     rules: { 'json/sort-keys': ['error', 'asc', { natural: true }] },
   },
   {
-    // pnpm writes the dependencies in plain alphabetical order, and the
-    // manifest is its to write.
     files: ['package.json'],
     rules: { 'json/sort-keys': ['error', 'asc'] },
   },
