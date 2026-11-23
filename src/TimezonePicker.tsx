@@ -9,7 +9,6 @@ import {
 } from 'solid-js';
 
 import { getTimezoneGroups, zoneLabel } from '#src/timezone-options';
-import { cn } from '#src/utilities';
 
 interface Props {
   class?: string;
@@ -22,14 +21,14 @@ interface Props {
 
 export const TimezonePicker = (props: Props) => {
   const [open, setOpen] = createSignal(false);
-  const [query, setQuery] = createSignal('');
+  // Starts undefined so Solid's compiled value binding hits its "" fallback.
+  const [query, setQuery] = createSignal<string>();
   const [activeIndex, setActiveIndex] = createSignal(0);
   const [placement, setPlacement] = createSignal<'above' | 'below'>('below');
   const [popup, setPopup] = createSignal<HTMLElement>();
   let openWidth = 0;
 
-  // Solid fires the ref callbacks before the node is inserted into the document,
-  // so measure and focus after insertion instead of in the ref itself.
+  // Measure and focus after insertion — refs fire before the node is in the document.
   createEffect(
     () => popup(),
     (element) => {
@@ -47,7 +46,7 @@ export const TimezonePicker = (props: Props) => {
 
   const listboxId = () => `${props.id}-listbox`;
 
-  const groups = createMemo(() => getTimezoneGroups(props.zones, query()));
+  const groups = createMemo(() => getTimezoneGroups(props.zones, query() ?? ''));
 
   const options = createMemo(() =>
     groups().flatMap(group => group.items.map(item => item.zone)));
@@ -109,10 +108,7 @@ export const TimezonePicker = (props: Props) => {
         break;
 
       case 'Enter': {
-        // IMEs use Enter to confirm composition; don't commit a selection then.
-        // Safari can fire compositionend before the Enter keydown, by which
-        // point isComposing is already false; verify on a real IME before
-        // relying on it.
+        // Ignore Enter while composing — IMEs use it to confirm, not select.
         if (event.isComposing) break;
 
         event.preventDefault();
@@ -160,7 +156,7 @@ export const TimezonePicker = (props: Props) => {
   }
 
   function openPicker() {
-    setQuery('');
+    setQuery(undefined);
     setActiveIndex(Math.max(options().indexOf(props.value), 0));
     openWidth = window.innerWidth;
     setOpen(true);
@@ -177,8 +173,7 @@ export const TimezonePicker = (props: Props) => {
     const roomAbove = top;
     const roomBelow = window.innerHeight - bottom;
 
-    // Popup height plus its gap to the trigger. The margin sits on the top or
-    // the bottom depending on the previous placement, so add both.
+    // Add both margins since the gap side depends on the previous placement.
     const needed
       = node.offsetHeight + parseFloat(marginTop) + parseFloat(marginBottom);
 
@@ -223,10 +218,9 @@ export const TimezonePicker = (props: Props) => {
 
   return (
     <div
-      class={cn('relative', props.class)}
+      class={['relative', props.class]}
       onFocusOut={(event) => {
         const next = event.relatedTarget;
-
         if (next instanceof Node && root && !root.contains(next)) closePicker();
       }}
       ref={(el) => {
@@ -251,14 +245,14 @@ export const TimezonePicker = (props: Props) => {
       </button>
 
       <Show when={open()}>
-        {/* When above, the order is reversed so the input stays next to the trigger
-            while the list grows and shrinks (DOM order is unchanged). */}
+        {/* Above: reversed order keeps the input beside the trigger (DOM order unchanged). */}
         <div
-          class={`absolute z-50 flex rounded-sm border border-zinc-300 bg-white text-zinc-900 shadow-lg inline-full dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100 ${
+          class={[
+            'absolute z-50 flex rounded-sm border border-zinc-300 bg-white text-zinc-900 shadow-lg inline-full dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100',
             placement() === 'above'
               ? 'inset-be-full mbe-1 flex-col-reverse'
-              : 'inset-bs-full mbs-1 flex-col'
-          }`}
+              : 'inset-bs-full mbs-1 flex-col',
+          ]}
           ref={setPopup}
         >
           <input
@@ -267,15 +261,16 @@ export const TimezonePicker = (props: Props) => {
             aria-controls={listboxId()}
             aria-expanded="true"
             aria-label="Search timezones"
-            class={`border-zinc-200 px-3 py-2 outline-none inline-full placeholder:text-zinc-400 dark:border-zinc-600 ${
-              placement() === 'above' ? 'border-bs' : 'border-be'
-            }`}
+            class={[
+              'border-zinc-200 px-3 py-2 outline-none inline-full placeholder:text-zinc-400 dark:border-zinc-600',
+              placement() === 'above' ? 'border-bs' : 'border-be',
+            ]}
             onInput={handleSearchInput}
             onKeyDown={handleSearchKeydown}
             placeholder="Search timezones…"
             role="combobox"
             type="text"
-            value={/* v8 ignore start */ query() /* v8 ignore stop */}
+            value={query()}
           />
 
           <div
@@ -300,11 +295,12 @@ export const TimezonePicker = (props: Props) => {
                         aria-selected={
                           item.zone === props.value ? 'true' : 'false'
                         }
-                        class={`flex cursor-pointer items-center justify-between rounded-sm px-3 py-2 text-start text-sm inline-full ${
+                        class={[
+                          'flex cursor-pointer items-center justify-between rounded-sm px-3 py-2 text-start text-sm inline-full',
                           item.index === activeIndex()
                             ? 'bg-zinc-200 ring-2 ring-zinc-900/40 ring-inset dark:bg-zinc-700 dark:ring-zinc-100/40'
-                            : 'hover:bg-zinc-100 dark:hover:bg-zinc-700'
-                        }`}
+                            : 'hover:bg-zinc-100 dark:hover:bg-zinc-700',
+                        ]}
                         data-index={item.index}
                         id={optionId(item.index)}
                         onClick={() => {

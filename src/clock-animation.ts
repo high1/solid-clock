@@ -9,24 +9,17 @@ const prefersReducedMotion = () =>
   typeof window !== 'undefined'
   && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/**
- * Animates hour/minute fractions toward their targets when the zone changes.
- * Both hands rotate in the direction of the zone change: forward when the new
- * zone is ahead, backward otherwise. The animation is derived from the shared
- * rAF clock (`now()`); there is no separate animation loop. Returns the
- * displayed fractions.
- */
 export function createClockAnimation(
   time: ReturnType<typeof createTime>,
   duration = ANIMATION_DURATION,
 ) {
-  const [hourDelta, setHourDelta] = createSignal(0);
-  const [minuteDelta, setMinuteDelta] = createSignal(0);
   const [animationStart, setAnimationStart] = createSignal<number>();
+  let hourDelta = 0;
+  let minuteDelta = 0;
   let previousZone: string | undefined;
 
   createEffect(
-    () => time.zone(), // tracked — re-runs when the zone changes
+    () => time.zone, // tracked — re-runs when the zone changes
     (zone) => {
       if (
         prefersReducedMotion()
@@ -38,43 +31,38 @@ export function createClockAnimation(
       }
 
       const nowValue = untrack(() => now());
-      const oldParts = zonedParts(nowValue, previousZone);
+      const previousParts = zonedParts(nowValue, previousZone);
       const newParts = zonedParts(nowValue, zone);
-      const forward = newParts.offset >= oldParts.offset;
+      const forward = newParts.offset >= previousParts.offset;
 
-      setHourDelta(
-        directionalDelta(
-          hourFraction(oldParts.wallSeconds),
-          hourFraction(newParts.wallSeconds),
-          forward,
-        ),
+      hourDelta = directionalDelta(
+        hourFraction(previousParts.wallSeconds),
+        hourFraction(newParts.wallSeconds),
+        forward,
       );
-      setMinuteDelta(
-        directionalDelta(
-          minuteFraction(oldParts.wallSeconds),
-          minuteFraction(newParts.wallSeconds),
-          forward,
-        ),
+      minuteDelta = directionalDelta(
+        minuteFraction(previousParts.wallSeconds),
+        minuteFraction(newParts.wallSeconds),
+        forward,
       );
       setAnimationStart(nowValue);
       previousZone = zone;
     },
   );
 
-  // When no animation is running, don't read now() at all.
   const progress = createMemo(() => {
     const start = animationStart();
 
     return start === undefined ? 1 : Math.min((now() - start) / duration, 1);
   });
+
   const eased = createMemo(() => {
     const easedProgress = progress();
 
     return easedProgress < 1 ? 1 - (1 - easedProgress) ** 3 : easedProgress; // easeOutCubic
   });
 
-  // Pin animationStart to undefined once the animation completes so we
-  // stop reading now() and stop re-deriving per frame.
+  // Clear the start once done so progress stops tracking now() every frame.
   createEffect(
     () => animationStart() !== undefined && progress() === 1,
     (done) => {
@@ -82,20 +70,19 @@ export function createClockAnimation(
     },
   );
 
+  const easedFraction = (part: number, delta: number) =>
+    (part - delta * (1 - eased()) + 1) % 1;
+
   return {
     get hour() {
-      const ease = eased();
-
-      return ease === 1
+      return eased() === 1
         ? time.hour
-        : (time.hour - hourDelta() * (1 - ease) + 1) % 1;
+        : easedFraction(time.hour, hourDelta);
     },
     get minute() {
-      const ease = eased();
-
-      return ease === 1
+      return eased() === 1
         ? time.minute
-        : (time.minute - minuteDelta() * (1 - ease) + 1) % 1;
+        : easedFraction(time.minute, minuteDelta);
     },
     get second() {
       return time.second;
@@ -106,14 +93,9 @@ export function createClockAnimation(
   };
 }
 
-/** Decimal precision for animation deltas — float noise below this is zero. */
 const DECIMAL_PRECISION = 4;
 
-/**
- * Signed angular delta in a chosen direction (full turn = 1).
- * Forward may exceed half a turn (e.g. +8h → +0.66 turn of the hour hand);
- * backward is the equivalent negative.
- */
+/** Signed turn toward the new time in the chosen direction. */
 export function directionalDelta(
   from: number,
   to: number,

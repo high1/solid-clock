@@ -9,10 +9,9 @@ import {
 } from '#src/common';
 import {
   getSecondsSinceMidnight,
-  getSecondsSinceMidnightIn,
   getTimeZone,
-  getTimezoneOffset,
   getTimeZones,
+  zonedParts,
 } from '#src/time';
 
 describe('getSecondsSinceMidnight', () => {
@@ -93,30 +92,9 @@ describe('rotation', () => {
   test.each([
     ['midnight', 0, 'rotate(0)', 'rotate(0)', 'rotate(0)', 'rotate(0)'],
     ['one hour', 3_600, 'rotate(0)', 'rotate(0)', 'rotate(0)', 'rotate(30)'],
-    [
-      'half past noon',
-      43_200 + 1_800,
-      'rotate(0)',
-      'rotate(0)',
-      'rotate(180)',
-      'rotate(15)',
-    ],
-    [
-      '59.5 seconds',
-      59.5,
-      'rotate(180)',
-      'rotate(357)',
-      'rotate(5.9)',
-      'rotate(0.5)',
-    ],
-    [
-      'next midnight',
-      86_400,
-      'rotate(0)',
-      'rotate(0)',
-      'rotate(0)',
-      'rotate(0)',
-    ],
+    ['half past noon', 43_200 + 1_800, 'rotate(0)', 'rotate(0)', 'rotate(180)', 'rotate(15)'],
+    ['59.5 seconds', 59.5, 'rotate(180)', 'rotate(357)', 'rotate(5.9)', 'rotate(0.5)'],
+    ['next midnight', 86_400, 'rotate(0)', 'rotate(0)', 'rotate(0)', 'rotate(0)'],
   ])('%s', (_name, clock, subsecond, second, minute, hour) => {
     expect(rotate(hourFraction(clock), 1)).toEqual(hour);
     expect(rotate(minuteFraction(clock), 1)).toEqual(minute);
@@ -140,7 +118,7 @@ describe('rotation primitives', () => {
   });
 });
 
-describe('getSecondsSinceMidnightIn', () => {
+describe('zonedParts wallSeconds', () => {
   test.each([
     ['midnight', Date.UTC(2020, 0, 1, 0, 0, 0, 0), 0],
     ['one second past midnight', Date.UTC(2020, 0, 1, 0, 0, 1, 0), 1],
@@ -148,20 +126,20 @@ describe('getSecondsSinceMidnightIn', () => {
     ['noon', Date.UTC(2020, 0, 1, 12, 0, 0, 0), 43_200],
     ['last second of the day', Date.UTC(2020, 0, 1, 23, 59, 59, 0), 86_399],
   ])('%s in UTC', (_name, timestamp, expected) => {
-    expect(getSecondsSinceMidnightIn(timestamp, 'UTC')).toBe(expected);
+    expect(zonedParts(timestamp, 'UTC').wallSeconds).toBe(expected);
   });
 
   test('renders the same instant in different zones', () => {
     const timestamp = Date.UTC(2020, 2, 8, 16, 30, 0, 0);
 
-    expect(getSecondsSinceMidnightIn(timestamp, 'UTC')).toBe(16 * 3600 + 1800);
-    expect(getSecondsSinceMidnightIn(timestamp, 'Europe/Berlin')).toBe(
+    expect(zonedParts(timestamp, 'UTC').wallSeconds).toBe(16 * 3600 + 1800);
+    expect(zonedParts(timestamp, 'Europe/Berlin').wallSeconds).toBe(
       17 * 3600 + 1800,
     );
-    expect(getSecondsSinceMidnightIn(timestamp, 'America/New_York')).toBe(
+    expect(zonedParts(timestamp, 'America/New_York').wallSeconds).toBe(
       12 * 3600 + 1800,
     );
-    expect(getSecondsSinceMidnightIn(timestamp, 'Australia/Sydney')).toBe(
+    expect(zonedParts(timestamp, 'Australia/Sydney').wallSeconds).toBe(
       3 * 3600 + 1800,
     );
   });
@@ -170,28 +148,28 @@ describe('getSecondsSinceMidnightIn', () => {
     const spring = Date.UTC(2020, 2, 8, 11, 0, 0, 0);
     const autumn = Date.UTC(2020, 10, 1, 11, 0, 0, 0);
 
-    expect(getSecondsSinceMidnightIn(spring, 'Europe/Berlin')).toBe(12 * 3600);
-    expect(getSecondsSinceMidnightIn(autumn, 'Europe/Berlin')).toBe(12 * 3600);
+    expect(zonedParts(spring, 'Europe/Berlin').wallSeconds).toBe(12 * 3600);
+    expect(zonedParts(autumn, 'Europe/Berlin').wallSeconds).toBe(12 * 3600);
   });
 
   test('spring forward skips from 01:59:59 to 03:00:00', () => {
     const before = Date.UTC(2020, 2, 29, 0, 59, 59);
     const after = Date.UTC(2020, 2, 29, 1, 0, 0);
 
-    expect(getSecondsSinceMidnightIn(before, 'Europe/Berlin')).toBe(7199);
-    expect(getSecondsSinceMidnightIn(after, 'Europe/Berlin')).toBe(10800);
+    expect(zonedParts(before, 'Europe/Berlin').wallSeconds).toBe(7199);
+    expect(zonedParts(after, 'Europe/Berlin').wallSeconds).toBe(10800);
   });
 
   test('fall back repeats the 02:00 hour', () => {
     const before = Date.UTC(2020, 9, 25, 0, 59, 59);
     const after = Date.UTC(2020, 9, 25, 1, 0, 0);
 
-    expect(getSecondsSinceMidnightIn(before, 'Europe/Berlin')).toBe(10799);
-    expect(getSecondsSinceMidnightIn(after, 'Europe/Berlin')).toBe(7200);
+    expect(zonedParts(before, 'Europe/Berlin').wallSeconds).toBe(10799);
+    expect(zonedParts(after, 'Europe/Berlin').wallSeconds).toBe(7200);
   });
 });
 
-describe('getTimezoneOffset', () => {
+describe('zonedParts offset', () => {
   const winter = Date.UTC(2020, 0, 15, 12, 0, 0, 0);
   const summer = Date.UTC(2020, 6, 15, 12, 0, 0, 0);
 
@@ -206,14 +184,14 @@ describe('getTimezoneOffset', () => {
     ['Asia/Kolkata', 'Asia/Kolkata', winter, 19_800],
     ['Asia/Kathmandu', 'Asia/Kathmandu', winter, 20_700],
   ])('%s', (_name, zone, timestamp, expected) => {
-    expect(getTimezoneOffset(timestamp, zone)).toBe(expected);
+    expect(zonedParts(timestamp, zone).offset).toBe(expected);
   });
 
   test('accounts for millisecond precision', () => {
     const timestamp = Date.UTC(2020, 0, 15, 12, 0, 0, 500);
 
-    expect(getTimezoneOffset(timestamp, 'Europe/Berlin')).toBe(3600);
-    expect(getTimezoneOffset(timestamp, 'America/New_York')).toBe(-18000);
+    expect(zonedParts(timestamp, 'Europe/Berlin').offset).toBe(3600);
+    expect(zonedParts(timestamp, 'America/New_York').offset).toBe(-18000);
   });
 });
 

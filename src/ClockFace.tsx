@@ -18,7 +18,7 @@ export const ClockFace = () => {
 
   return (
     <div
-      class="grid grid-rows-[auto_1fr] justify-center justify-items-stretch gap-2 px-2 pbs-2 pbe-2 block-dvh dark:bg-zinc-800"
+      class="grid grid-rows-[auto_1fr] justify-center gap-2 px-2 pbs-2 pbe-2 block-dvh dark:bg-zinc-800"
       data-testid={getTestId(clockFaceId)}
     >
       <div class="flex items-center justify-between gap-2">

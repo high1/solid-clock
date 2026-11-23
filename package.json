@@ -55,7 +55,8 @@
       "./*",
       "./*.ts",
       "./*.tsx"
-    ]
+    ],
+    "#/eslint-rule": "./eslint-rule.ts"
   },
   "keywords": [
     "solid-js",
@@ -74,7 +75,7 @@
     "coverage": "vitest run --coverage",
     "dev": "vite",
     "format": "prettier --write .",
-    "lint": "eslint . --max-warnings 0",
+    "lint": "ESLINT_FLAGS=unstable_native_nodejs_ts_config eslint . --max-warnings 0",
     "playwright": "playwright install --only-shell chromium",
     "preview": "vite preview",
     "start": "vite",

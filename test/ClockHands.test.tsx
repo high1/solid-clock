@@ -110,7 +110,7 @@ describe('<ClockHands />', () => {
 
   test('defaults to the runtime timezone', () => {
     setLocalTime(3);
-    const screen = render(() => <ClockHands />);
+    const screen = render(() => <ClockHands zone={getTimeZone()} />);
     expect(screen.getByTestId(clockHourId)).toHaveAttribute(
       'transform',
       'rotate(90)',

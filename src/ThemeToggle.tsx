@@ -56,8 +56,8 @@ export const ThemeToggle = () => {
 
   const iconClass = (active: boolean, exitClass: string) =>
     active
-      ? 'scale-100 rotate-0 opacity-100'
-      : `scale-50 opacity-0 ${exitClass}`;
+      ? ['scale-100 rotate-0 opacity-100']
+      : ['scale-50 opacity-0', exitClass];
 
   return (
     <button
@@ -68,12 +68,18 @@ export const ThemeToggle = () => {
     >
       <div class="relative block-5 inline-5 group-hover:rotate-10 motion-safe:transition-transform">
         <div
-          class={`absolute inset-0 block-5 inline-5 motion-safe:[&&]:transition-all ${iconClass(!isDark(), 'rotate-90')}`}
+          class={[
+            'absolute inset-0 block-5 inline-5 motion-safe:[&&]:transition-all',
+            iconClass(!isDark(), 'rotate-90'),
+          ]}
         >
           <Sun />
         </div>
         <div
-          class={`absolute inset-0 block-5 inline-5 motion-safe:[&&]:transition-all ${iconClass(isDark(), '-rotate-90')}`}
+          class={[
+            'absolute inset-0 block-5 inline-5 motion-safe:[&&]:transition-all',
+            iconClass(isDark(), '-rotate-90'),
+          ]}
         >
           <Moon />
         </div>
