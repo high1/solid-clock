@@ -67,8 +67,11 @@ jobs:
         uses: actions/upload-pages-artifact@v5.0.0
         if: github.ref == 'refs/heads/main'
         with:
+          name: github-pages-${{ github.run_attempt }}
           path: dist
 
       - name: Deploy to GitHub Pages 🚀
         uses: actions/deploy-pages@v5.0.1
         if: github.ref == 'refs/heads/main'
+        with:
+          artifact_name: github-pages-${{ github.run_attempt }}
